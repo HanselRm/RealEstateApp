@@ -9,13 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F50F87CE-CE73-4384-A495-D0BE76F5C6B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStateAppProg3.Core.Application", "RealStateAppProg3.Core.Application\RealStateAppProg3.Core.Application.csproj", "{721C7219-58F8-4244-8FD6-990245BE0D50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealStateAppProg3.Core.Application", "RealStateAppProg3.Core.Application\RealStateAppProg3.Core.Application.csproj", "{721C7219-58F8-4244-8FD6-990245BE0D50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStateAppProg3.Core.Domain", "RealStateAppProg3.Core.Domain\RealStateAppProg3.Core.Domain.csproj", "{29DA2692-A66A-4DEA-B810-E99E40CA14C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealStateAppProg3.Core.Domain", "RealStateAppProg3.Core.Domain\RealStateAppProg3.Core.Domain.csproj", "{29DA2692-A66A-4DEA-B810-E99E40CA14C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStateAppProg3.Infrastructure.Persistence", "RealStateAppProg3.Infrastructure.Persistence\RealStateAppProg3.Infrastructure.Persistence.csproj", "{76F313DA-6986-4820-9DED-02118BCAB000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealStateAppProg3.Infrastructure.Persistence", "RealStateAppProg3.Infrastructure.Persistence\RealStateAppProg3.Infrastructure.Persistence.csproj", "{76F313DA-6986-4820-9DED-02118BCAB000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStateAppProg3.Infrastructure.Identity", "RealStateAppProg3.Infrastructure.Identity\RealStateAppProg3.Infrastructure.Identity.csproj", "{7982788C-4E4D-41A2-BA2E-6EB05EE6F3AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealStateAppProg3.Infrastructure.Identity", "RealStateAppProg3.Infrastructure.Identity\RealStateAppProg3.Infrastructure.Identity.csproj", "{7982788C-4E4D-41A2-BA2E-6EB05EE6F3AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStateAppProg3.Infrastructure.Shared", "RealStateAppProg3.Infrastructure.Shared\RealStateAppProg3.Infrastructure.Shared.csproj", "{A3064CE2-0464-4090-B200-9C06203DA32E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7982788C-4E4D-41A2-BA2E-6EB05EE6F3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7982788C-4E4D-41A2-BA2E-6EB05EE6F3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7982788C-4E4D-41A2-BA2E-6EB05EE6F3AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3064CE2-0464-4090-B200-9C06203DA32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3064CE2-0464-4090-B200-9C06203DA32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3064CE2-0464-4090-B200-9C06203DA32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3064CE2-0464-4090-B200-9C06203DA32E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{29DA2692-A66A-4DEA-B810-E99E40CA14C7} = {CD52D313-9AB8-4247-B240-0FECAC606516}
 		{76F313DA-6986-4820-9DED-02118BCAB000} = {DD7046BA-26BA-46F4-B06F-3F6EB8C3B649}
 		{7982788C-4E4D-41A2-BA2E-6EB05EE6F3AD} = {DD7046BA-26BA-46F4-B06F-3F6EB8C3B649}
+		{A3064CE2-0464-4090-B200-9C06203DA32E} = {DD7046BA-26BA-46F4-B06F-3F6EB8C3B649}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {049180B3-E204-4DCF-97CA-52B324B42714}
