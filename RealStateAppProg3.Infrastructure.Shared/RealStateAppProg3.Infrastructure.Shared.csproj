@@ -12,4 +12,9 @@
     <PackageReference Include="MimeKit" Version="4.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RealStateAppProg3.Core.Application\RealStateAppProg3.Core.Application.csproj" />
+    <ProjectReference Include="..\RealStateAppProg3.Core.Domain\RealStateAppProg3.Core.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
