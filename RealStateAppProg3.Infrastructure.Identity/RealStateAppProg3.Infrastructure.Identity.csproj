@@ -23,4 +23,8 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RealStateAppProg3.Core.Application\RealStateAppProg3.Core.Application.csproj" />
+  </ItemGroup>
+
 </Project>
