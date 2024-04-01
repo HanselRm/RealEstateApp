@@ -56,7 +56,13 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                 response.Error = $"Su cuenta no está activa, comuniquese con el Admin";
                 return response;
             }
-
+            //Valida si el user esta activo
+            if (!user.IsActive)
+            {
+                response.HasError = true;
+                response.Error = $"Comuniquese con su administrador para acceder a los permisos de agente.";
+                return response;
+            }
 
             //mapeo de user a response
             response.Id = user.Id;
