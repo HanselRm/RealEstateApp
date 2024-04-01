@@ -24,11 +24,19 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
         {
             AuthenticationResponse response = new();
 
-            var user = await _userManager.FindByNameAsync(request.UserName);
+            //Busca el user por email
+            var user = await _userManager.FindByEmailAsync(request.UserName);
+            if (user == null)
+            {
+                //si no encuentra por email 
+                //Busca por nombre de usuario
+                user = await _userManager.FindByNameAsync(request.UserName);
+            }
+
             if (user == null)
             {
                 response.HasError = true;
-                response.Error = $"No existe una cuenta registrada con el nombre de Usuario {request.UserName}";
+                response.Error = $"No existe una cuenta registrada con {request.UserName}";
                 return response;
             }
 
@@ -48,6 +56,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                 response.Error = $"Su cuenta no está activa, comuniquese con el Admin";
                 return response;
             }
+
 
             //mapeo de user a response
             response.Id = user.Id;
