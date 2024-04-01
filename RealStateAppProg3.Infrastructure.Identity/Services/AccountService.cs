@@ -1,7 +1,4 @@
-﻿
-
-using Azure;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Infrastructure.Identity.Models;
