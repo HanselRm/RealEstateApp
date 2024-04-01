@@ -74,6 +74,12 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             response.IsVerified = user.EmailConfirmed;
             return response;
         }
+
+        //cerrar session
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 
 }
