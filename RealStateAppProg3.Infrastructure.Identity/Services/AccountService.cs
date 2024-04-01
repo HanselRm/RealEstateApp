@@ -68,6 +68,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             response.Id = user.Id;
             response.Email = user.Email;
             response.UserName = user.UserName;
+                
             var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
             response.Roles = rolesList.ToList();
             response.IsVerified = user.EmailConfirmed;
