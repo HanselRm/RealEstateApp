@@ -10,5 +10,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Models
         public string LastName {  get; set; }
         public string? ImgUser { get; set; }
         public string? Identification { get; set; }
+        //propiedad para manejar el estados de los usuarios agentes
+        public bool IsActive { get; set; } = false;
     }
 }
