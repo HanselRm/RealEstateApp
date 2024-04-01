@@ -16,4 +16,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RealStateAppProg3.Core.Domain\RealStateAppProg3.Core.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
