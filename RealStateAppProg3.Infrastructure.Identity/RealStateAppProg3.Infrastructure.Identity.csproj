@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RealStateAppProg3.Core.Application\RealStateAppProg3.Core.Application.csproj" />
+    <ProjectReference Include="..\RealStateAppProg3.Infrastructure.Shared\RealStateAppProg3.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
 </Project>
