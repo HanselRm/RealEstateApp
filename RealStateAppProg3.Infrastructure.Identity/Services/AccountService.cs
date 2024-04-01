@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
+using RealStateAppProg3.Core.Application.ViewModels.Users;
 using RealStateAppProg3.Infrastructure.Identity.Models;
 
 namespace RealStateAppProg3.Infrastructure.Identity.Services
@@ -76,6 +78,57 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        //registrar user
+        public async Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm)
+        {
+            SaveUserViewModel userVM = new SaveUserViewModel();
+            var verifUsername = await _userManager.FindByNameAsync(vm.Username);
+            if (verifUsername != null)
+            {
+                userVM.HasError = true;
+                userVM.Error = "Este usuario ya esta en uso";
+                return userVM;
+            }
+
+            //valida que la cedula sea unica
+            var user = await _userManager.Users.ToListAsync();
+            var verifyCedula = user.FirstOrDefault(user => user.Identification == vm.Identification);
+            if (verifyCedula != null)
+            {
+                userVM.HasError = true;
+                userVM.Error = $"Esta cedula ya esta en uso";
+                return userVM;
+            }
+            //valida el email
+            var verifyEmail = await _userManager.FindByEmailAsync(vm.Email);
+            if (verifyEmail != null)
+            {
+                userVM.HasError = true;
+                userVM.Error = $"Este email {userVM.Email} ya esta en uso";
+                return userVM;
+            }
+
+            ApplicationUser ApUser = new()
+            {
+                Name = vm.Name,
+                LastName = vm.LastName,
+                Email = vm.Email,
+                Identification = vm.Identification,
+                UserName = vm.Username,
+                EmailConfirmed = true,
+                ImgUser = vm.PhotoProfileUrl,
+                IsActive = vm.IsActive
+            };
+
+            var status = await _userManager.CreateAsync(ApUser, vm.Password);
+            if (status.Succeeded)
+            {
+                userVM.HasError = false;
+
+            }
+            return userVM;
         }
     }
 
