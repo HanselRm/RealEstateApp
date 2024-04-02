@@ -22,6 +22,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//autentica primero
+app.UseAuthentication();    
 app.UseAuthorization();
 
 app.MapControllerRoute(
