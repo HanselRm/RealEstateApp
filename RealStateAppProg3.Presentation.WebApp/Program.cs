@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using RealStateAppProg3.Infrastructure.Identity;
+using RealStateAppProg3.Infrastructure.Identity.Models;
+using RealStateAppProg3.Infrastructure.Identity.Seeds;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //service registration identity
@@ -8,6 +12,29 @@ builder.Services.AddIdentityInfrastructure(builder.Configuration);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+//Metodo para correr los Seeds
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        //dependency injection 
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        //Metodos de los servicios para crear roles y default users con roles
+        await DefaultRoles.SeedAsync(userManager, roleManager);
+        await DefaultAdministratorUser.SeedAsync(userManager, roleManager);
+        await DefaultAgentUser.SeedAsync(userManager, roleManager);
+        await DefaultClientUser.SeedAsync(userManager, roleManager);
+        await DefaultSuperAdminUser.SeedAsync(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+    }
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
