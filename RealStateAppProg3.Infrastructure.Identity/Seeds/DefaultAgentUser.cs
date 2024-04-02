@@ -10,7 +10,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Seeds
     {
         public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            //Creacion de usuario Admin
+            //Creacion de usuario Agent
             ApplicationUser defaultUserAgent = new();
             defaultUserAgent.UserName = "agentuser";
             defaultUserAgent.Email = "agentuser@email.com";
