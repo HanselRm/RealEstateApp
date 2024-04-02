@@ -4,10 +4,11 @@ using MimeKit;
 using RealStateAppProg3.Core.Application.Dtos.Email;
 using RealStateAppProg3.Core.Domain.Settings;
 using MailKit.Net.Smtp;
+using RealStateAppProg3.Core.Application.Interfaces.Service;
 
 namespace RealStateAppProg3.Infrastructure.Shared.Service
 {
-    public class EmailServices
+    public class EmailServices : IEmailServices
     {
         private MailSettings _mailSettings { get; }
         public EmailServices(IOptions<MailSettings> mailSettings)
