@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Identity;
 using RealStateAppProg3.Infrastructure.Identity;
+using RealStateAppProg3.Infrastructure.Shared;
 using RealStateAppProg3.Infrastructure.Identity.Models;
 using RealStateAppProg3.Infrastructure.Identity.Seeds;
 
 var builder = WebApplication.CreateBuilder(args);
-
+#region Service registration
 //service registration identity
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
 
+//service registration Shaared
+builder.Services.AddSharedInfrastructure(builder.Configuration);
+#endregion
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
