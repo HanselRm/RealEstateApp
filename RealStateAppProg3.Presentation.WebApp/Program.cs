@@ -1,6 +1,8 @@
+using RealStateAppProg3.Infrastructure.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
-
+//service registration identity
+builder.Services.AddIdentityInfrastructure(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
