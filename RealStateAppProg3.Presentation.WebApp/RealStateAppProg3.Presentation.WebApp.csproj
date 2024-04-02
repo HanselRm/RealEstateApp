@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RealStateAppProg3.Core.Application\RealStateAppProg3.Core.Application.csproj" />
+    <ProjectReference Include="..\RealStateAppProg3.Core.Domain\RealStateAppProg3.Core.Domain.csproj" />
+    <ProjectReference Include="..\RealStateAppProg3.Infrastructure.Identity\RealStateAppProg3.Infrastructure.Identity.csproj" />
+    <ProjectReference Include="..\RealStateAppProg3.Infrastructure.Persistence\RealStateAppProg3.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\RealStateAppProg3.Infrastructure.Shared\RealStateAppProg3.Infrastructure.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
