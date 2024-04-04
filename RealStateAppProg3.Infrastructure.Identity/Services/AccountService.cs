@@ -1,9 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Azure;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using RealStateAppProg3.Core.Application.Dtos.Account;
+using RealStateAppProg3.Core.Application.Dtos.Email;
+using RealStateAppProg3.Core.Application.Enums;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.ViewModels.Users;
 using RealStateAppProg3.Infrastructure.Identity.Models;
+using System.Data;
+using System.Runtime.Intrinsics.Arm;
+using System.Text;
 
 namespace RealStateAppProg3.Infrastructure.Identity.Services
 {
@@ -11,11 +18,13 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailServices _emailService;
 
-        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailServices emailServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailServices;
         }
 
         //Metodo login
@@ -81,7 +90,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
         }
 
         //registrar user
-        public async Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm)
+        public async Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm, string origin)
         {
             SaveUserViewModel userVM = new SaveUserViewModel();
             var verifUsername = await _userManager.FindByNameAsync(vm.Username);
@@ -122,13 +131,62 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                 IsActive = vm.IsActive
             };
 
+            if (vm.TypeUser == RoleENum.Agent.ToString())
+            {
+                ApUser.IsActive = false;
+                ApUser.EmailConfirmed = true;
+            }
+
+            if (vm.TypeUser == RoleENum.Client.ToString())
+            {
+                ApUser.EmailConfirmed = false;
+                ApUser.IsActive = false;
+            }
+            
+            if (vm.TypeUser == RoleENum.Admin.ToString())
+            {
+                ApUser.IsActive = true;
+                ApUser.EmailConfirmed = true;
+            }
+
             var status = await _userManager.CreateAsync(ApUser, vm.Password);
+
             if (status.Succeeded)
             {
+                await _userManager.AddToRoleAsync(ApUser, vm.TypeUser);
+                //si el usuario es Cliente le envia un email
+                if (vm.TypeUser == RoleENum.Client.ToString())
+                {
+                    var verificationUri = await SendVerificationEmail(ApUser, origin);
+                    await _emailService.sendAsync(new EmailRequest()
+                    {
+                        To = ApUser.Email,
+                        Body = $"Confirme su cuenta en este link: {verificationUri}",
+                        Subject = "Confirmacion de correo"
+                    });
+                }
+                
                 userVM.HasError = false;
 
             }
+            else
+            {
+                userVM.HasError = true;
+                userVM.Error = $"Hubo un error, intentelo mas tarde";
+                return userVM;
+            }
             return userVM;
+        }
+
+        //metodo de verificar email
+        public async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
+        {
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var route = "User/ConfirmEmail";
+            var uri = new Uri(string.Concat($"{origin}/", route));
+            var verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "Token", code);
+            return verificationUrl;
         }
     }
 
