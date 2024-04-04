@@ -205,6 +205,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             }
         }
 
+        //envia la contra verification
         private async Task<string> SendForgotPasswordUrl(ApplicationUser user, string origin)
         {
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
