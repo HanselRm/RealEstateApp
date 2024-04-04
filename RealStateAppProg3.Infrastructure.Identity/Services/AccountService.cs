@@ -177,6 +177,45 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             }
             return userVM;
         }
+        //Olvidar contraseña
+        public async Task<ForgotPassWordResponse> ForgotPasswordRequestAsync(ForgotPassowordRequest request, string origin)
+        {
+            ForgotPassWordResponse response = new()
+            {
+                HasError = false
+            };
+
+            var account = await _userManager.FindByEmailAsync(request.Email);
+            if(account == null)
+            {
+                response.HasError = true;
+                response.Error = $"Este email {request.Email} esta cuenta no existe";
+                return response;
+            }
+            else
+            {
+                var verificationUri = await SendForgotPasswordUrl(account, origin);
+                await _emailService.sendAsync(new EmailRequest()
+                {
+                    To = request.Email,
+                    Body = $"Por favor resetea la contraseña aqui: {verificationUri}",
+                    Subject = "resetear password"
+                });
+                return response;
+            }
+        }
+
+        private async Task<string> SendForgotPasswordUrl(ApplicationUser user, string origin)
+        {
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var route = "User/ResetPassword";
+            var Uri = new Uri(string.Concat($"{origin}/", route));
+            var verificationUrl = QueryHelpers.AddQueryString(Uri.ToString(), "token", code);
+
+            return verificationUrl;
+        }
 
         //Confirmar cuenta
         public async Task<string> ConfirmAccount(string userId, string token)
