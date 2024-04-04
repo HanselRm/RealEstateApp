@@ -217,6 +217,33 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
 
             return verificationUrl;
         }
+        //Resetear contra
+        public async Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request)
+        {
+            ResetPasswordResponse response = new();
+            response.HasError = false;
+
+            var account = await _userManager.FindByEmailAsync(request.Email);
+
+            if (account == null)
+            {
+                response.HasError = true;
+                response.Error = $"La cuenta {request.Email} no se encuentra";
+                return response;
+            }
+
+            request.Token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.Token));
+
+            var result = await _userManager.ResetPasswordAsync(account, request.Token, request.Password);
+            if (!result.Succeeded)
+            {
+                response.HasError = true;
+                response.Error = $"Ha ocurrido un error, intentelo mas tarde";
+                return response;
+
+            }
+            return response;
+        }
 
         //Confirmar cuenta
         public async Task<string> ConfirmAccount(string userId, string token)
