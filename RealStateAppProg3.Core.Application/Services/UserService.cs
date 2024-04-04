@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
+using RealStateAppProg3.Core.Application.ViewModels.Users;
 
 
 namespace RealStateAppProg3.Core.Application.Services
@@ -16,6 +18,12 @@ namespace RealStateAppProg3.Core.Application.Services
         }
 
         //metodo de login
+        public async Task<AuthenticationResponse> LoginAsync(LoginViewModel vm)
+        {
+            AuthenticationRequest loginRequest = _mapper.Map<AuthenticationRequest>(vm);
+            AuthenticationResponse userResponse = await _accountServices.AuthenticateAsync(loginRequest);
 
+            return userResponse;
+        }
     }
 }
