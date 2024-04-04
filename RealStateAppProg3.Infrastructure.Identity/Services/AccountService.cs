@@ -178,6 +178,26 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             return userVM;
         }
 
+        //Confirmar cuenta
+        public async Task<string> ConfirmAccount(string userId, string token)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if(user == null)
+            {
+                return $"No existe una cuenta registrada con ese user: {userId}";
+            }
+
+            token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return $"Cuenta verificada para {user.Email}";
+            }
+            else
+            {
+                return $"Ocurrio un error confirmando la cuenta {user.Email}";
+            }
+        }
         //metodo de verificar email
         public async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
         {
