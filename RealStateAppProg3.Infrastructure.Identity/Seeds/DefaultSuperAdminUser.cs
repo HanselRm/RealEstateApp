@@ -18,6 +18,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Seeds
             defaultUserSuper.LastName = "Mejia";
             defaultUserSuper.Identification = "402191133";
             defaultUserSuper.EmailConfirmed = true;
+            defaultUserSuper.IsActive = true;
             defaultUserSuper.PhoneNumberConfirmed = true;
 
             //Validar si el default user existe
