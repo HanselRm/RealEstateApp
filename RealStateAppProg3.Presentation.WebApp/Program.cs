@@ -15,6 +15,9 @@ builder.Services.AddSharedInfrastructure(builder.Configuration);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Añadir sesiones
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 var app = builder.Build();
 
 //Metodo para correr los Seeds
