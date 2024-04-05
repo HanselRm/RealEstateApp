@@ -37,5 +37,12 @@ namespace RealStateAppProg3.Core.Application.Services
         {
             return await _accountServices.ConfirmAccount(userId, token);
         }
+
+        //metodo para olvidar contraseña
+        public async Task<ForgotPassWordResponse> ForgotPassWordAsync(ForgotPasswordViewModel vm ,string origin)
+        {
+            ForgotPassowordRequest forgotPass = _mapper.Map<ForgotPassowordRequest>(vm);
+            return await _accountServices.ForgotPasswordRequestAsync(forgotPass,origin);
+        }
     }
 }
