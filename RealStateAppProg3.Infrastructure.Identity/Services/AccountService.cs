@@ -49,11 +49,12 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             }
 
             //inicia seccion
-            var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
             if (!result.Succeeded)
             {
                 response.HasError = true;
                 response.Error = "Credenciales incorrectas";
+                return response;
             }
             
 

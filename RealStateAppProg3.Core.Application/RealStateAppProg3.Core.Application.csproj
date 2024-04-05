@@ -22,8 +22,4 @@
     <ProjectReference Include="..\RealStateAppProg3.Core.Domain\RealStateAppProg3.Core.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
 </Project>
