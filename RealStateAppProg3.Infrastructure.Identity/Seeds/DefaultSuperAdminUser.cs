@@ -30,6 +30,9 @@ namespace RealStateAppProg3.Infrastructure.Identity.Seeds
                 {
                     await userManager.CreateAsync(defaultUserSuper, "123Pa$$word!");
                     await userManager.AddToRoleAsync(defaultUserSuper, RoleENum.Client.ToString());
+                    await userManager.AddToRoleAsync(defaultUserSuper, RoleENum.Admin.ToString());
+                    await userManager.AddToRoleAsync(defaultUserSuper, RoleENum.Agent.ToString());
+                    await userManager.AddToRoleAsync(defaultUserSuper, RoleENum.Developer.ToString());
                 }
             }
         }
