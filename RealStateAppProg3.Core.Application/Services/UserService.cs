@@ -31,5 +31,11 @@ namespace RealStateAppProg3.Core.Application.Services
         {
             return await _accountServices.RegisterAsync(vm, origin);
         }
+
+        //metodo para confirmar email
+        public async Task<string> confirmEmailAsync(string userId, string token)
+        {
+            return await _accountServices.ConfirmAccount(userId, token);
+        }
     }
 }
