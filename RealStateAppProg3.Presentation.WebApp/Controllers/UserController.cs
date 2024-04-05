@@ -46,7 +46,6 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 login.HasError = response.HasError;
                 login.Error = response.Error;
                 return View(login);
-
             }
         }
     }
