@@ -26,6 +26,12 @@ namespace RealStateAppProg3.Core.Application.Services
             return userResponse;
         }
 
+        //metodo de cerrar sesion
+        public async Task SignOutAsync()
+        {
+            await _accountServices.SignOutAsync();
+        }
+
         //metodo de create
         public async Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm, string origin)
         {
