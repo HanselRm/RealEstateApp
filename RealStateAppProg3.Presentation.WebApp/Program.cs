@@ -4,19 +4,22 @@ using RealStateAppProg3.Infrastructure.Shared;
 using RealStateAppProg3.Infrastructure.Identity.Models;
 using RealStateAppProg3.Infrastructure.Identity.Seeds;
 using RealStateAppProg3.Core.Application;
+using RealStateAppProg3.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSession();
-#region Service registration
-//service registration identity
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+//Application
+builder.Services.AddApplicationLayer();
+//persistense
+builder.Services.AddPersistenceLayer(builder.Configuration);
+//Identity
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
-
-//service registration Shaared
+//Shaared
 builder.Services.AddSharedInfrastructure(builder.Configuration);
 
-//service registration Application
-builder.Services.AddApplicationLayer();
-#endregion
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
