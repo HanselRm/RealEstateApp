@@ -25,5 +25,11 @@ namespace RealStateAppProg3.Core.Application.Services
 
             return userResponse;
         }
+
+        //metodo de create
+        public async Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm, string origin)
+        {
+            return await _accountServices.RegisterAsync(vm, origin);
+        }
     }
 }
