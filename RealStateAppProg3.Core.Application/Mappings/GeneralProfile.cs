@@ -26,11 +26,18 @@ namespace RealStateAppProg3.Core.Application.Mappings
             CreateMap<TypeProperty, TypePropertyViewModel>();
             #endregion
 
-            #region AuthenticationRequest
+            #region Authentication 
             CreateMap<AuthenticationRequest, LoginViewModel>()
                .ForMember(x => x.HasError, opt => opt.Ignore())
                .ForMember(x => x.Error, opt => opt.Ignore())
                .ReverseMap();
+            #endregion
+
+            #region ForgotPassword 
+            CreateMap<ForgotPassowordRequest, ForgotPasswordViewModel>()
+                .ForMember(x => x.HasError, opt => opt.Ignore())
+                .ForMember(x => x.Error, opt => opt.Ignore())
+                .ReverseMap();
             #endregion
         }
     }
