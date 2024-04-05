@@ -6,7 +6,7 @@ using RealStateAppProg3.Core.Application.ViewModels.Users;
 
 namespace RealStateAppProg3.Core.Application.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IAccountService _accountServices;
         private readonly IMapper _mapper;
@@ -45,10 +45,10 @@ namespace RealStateAppProg3.Core.Application.Services
         }
 
         //metodo para olvidar contraseña
-        public async Task<ForgotPassWordResponse> ForgotPassWordAsync(ForgotPasswordViewModel vm ,string origin)
+        public async Task<ForgotPassWordResponse> ForgotPassWordAsync(ForgotPasswordViewModel vm, string origin)
         {
             ForgotPassowordRequest forgotPass = _mapper.Map<ForgotPassowordRequest>(vm);
-            return await _accountServices.ForgotPasswordRequestAsync(forgotPass,origin);
+            return await _accountServices.ForgotPasswordRequestAsync(forgotPass, origin);
         }
 
         //metodo para resetear el password
