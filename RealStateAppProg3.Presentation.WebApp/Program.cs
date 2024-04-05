@@ -5,6 +5,7 @@ using RealStateAppProg3.Infrastructure.Identity.Models;
 using RealStateAppProg3.Infrastructure.Identity.Seeds;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSession();
 #region Service registration
 //service registration identity
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
