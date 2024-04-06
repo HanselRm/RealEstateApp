@@ -130,7 +130,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 return View(vm);
             }
         }
-
+        //resetear contraseña
         public IActionResult ResetPassword(ResetPasswordViewModel vm)
         {
 
