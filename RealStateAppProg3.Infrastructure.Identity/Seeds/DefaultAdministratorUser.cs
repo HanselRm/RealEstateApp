@@ -18,6 +18,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Seeds
             defaultUserAdmin.LastName = "Box";
             defaultUserAdmin.Identification = "402191111";
             defaultUserAdmin.EmailConfirmed = true;
+            defaultUserAdmin.IsActive = true;
             defaultUserAdmin.PhoneNumberConfirmed = true;
 
             //Validar si el default user existe

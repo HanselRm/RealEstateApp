@@ -48,5 +48,13 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 return View(login);
             }
         }
+
+        //LogOut metodo
+        public async Task<IActionResult> LogOut()
+        {
+            await _userService.SignOutAsync();
+            HttpContext.Session.Remove("user");
+            return RedirectToRoute(new { controller = "User", action = "Index" });
+        }
     }
 }
