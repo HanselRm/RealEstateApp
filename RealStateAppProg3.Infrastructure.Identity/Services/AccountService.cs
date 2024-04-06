@@ -127,9 +127,9 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                 Email = vm.Email,
                 Identification = vm.Identification,
                 UserName = vm.Username,
-                EmailConfirmed = true,
+                PhoneNumber = vm.PhoneNumber,
+                PhoneNumberConfirmed = true,
                 ImgUser = vm.PhotoProfileUrl,
-                IsActive = vm.IsActive
             };
 
             if (vm.TypeUser == RoleENum.Agent.ToString())
