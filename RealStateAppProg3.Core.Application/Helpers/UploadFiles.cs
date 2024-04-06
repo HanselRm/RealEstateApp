@@ -5,7 +5,7 @@ using System.Security.Principal;
 
 namespace RealStateAppProg3.Core.Application.Helpers
 {
-    public class UploadFiles<T> where T : class
+    public class UploadFiles
     {
         public static string UploadFile(IFormFile file, string Chapter, string id)
         {
