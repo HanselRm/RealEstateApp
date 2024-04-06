@@ -80,7 +80,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
             if (response != null && response.HasError != true)
             {
-                return RedirectToRoute(new { controller = "Home", action = "Index" });
+                return RedirectToRoute(new { controller = "User", action = "Index" });
             }
             else
             {
