@@ -100,7 +100,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             string response = await _userService.confirmEmailAsync(userId, token);
             return View(response);
         }
-
+        //Recuperar contraseña
         public async Task<IActionResult> PasswordRecover()
         {
             return View(new ForgotPasswordViewModel());
