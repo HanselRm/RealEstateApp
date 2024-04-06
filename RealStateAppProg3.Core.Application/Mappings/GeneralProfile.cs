@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using RealStateAppProg3.Core.Application.Dtos.Account;
+using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
+using RealStateAppProg3.Core.Application.ViewModels.TypeSale;
+using RealStateAppProg3.Core.Application.ViewModels.Users;
 using RealStateAppProg3.Core.Application.Features.Property.Commands.CreateProperty;
 using RealStateAppProg3.Core.Application.Features.Property.Commands.UpdatePropertyByIdCommand;
 using RealStateAppProg3.Core.Application.Features.Property.Queries.GetAllProperties;
 using RealStateAppProg3.Core.Application.ViewModels.Property;
-using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
-using RealStateAppProg3.Core.Application.ViewModels.TypeSale;
 using RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty;
 using RealStateAppProg3.Core.Domain.Entities;
+using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 
 namespace RealStateAppProg3.Core.Application.Mappings
 {
@@ -28,6 +31,28 @@ namespace RealStateAppProg3.Core.Application.Mappings
 
             CreateMap<TypeProperty, TypePropertyViewModel>();
             #endregion
+
+            #region Authentication 
+            CreateMap<AuthenticationRequest, LoginViewModel>()
+               .ForMember(x => x.HasError, opt => opt.Ignore())
+               .ForMember(x => x.Error, opt => opt.Ignore())
+               .ReverseMap();
+            #endregion
+
+            #region ForgotPassword 
+            CreateMap<ForgotPassowordRequest, ForgotPasswordViewModel>()
+                .ForMember(x => x.HasError, opt => opt.Ignore())
+                .ForMember(x => x.Error, opt => opt.Ignore())
+                .ReverseMap();
+            #endregion
+
+            #region resetPassword 
+            CreateMap<ResetPasswordRequest, ResetPasswordViewModel>()
+                .ForMember(x => x.HasError, opt => opt.Ignore())
+                .ForMember(x => x.Error, opt => opt.Ignore())
+                .ReverseMap();
+            #endregion
+
             #region Property
             CreateMap<Property, PropertyViewModel>();
             CreateMap<Property, CreatePropertyCommand>()
@@ -52,7 +77,7 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.TypeSale, opt => opt.Ignore())
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore());
 
-            CreateMap<Property,SavePropertyViewModel>()
+            CreateMap<Property, SavePropertyViewModel>()
                 .ForMember(x => x.Upgrades, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(x => x.Upgrades, opt => opt.Ignore())

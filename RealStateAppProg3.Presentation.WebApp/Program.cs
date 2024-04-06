@@ -3,17 +3,28 @@ using RealStateAppProg3.Infrastructure.Identity;
 using RealStateAppProg3.Infrastructure.Shared;
 using RealStateAppProg3.Infrastructure.Identity.Models;
 using RealStateAppProg3.Infrastructure.Identity.Seeds;
+using RealStateAppProg3.Core.Application;
+using RealStateAppProg3.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
-#region Service registration
-//service registration identity
-builder.Services.AddIdentityInfrastructure(builder.Configuration);
-
-//service registration Shaared
-builder.Services.AddSharedInfrastructure(builder.Configuration);
-#endregion
+builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//Application
+builder.Services.AddApplicationLayer();
+//persistense
+builder.Services.AddPersistenceLayer(builder.Configuration);
+//Identity
+builder.Services.AddIdentityInfrastructure(builder.Configuration);
+//Shaared
+builder.Services.AddSharedInfrastructure(builder.Configuration);
+
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+//Añadir sesiones
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
@@ -47,6 +58,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+//usa sesiones
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -59,6 +72,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=User}/{action=Index}/{id?}");
 
 app.Run();

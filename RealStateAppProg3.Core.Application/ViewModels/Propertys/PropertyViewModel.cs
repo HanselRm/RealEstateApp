@@ -4,7 +4,7 @@ using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
 using RealStateAppProg3.Core.Application.ViewModels.TypeSale;
 using RealStateAppProg3.Core.Domain.Entities;
 
-namespace RealStateAppProg3.Core.Application.ViewModels.Property
+namespace RealStateAppProg3.Core.Application.ViewModels.Propertys
 {
     public class PropertyViewModel
     {
@@ -26,5 +26,6 @@ namespace RealStateAppProg3.Core.Application.ViewModels.Property
         public TypeSaleViewModel? TypeSale { get; set; }
         public List<UpgradesProperty>? Upgrades { get; set; }
         public List<PropertyFavViewModel>? propertyFavs { get; set; }
+
     }
 }
