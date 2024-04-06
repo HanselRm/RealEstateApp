@@ -52,7 +52,7 @@ namespace RealStateAppProg3.Core.Application.Services
         }
 
         //metodo para resetear el password
-        public async Task<ResetPasswordResponse> ResetPassWordAsync(ForgotPasswordViewModel vm)
+        public async Task<ResetPasswordResponse> ResetPassWordAsync(ResetPasswordViewModel vm)
         {
             ResetPasswordRequest resetPass = _mapper.Map<ResetPasswordRequest>(vm);
             return await _accountServices.ResetPasswordAsync(resetPass);
