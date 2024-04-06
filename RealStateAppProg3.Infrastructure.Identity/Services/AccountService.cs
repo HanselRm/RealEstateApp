@@ -259,6 +259,8 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
+                user.IsActive = true;
+                await _userManager.UpdateAsync(user);
                 return $"Cuenta verificada para {user.Email}";
             }
             else

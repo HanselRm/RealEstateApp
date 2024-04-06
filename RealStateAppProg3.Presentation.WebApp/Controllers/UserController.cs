@@ -98,7 +98,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             string response = await _userService.confirmEmailAsync(userId, token);
-            return View(response);
+            return View("ConfirmEmail", response);
         }
         //Recuperar contraseña
         public async Task<IActionResult> PasswordRecover()
