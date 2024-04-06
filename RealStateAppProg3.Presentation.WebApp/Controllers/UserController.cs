@@ -136,5 +136,27 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
             return View(vm);
         }
+        [HttpPost]
+        public async Task<IActionResult> ResetPasswordd(ResetPasswordViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+
+            ResetPasswordResponse response = await _userService.ResetPassWordAsync(vm);
+
+            if (response != null && response.HasError != true)
+            {
+                return RedirectToRoute(new { controller = "User", action = "Index" });
+            }
+            else
+            {
+                vm.HasError = response.HasError;
+                vm.Error = response.Error;
+                return View(vm);
+            }
+        }
     }
 }
