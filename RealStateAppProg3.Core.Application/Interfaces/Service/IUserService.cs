@@ -9,7 +9,7 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
         Task<ForgotPassWordResponse> ForgotPassWordAsync(ForgotPasswordViewModel vm, string origin);
         Task<AuthenticationResponse> LoginAsync(LoginViewModel vm);
         Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm, string origin);
-        Task<ResetPasswordResponse> ResetPassWordAsync(ForgotPasswordViewModel vm, string origin);
+        Task<ResetPasswordResponse> ResetPassWordAsync(ForgotPasswordViewModel vm);
         Task SignOutAsync();
     }
 }
