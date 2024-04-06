@@ -56,5 +56,34 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             HttpContext.Session.Remove("user");
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
+
+        //crear usuario
+        public async Task<IActionResult> Register() 
+        {
+            return View(new SaveUserViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(SaveUserViewModel vm)
+        {
+            if (!ModelState.IsValid && vm.Id != null)
+            {
+                return View(vm);
+            }
+            var origin = Request.Headers["origin"];
+            SaveUserViewModel response = await _userService.RegisterAsync(vm, origin);
+            if (response != null && response.HasError != true)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                vm.HasError = response.HasError;
+                vm.Error = response.Error;
+                return View(vm);
+
+            }
+
+        }
     }
 }
