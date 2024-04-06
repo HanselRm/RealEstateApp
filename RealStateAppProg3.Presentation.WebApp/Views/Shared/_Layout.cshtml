@@ -1,5 +1,6 @@
 ﻿@using RealStateAppProg3.Core.Application.Helpers;
 ﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+﻿@using RealStateAppProg3.Core.Application.Enums;
 
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -33,6 +34,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Agentes</a>
                         </li>
+                        @if (user != null && user.Roles.Contains(RoleENum.Client.ToString()))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Mis propiedades</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Únete a la app</a>
                         </li>
