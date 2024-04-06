@@ -214,7 +214,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var route = "User/ResetPassword";
             var Uri = new Uri(string.Concat($"{origin}/", route));
-            var verificationUrl = QueryHelpers.AddQueryString(Uri.ToString(), "token", code);
+            var verificationUrl = QueryHelpers.AddQueryString(Uri.ToString(), "Token", code);
 
             return verificationUrl;
         }

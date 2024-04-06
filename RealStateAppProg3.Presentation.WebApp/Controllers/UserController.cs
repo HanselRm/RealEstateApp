@@ -98,5 +98,19 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             string response = await _userService.confirmEmailAsync(userId, token);
             return View(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PasswordRecover(string UserName)
+        {
+            /*var bolean = await _userService.GetByUserNameViewModel(UserName);
+            if (bolean)
+            {
+                return RedirectToRoute(new { controller = "User", action = "Index" });
+            }
+
+            ModelState.AddModelError("UserValidation", "Nombre de usuario incorrecto");*/
+            return View();
+
+        }
     }
 }
