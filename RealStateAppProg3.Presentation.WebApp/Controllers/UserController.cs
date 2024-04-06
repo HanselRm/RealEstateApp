@@ -91,5 +91,12 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             }
 
         }
+
+        //ConfirmEmail method
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            string response = await _userService.confirmEmailAsync(userId, token);
+            return View(response);
+        }
     }
 }

@@ -273,7 +273,9 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var route = "User/ConfirmEmail";
             var uri = new Uri(string.Concat($"{origin}/", route));
-            var verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "Token", code);
+            var verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "userId", user.Id);
+            verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "token", code);
+
             return verificationUrl;
         }
     }
