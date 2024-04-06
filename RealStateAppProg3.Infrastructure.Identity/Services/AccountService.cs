@@ -270,11 +270,14 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
         public async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
             var route = "User/ConfirmEmail";
+                
             var uri = new Uri(string.Concat($"{origin}/", route));
             var verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "userId", user.Id);
-            verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "token", code);
+            verificationUrl = QueryHelpers.AddQueryString(verificationUrl, "token", code);
 
             return verificationUrl;
         }
