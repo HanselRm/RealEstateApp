@@ -71,7 +71,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 return View(vm);
             }
             var origin = Request.Headers["origin"];
+            vm.PhotoProfileUrl = UploadFiles.UploadFile(vm.file, "User", vm.Id);
+
             SaveUserViewModel response = await _userService.RegisterAsync(vm, origin);
+
             if (response != null && response.HasError != true)
             {
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
