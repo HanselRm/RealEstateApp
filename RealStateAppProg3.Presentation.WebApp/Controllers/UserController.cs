@@ -6,6 +6,8 @@ using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
 using RealStateAppProg3.Core.Application.ViewModels.Users;
 using System.Data;
+using NuGet.Protocol.Plugins;
+using NuGet.Common;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
@@ -99,18 +101,40 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View(response);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PasswordRecover(string UserName)
+        public async Task<IActionResult> PasswordRecover()
         {
-            /*var bolean = await _userService.GetByUserNameViewModel(UserName);
-            if (bolean)
+            return View(new ForgotPasswordViewModel());
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PasswordRecover(ForgotPasswordViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var origin = Request.Headers["origin"];
+
+            ForgotPassWordResponse response = await _userService.ForgotPassWordAsync(vm, origin);
+
+            if (response != null && response.HasError != true)
             {
                 return RedirectToRoute(new { controller = "User", action = "Index" });
             }
+            else
+            {
+                vm.HasError = response.HasError;
+                vm.Error = response.Error;
+                return View(vm);
+            }
+        }
 
-            ModelState.AddModelError("UserValidation", "Nombre de usuario incorrecto");*/
-            return View();
+        public IActionResult ResetPassword(ResetPasswordViewModel vm)
+        {
 
+            return View(vm);
         }
     }
 }
