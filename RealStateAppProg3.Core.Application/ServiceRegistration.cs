@@ -16,6 +16,9 @@ namespace RealStateAppProg3.Core.Application
             services.AddTransient<IUpgradeService, UpgradeService>();
             services.AddTransient<ITypePropertyService, TypePropertyService>();
             services.AddTransient<ITypeSaleService, TypeSaleService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IPropertyFavService,PropertyFavService>();
+            services.AddTransient<IPropertyService, PropertyService>();
             #endregion
         }
     }

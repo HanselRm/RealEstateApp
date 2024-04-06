@@ -17,6 +17,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Seeds
             defaultUserClient.LastName = "Mejia";
             defaultUserClient.Identification = "402191122";
             defaultUserClient.EmailConfirmed = true;
+            defaultUserClient.IsActive = true;
             defaultUserClient.PhoneNumberConfirmed = true;
 
             //Validar si el default user existe

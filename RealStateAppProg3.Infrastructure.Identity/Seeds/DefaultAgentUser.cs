@@ -18,6 +18,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Seeds
             defaultUserAgent.LastName = "Mejia";
             defaultUserAgent.Identification = "40229997261";
             defaultUserAgent.EmailConfirmed = true;
+            defaultUserAgent.IsActive = true;
             defaultUserAgent.PhoneNumberConfirmed = true;
 
             //Validar si el default user existe
