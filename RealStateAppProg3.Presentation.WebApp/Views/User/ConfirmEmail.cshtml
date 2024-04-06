@@ -1,0 +1,42 @@
+﻿@using RealStateAppProg3.Core.Application.ViewModels.Users;
+@model string;
+@{
+    ViewData["Title"] = "Confirm";
+}
+
+<head>
+    <title>Mensaje Profesional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .message-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .message-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .message-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message-container">
+        <p> @Model - <a asp-controller="User" asp-action="Index"> Ingresa a la app</a></p>
+    </div>
+</body>
