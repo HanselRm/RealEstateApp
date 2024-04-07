@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
+using RealStateAppProg3.Core.Application.ViewModels.Users;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
@@ -18,10 +19,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View();
         }
         //mi perfil
-        public async Task<IActionResult> MyProfile(int Id)
+        public async Task<IActionResult> MyProfile(string Id)
         {
-
-            return View();
+            SaveUserViewModel vm = await _userService.GetByIdWithoutRol(Id);
+            return View(vm);
         }
     }
 }
