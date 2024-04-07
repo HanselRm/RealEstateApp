@@ -6,7 +6,6 @@ using RealStateAppProg3.Core.Application.ViewModels.Users;
 using RealStateAppProg3.Core.Application.Features.Property.Commands.CreateProperty;
 using RealStateAppProg3.Core.Application.Features.Property.Commands.UpdatePropertyByIdCommand;
 using RealStateAppProg3.Core.Application.Features.Property.Queries.GetAllProperties;
-using RealStateAppProg3.Core.Application.ViewModels.Property;
 using RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty;
 using RealStateAppProg3.Core.Domain.Entities;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
