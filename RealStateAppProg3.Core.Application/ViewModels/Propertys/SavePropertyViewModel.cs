@@ -2,7 +2,7 @@
 
 using RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty;
 
-namespace RealStateAppProg3.Core.Application.ViewModels.Property
+namespace RealStateAppProg3.Core.Application.ViewModels.Propertys
 {
     public class SavePropertyViewModel
     {

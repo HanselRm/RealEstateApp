@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 namespace RealStateAppProg3.Core.Application.ViewModels.TypeSale
 {
     public class TypeSaleViewModel

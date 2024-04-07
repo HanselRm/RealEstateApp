@@ -127,9 +127,9 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                 Email = vm.Email,
                 Identification = vm.Identification,
                 UserName = vm.Username,
-                EmailConfirmed = true,
+                PhoneNumber = vm.PhoneNumber,
+                PhoneNumberConfirmed = true,
                 ImgUser = vm.PhotoProfileUrl,
-                IsActive = vm.IsActive
             };
 
             if (vm.TypeUser == RoleENum.Agent.ToString())
@@ -214,7 +214,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var route = "User/ResetPassword";
             var Uri = new Uri(string.Concat($"{origin}/", route));
-            var verificationUrl = QueryHelpers.AddQueryString(Uri.ToString(), "token", code);
+            var verificationUrl = QueryHelpers.AddQueryString(Uri.ToString(), "Token", code);
 
             return verificationUrl;
         }
@@ -259,6 +259,8 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
+                user.IsActive = true;
+                await _userManager.UpdateAsync(user);
                 return $"Cuenta verificada para {user.Email}";
             }
             else
@@ -270,10 +272,15 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
         public async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
             var route = "User/ConfirmEmail";
+                
             var uri = new Uri(string.Concat($"{origin}/", route));
-            var verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "Token", code);
+            var verificationUrl = QueryHelpers.AddQueryString(uri.ToString(), "userId", user.Id);
+            verificationUrl = QueryHelpers.AddQueryString(verificationUrl, "token", code);
+
             return verificationUrl;
         }
     }

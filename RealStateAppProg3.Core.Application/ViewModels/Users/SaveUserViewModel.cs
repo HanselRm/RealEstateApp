@@ -41,10 +41,11 @@ namespace RealStateAppProg3.Core.Application.ViewModels.Users
         [Required(ErrorMessage = "Debe colocar una contraseña")]
         public string ConfirmPassword { get; set; }
 
+        [Required(ErrorMessage = "Debe colocar una el tipo de usuario")]
         public string TypeUser { get; set; }
         
         public bool IsConfirm { get; set; }
-        public bool HasError { get; set; }
-        public string Error { get; set; }
+        public bool? HasError { get; set; }
+        public string? Error { get; set; }
     }
 }
