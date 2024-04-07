@@ -10,6 +10,7 @@ using RealStateAppProg3.Core.Application.ViewModels.Property;
 using RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty;
 using RealStateAppProg3.Core.Domain.Entities;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
 
 namespace RealStateAppProg3.Core.Application.Mappings
 {
@@ -93,6 +94,12 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.Property, opt => opt.Ignore())
                 .ForMember(x => x.Upgrades, opt => opt.Ignore());
             CreateMap<UpgradesProperty, UpgradePropertyViewModel>();
+            #endregion
+            #region Upgrade
+            CreateMap<Upgrades, UpgradeViewModel>();
+            CreateMap<Upgrades, SaveUpgradesViewModel>()
+                .ReverseMap()
+                .ForMember(x => x.Properties, opt => opt.Ignore());
             #endregion
         }
     }
