@@ -180,7 +180,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
         }
 
         //Actualizar usuario
-        public async Task<SaveUserViewModel> UpdateAsync(SaveUserViewModel vm, string origin)
+        public async Task<SaveUserViewModel> UpdateAsync(SaveUserViewModel vm)
         {
             SaveUserViewModel userVM = new SaveUserViewModel();
 
