@@ -237,6 +237,28 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             return userVM;
         }
 
+        //get UserVm por Id
+        public async Task<SaveUserViewModel> GetByIdWithoutRol(string id)
+        {
+
+            var user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                throw new Exception("No se encontro este usuario");
+            }
+
+            SaveUserViewModel vm = new SaveUserViewModel
+            {
+                Name = user.Name,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                PhotoProfileUrl = user.ImgUser,
+                Email = user.Email,
+                Id = user.Id
+            };
+            return vm;
+        }
+
         //Olvidar contraseña
         public async Task<ForgotPassWordResponse> ForgotPasswordRequestAsync(ForgotPassowordRequest request, string origin)
         {
