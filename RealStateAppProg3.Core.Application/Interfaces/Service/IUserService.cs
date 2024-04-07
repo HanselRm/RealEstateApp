@@ -10,6 +10,7 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
         Task<AuthenticationResponse> LoginAsync(LoginViewModel vm);
         Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm, string origin);
         Task<SaveUserViewModel> UpdateAsync(SaveUserViewModel vm);
+        Task<SaveUserViewModel> GetByIdWithoutRol(string id);
         Task<ResetPasswordResponse> ResetPassWordAsync(ResetPasswordViewModel vm);
         Task SignOutAsync();
     }
