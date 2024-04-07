@@ -178,6 +178,65 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             }
             return userVM;
         }
+
+        //Actualizar usuario
+        public async Task<SaveUserViewModel> UpdateAsync(SaveUserViewModel vm, string origin)
+        {
+            SaveUserViewModel userVM = new SaveUserViewModel();
+
+            var AppUser = await _userManager.FindByIdAsync(vm.Id);
+
+            if(AppUser.UserName != vm.Username)
+            {
+                var verifUsername = await _userManager.FindByNameAsync(vm.Username);
+                if (verifUsername != null)
+                {
+                    userVM.HasError = true;
+                    userVM.Error = "Este usuario ya esta en uso";
+                    return userVM;
+                }
+            }
+
+          if(AppUser.Email != vm.Email)
+            {
+                //valida el email
+
+                var verifyEmail = await _userManager.FindByEmailAsync(vm.Email);
+                if (verifyEmail != null)
+                {
+                    userVM.HasError = true;
+                    userVM.Error = $"Este email {userVM.Email} ya esta en uso";
+                    return userVM;
+                }
+            }
+
+
+            AppUser.Name = vm.Name;
+            AppUser.LastName = vm.LastName;
+            AppUser.Email = vm.Email;
+            AppUser.Identification = vm.Identification;
+            AppUser.UserName = vm.Username;
+            AppUser.PhoneNumber = vm.PhoneNumber;
+            AppUser.PhoneNumberConfirmed = true;
+            AppUser.ImgUser = vm.PhotoProfileUrl;
+            
+
+            var status = await _userManager.UpdateAsync(AppUser);
+
+            if (status.Succeeded)
+            {
+                userVM.HasError = true;
+
+            }
+            else
+            {
+                userVM.HasError = true;
+                userVM.Error = $"Hubo un error, intentelo mas tarde";
+                return userVM;
+            }
+            return userVM;
+        }
+
         //Olvidar contraseña
         public async Task<ForgotPassWordResponse> ForgotPasswordRequestAsync(ForgotPassowordRequest request, string origin)
         {
