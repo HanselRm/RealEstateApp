@@ -2,7 +2,7 @@
 using AutoMapper;
 using MediatR;
 using RealStateAppProg3.Core.Application.Interfaces.Repositories;
-using RealStateAppProg3.Core.Application.ViewModels.Property;
+using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Domain.Entities;
 
 namespace RealStateAppProg3.Core.Application.Features.Property.Queries.GetAllProperties

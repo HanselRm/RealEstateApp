@@ -1,5 +1,5 @@
 ﻿
-using RealStateAppProg3.Core.Application.ViewModels.Property;
+using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
 
 namespace RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty

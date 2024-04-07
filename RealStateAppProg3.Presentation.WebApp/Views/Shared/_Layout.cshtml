@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using RealStateAppProg3.Core.Application.Helpers;
+﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+
+    var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,12 +34,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Agentes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="#">Únete a la app</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Únete a la app</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index"> Iniciar sesión</a>
                         </li>
                     </ul>
+                    @if(user != null)
+                    {
+                        <div class="d-flex">
+                            <a asp-controller="User" asp-action="LogOut" class="btn btn-outline-danger rounded-pill">
+                                <i class="bi bi-box-arrow-right me-2"></i> Cerrar Sesión
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>

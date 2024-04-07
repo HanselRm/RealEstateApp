@@ -17,7 +17,7 @@ namespace RealStateAppProg3.Core.Application.ViewModels.Users
         [Required(ErrorMessage = "debes confirmar tu contraseña")]
         [Compare(nameof(Password), ErrorMessage = "Ambas contraseña deben coincidir")]
         public string ConfirmPassword { get; set; }
-        public bool HasError { get; set; }
-        public string Error { get; set; }
+        public bool? HasError { get; set; }
+        public string? Error { get; set; }
     }
 }
