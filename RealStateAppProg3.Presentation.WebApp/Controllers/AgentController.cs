@@ -127,7 +127,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             //guardamos la propiedad
             await _propertyService.SaveAsync(vm, user.Id);
 
-            return RedirectToRoute(new { controller = "Admin", action = "MantPro" });
+            return RedirectToRoute(new { controller = "Agent", action = "MantPro" });
         }
     }
 }

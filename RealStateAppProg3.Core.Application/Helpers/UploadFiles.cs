@@ -28,7 +28,7 @@ namespace RealStateAppProg3.Core.Application.Helpers
             {
                 file.CopyTo(stream);
             }
-            return Path.Combine(basePath, filename);
+            return $"{basePath}/{fileName}";
         }
     }
 }

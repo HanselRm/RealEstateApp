@@ -33,12 +33,11 @@ namespace RealStateAppProg3.Core.Application.Services
             //genera el codigo
             vm.Code = CodeGenerator.Unique9DigitsGenerator().ToString();
 
-            var verifyCode = await _propertyRepository.GetByIdAsync(int.Parse(vm.Code));
+            var verifyCode = await _propertyRepository.GetByIdAsync(vm.Code);
             while (verifyCode != null)
             {
                 vm.Code = CodeGenerator.Unique9DigitsGenerator().ToString();
-                verifyCode = await _propertyRepository.GetByIdAsync(int.Parse(vm.Code));
-
+                verifyCode = await _propertyRepository.GetByIdAsync(vm.Code);
             }
             //mapea de viewmodel a entidad
             var property = _mapper.Map<Property>(vm);
