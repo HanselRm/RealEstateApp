@@ -3,6 +3,7 @@ using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
 using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
 using RealStateAppProg3.Core.Application.ViewModels.TypeSale;
+using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
@@ -10,11 +11,13 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
     {
         private readonly ITypePropertyService _typePropertyService;
         private readonly ITypeSaleService _typeSaleService;
+        private readonly IUpgradeService _upgradeService;
 
-        public AdminController(ITypePropertyService typePropertyService, ITypeSaleService typeSaleService)
+        public AdminController(ITypePropertyService typePropertyService, ITypeSaleService typeSaleService, IUpgradeService upgradeService)
         {
             _typeSaleService = typeSaleService;
             _typePropertyService = typePropertyService;
+            _upgradeService = upgradeService;
         }
 
         #region Mant. de propiedades
@@ -122,6 +125,58 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         {
             await _typeSaleService.RemoveAsync(id);
             return RedirectToRoute(new { controller = "Admin", action = "MantTSale" });
+        }
+        #endregion
+
+        #region Mant. de Mejoras
+        public async Task<IActionResult> MantUpgrade()
+        {
+            var vm = await _upgradeService.GetAllAsync();
+            return View(vm);
+        }
+
+        public IActionResult SaveUpgrade()
+        {
+            return View("SaveUpgrade", new SaveUpgradesViewModel());
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveUpgrade(SaveUpgradesViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SaveUpgrade", vm);
+            }
+            await _upgradeService.SaveAsync(vm);
+            return RedirectToRoute(new { controller = "Admin", action = "MantUpgrade" });
+        }
+        public async Task<IActionResult> UpdateUpgrade(int Id)
+        {
+            
+            var Upgrade = await _upgradeService.GetByIdAsync(Id);
+            return View("SaveUpgrade", Upgrade);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUpgrade(SaveUpgradesViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SaveUpgrade", vm);
+            }
+            await _upgradeService.UpdateAsync(vm, vm.Id);
+            return RedirectToRoute(new { controller = "Admin", action = "MantUpgrade" });
+        }
+
+        public IActionResult RemoveUpgrade(int Id)
+        {
+            ViewBag.Id = Id;
+            return View();
+        }
+        public async Task<IActionResult> ConfirmRemoveUpgrade(int id)
+        {
+            await _upgradeService.RemoveAsync(id);
+            return RedirectToRoute(new { controller = "Admin", action = "MantUpgrade" });
         }
         #endregion
     }

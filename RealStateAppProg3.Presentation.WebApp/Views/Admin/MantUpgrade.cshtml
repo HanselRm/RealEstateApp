@@ -5,7 +5,7 @@
     <div class="row mb-3">
 
         <div class="col-3 offset-9">
-            <a asp-controller="Upgrade" asp-action="Save" class="btn btn-danger">Agregar una mejora</a>
+            <a asp-controller="Admin" asp-action="SaveUpgrade" class="btn btn-danger">Agregar una mejora</a>
         </div>
 
         <div class="col-12">
@@ -29,12 +29,12 @@
                             <td>@beneficiary.Name</td>
                             <td>@beneficiary.Description</td>
                             <td>
-                                <a asp-controller="Upgrade" asp-action="Update" asp-route-Id="@beneficiary.Id">
+                                <a asp-controller="Admin" asp-action="UpdateUpgrade" asp-route-Id="@beneficiary.Id">
                                     Actualizar
                                 </a>
                             </td>
                             <td>
-                                <a asp-controller="Upgrade" asp-action="Remove" asp-route-Id="@beneficiary.Id">
+                                <a asp-controller="Admin" asp-action="RemoveUpgrade" asp-route-Id="@beneficiary.Id">
                                     Remover
                                 </a>
                             </td>
