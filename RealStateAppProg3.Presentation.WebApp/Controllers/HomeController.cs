@@ -22,6 +22,12 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             List<PropertyViewModel> list = await _propertyService.GetAllAsync();
             return View(list);
         }
+        public async Task<IActionResult> FilterCode(string codigo)
+        {
+            List<PropertyViewModel> list = await _propertyService.GetAllAsync();
+            return View("Index",list.Where(p => p.Code == codigo).ToList());
+        }
+        
 
         public IActionResult Privacy()
         {
