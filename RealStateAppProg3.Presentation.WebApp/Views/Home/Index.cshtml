@@ -15,7 +15,9 @@
         {
             <div class="col">
                 <div class="card h-100 shadow">
-                    <img class="card-img-top" src="@property.UrlImage1" alt="@property.Code">
+                    <div class="image-container">
+                        <img class="card-img-top img-fluid" src="@property.UrlImage1" alt="@property.Code">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">
                             <i class="fas fa-building me-2"></i>@property.TypeProperty
@@ -47,4 +49,19 @@
 
 @section Styles {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <style>
+        .image-container {
+            height: 200px; /* Ajusta la altura según tus necesidades */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .image-container img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+    </style>
 }
