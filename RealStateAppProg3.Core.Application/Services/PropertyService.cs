@@ -18,10 +18,8 @@ namespace RealStateAppProg3.Core.Application.Services
         private readonly IMapper _mapper;
         private readonly IUpgradesPropertyRepository _upgradePropertyRepository;
         private readonly IUpgradeRepository _upgradeRepository;
-        public PropertyService(IPropertyRepository propertyRepository,
-                               IMapper mapper,
-                               IUpgradeRepository upgradeRepository,
-        IUpgradesPropertyRepository upgradePropertyRepository) : base(propertyRepository,mapper)
+        public PropertyService(IPropertyRepository propertyRepository, IMapper mapper, IUpgradeRepository upgradeRepository,
+                                IUpgradesPropertyRepository upgradePropertyRepository) : base(propertyRepository,mapper)
         {
             _propertyRepository =  propertyRepository;
             _upgradePropertyRepository = upgradePropertyRepository;
@@ -31,9 +29,21 @@ namespace RealStateAppProg3.Core.Application.Services
 
         public  async Task<SavePropertyViewModel> SaveAsync(SavePropertyViewModel vm, string Id)
         {
-            var property = _mapper.Map<Property>(vm);
+
+            //genera el codigo
             vm.Code = CodeGenerator.Unique9DigitsGenerator().ToString();
+
+            var verifyCode = await _propertyRepository.GetByIdAsync(int.Parse(vm.Code));
+            while (verifyCode != null)
+            {
+                vm.Code = CodeGenerator.Unique9DigitsGenerator().ToString();
+                verifyCode = await _propertyRepository.GetByIdAsync(int.Parse(vm.Code));
+
+            }
+            //mapea de viewmodel a entidad
+            var property = _mapper.Map<Property>(vm);
             property.Code = vm.Code;
+            property.Created = DateTime.Now;
 
             vm.IdUser = Id;
             property = await _propertyRepository.SaveAsync(property);
