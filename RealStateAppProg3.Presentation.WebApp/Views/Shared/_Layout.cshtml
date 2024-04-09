@@ -39,6 +39,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index"> Iniciar sesión</a>
                         </li>
+                        @* elimina *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Property" asp-action="Save"> GPropiedades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Upgrade" asp-action="Index"> Mejoras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TypeProperty" asp-action="Index"> TPropiedades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TypeSale" asp-action="Index"> TVenta</a>
+                        </li>
                     </ul>
                     @if(user != null)
                     {

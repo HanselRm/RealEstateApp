@@ -31,6 +31,7 @@ namespace RealStateAppProg3.Infrastructure.Persistence.Context
             modelBuilder.Entity<TypeSale>().HasKey(x => x.Id);
             modelBuilder.Entity<Upgrades>().HasKey(x => x.Id);
             modelBuilder.Entity<UpgradesProperty>().HasKey(x => x.Id);
+            modelBuilder.Entity<PropertyFav>().HasKey(x => x.Id);
             #endregion
             #region Configuring Foreign Keys
             #region Property Keys
