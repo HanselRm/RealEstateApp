@@ -60,6 +60,12 @@
                                     </div>
 
                                     <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="IsActive" value="@Model.IsActive" />
+                                    <input type="hidden" asp-for="Email" value="@Model.Email" />
+                                    <input type="hidden" asp-for="TypeUser" value="@Model.TypeUser" />
+                                    <input type="hidden" asp-for="IsConfirm" value="@Model.IsConfirm" />
+                                    <input type="hidden" asp-for="Username" value="@Model.Username" />
+                                    <input type="hidden" asp-for="Identification" value="@Model.Identification" />
 
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Actualizar</button>
                                 </form>

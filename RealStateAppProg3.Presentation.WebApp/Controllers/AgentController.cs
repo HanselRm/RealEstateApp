@@ -28,22 +28,19 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
         [HttpPost]
         public async Task<IActionResult> MyProfile(SaveUserViewModel vm)
-        {
-            if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
-                || ModelState["PhoneNumber"].Errors.Any() || ModelState["file"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
-                || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
-                || ModelState["ConfirmPassword"].Errors.Any() || ModelState["TypeUser"].Errors.Any())
+            {
+            if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any()
+                || ModelState["PhoneNumber"].Errors.Any() )
             {
                 return View(vm);
             }
-            var origin = Request.Headers["origin"];
-            vm.PhotoProfileUrl = UploadFiles.UploadFile(vm.file, "User", vm.Id);
+            /*vm.PhotoProfileUrl = UploadFiles.UploadFile(vm.file, "User", vm.Id);*/
 
-            SaveUserViewModel response = await _userService.RegisterAsync(vm, origin);
+            SaveUserViewModel response = await _userService.UpdateAsync(vm);
 
             if (response != null && response.HasError != true)
             {
-                return RedirectToRoute(new { controller = "User", action = "Index" });
+                return RedirectToRoute(new { controller = "Agent", action = "Index" });
             }
             else
             {

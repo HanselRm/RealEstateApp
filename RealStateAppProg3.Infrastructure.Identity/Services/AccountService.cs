@@ -186,7 +186,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
 
             var AppUser = await _userManager.FindByIdAsync(vm.Id);
 
-            if(AppUser.UserName != vm.Username)
+/*            if(AppUser.UserName != vm.Username)
             {
                 var verifUsername = await _userManager.FindByNameAsync(vm.Username);
                 if (verifUsername != null)
@@ -208,7 +208,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                     userVM.Error = $"Este email {userVM.Email} ya esta en uso";
                     return userVM;
                 }
-            }
+            }*/
 
 
             AppUser.Name = vm.Name;
@@ -225,7 +225,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
 
             if (status.Succeeded)
             {
-                userVM.HasError = true;
+                userVM.HasError = false;
 
             }
             else
@@ -250,6 +250,8 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             SaveUserViewModel vm = new SaveUserViewModel
             {
                 Name = user.Name,
+                Username = user.UserName,
+                Identification = user.Identification,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 PhotoProfileUrl = user.ImgUser,
