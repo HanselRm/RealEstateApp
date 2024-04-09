@@ -42,6 +42,7 @@ namespace RealStateAppProg3.Core.Application.ViewModels.Propertys
         public IFormFile? Img2 { get; set; }
         public IFormFile? Img3 { get; set; }
         public IFormFile? Img4 { get; set; }
+        public DateTime? Created { get; set; }
         public List<int> UpgradesId { get; set; }
         //id usuario
         public string IdUser { get; set; }
