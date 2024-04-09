@@ -1,12 +1,11 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using InternetBanking.Core.Application.Services;
-using Microsoft.AspNetCore.Http;
 using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Helpers;
 using RealStateAppProg3.Core.Application.Interfaces.Repositories;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+using RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty;
 using RealStateAppProg3.Core.Domain.Entities;
 using System.Xml.Serialization;
 
@@ -18,26 +17,34 @@ namespace RealStateAppProg3.Core.Application.Services
 
         private readonly IMapper _mapper;
         private readonly IUpgradesPropertyRepository _upgradePropertyRepository;
-        private readonly IHttpContextAccessor contextAccessor;
+        private readonly IUpgradeRepository _upgradeRepository;
         public PropertyService(IPropertyRepository propertyRepository,
                                IMapper mapper,
-                               IUpgradesPropertyRepository upgradePropertyRepository) : base(propertyRepository,mapper)
+                               IUpgradeRepository upgradeRepository,
+        IUpgradesPropertyRepository upgradePropertyRepository) : base(propertyRepository,mapper)
         {
             _propertyRepository =  propertyRepository;
             _upgradePropertyRepository = upgradePropertyRepository;
             _mapper = mapper;
+            _upgradeRepository = upgradeRepository;
         }
 
-        public override async Task<SavePropertyViewModel> SaveAsync(SavePropertyViewModel vm)
+        public  async Task<SavePropertyViewModel> SaveAsync(SavePropertyViewModel vm, string Id)
         {
             var property = _mapper.Map<Property>(vm);
             vm.Code = CodeGenerator.Unique9DigitsGenerator().ToString();
-            vm.IdUser = contextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user").Id; 
+            property.Code = vm.Code;
+
+            vm.IdUser = Id;
             property = await _propertyRepository.SaveAsync(property);
-            foreach(var item in vm.Upgrades)
+
+            
+            foreach(var item in vm.UpgradesId)
             {
-                item.IdProperty = int.Parse(property.Code);
-                await _upgradePropertyRepository.SaveAsync(_mapper.Map<UpgradesProperty>(item));
+                UpgradesProperty upgradesProperty = new();
+                upgradesProperty.IdProperty = property.Code;
+                upgradesProperty.IdUpgrade = item; 
+                await _upgradePropertyRepository.SaveAsync(upgradesProperty);
             }
             return _mapper.Map<SavePropertyViewModel>(property);
         }

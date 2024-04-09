@@ -7,5 +7,6 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
 {
     public interface IPropertyService : IBaseService<PropertyViewModel,SavePropertyViewModel, Property>
     {
+        Task<SavePropertyViewModel> SaveAsync(SavePropertyViewModel vm, string Id);
     }
 }
