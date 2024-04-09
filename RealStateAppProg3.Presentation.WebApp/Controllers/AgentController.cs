@@ -62,7 +62,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> SaveProperty()
+        public async Task<IActionResult> SaveTpro()
         {
             //tipos de venta
             var typeSales = await _typeSaleService.GetAllAsync();
@@ -77,7 +77,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveProperty(SavePropertyViewModel vm)
+        public async Task<IActionResult> SaveTpro(SavePropertyViewModel vm)
         {
             if (!ModelState.IsValid)
             {
