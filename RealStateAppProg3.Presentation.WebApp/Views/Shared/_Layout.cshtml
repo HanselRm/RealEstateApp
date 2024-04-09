@@ -64,7 +64,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Agent" asp-action="MyProfile" asp-route-Id="@user.Id">Mi perfil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Agent" asp-action="SaveProperty">Mant. de propiedades</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Agent" asp-action="MantPro">Mant. de propiedades</a>
                             </li>
                         }
                         @if(user != null && user.Roles.Contains(RoleENum.Admin.ToString()))
