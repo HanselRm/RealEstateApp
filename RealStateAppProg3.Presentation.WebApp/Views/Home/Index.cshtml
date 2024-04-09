@@ -1,37 +1,42 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 @model List<PropertyViewModel>;
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="container">
-    <h2 class="my-4 text-center">Home</h2>
+    <h2 class="my-4 text-center text-primary">
+        <i class="fas fa-home me-2"></i>Propiedades
+    </h2>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var property in Model.OrderByDescending(p => p.Created))
         {
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 shadow">
                     <img class="card-img-top" src="@property.UrlImage1" alt="@property.Code">
                     <div class="card-body">
-                        <h5 class="card-title">@property.TypeProperty</h5>
+                        <h5 class="card-title">
+                            <i class="fas fa-building me-2"></i>@property.TypeProperty
+                        </h5>
                         <p class="card-text">
-                            <span class="fw-bold">Código:</span> @property.Code
+                            <i class="fas fa-key me-2"></i><span class="fw-bold">Código:</span> @property.Code
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Tipo de Venta:</span> @property.TypeSale
+                            <i class="fas fa-tag me-2"></i><span class="fw-bold">Tipo de Venta:</span> @property.TypeSale
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Valor:</span> @property.Value.ToString("C")
+                            <i class="fas fa-dollar-sign me-2"></i><span class="fw-bold">Valor:</span> @property.Value.ToString("C")
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Habitaciones:</span> @property.NumberRooms
+                            <i class="fas fa-bed me-2"></i><span class="fw-bold">Habitaciones:</span> @property.NumberRooms
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Baños:</span> @property.Bathrooms
+                            <i class="fas fa-bath me-2"></i><span class="fw-bold">Baños:</span> @property.Bathrooms
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Área:</span> @property.SizeInMeters m²
+                            <i class="fas fa-ruler-combined me-2"></i><span class="fw-bold">Área:</span> @property.SizeInMeters m²
                         </p>
                     </div>
                 </div>
@@ -39,3 +44,7 @@
         }
     </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+}
