@@ -1,0 +1,27 @@
+﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+@model List<PropertyViewModel>
+
+<div class="container mt-5">
+    <div class="row mb-3">
+
+        <div class="col-3 offset-9">
+            <a asp-controller="Agent" asp-action="SaveProp" class="btn btn-danger">Agregar una propiedad</a>
+        </div>
+
+        <div class="col-12">
+            <h2 class="text-center mb-4">Propiedades</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            
+        </table>
+
+    </div>
+</div>

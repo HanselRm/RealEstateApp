@@ -37,6 +37,17 @@ namespace RealStateAppProg3.Core.Application.Services
         {
             return await _accountServices.RegisterAsync(vm, origin);
         }
+        //metodo de actualizar 
+        public async Task<SaveUserViewModel> UpdateAsync(SaveUserViewModel vm)
+        {
+            return await _accountServices.UpdateAsync(vm);
+        }
+
+        //metodo de obtener user sin rol
+        public async Task<SaveUserViewModel> GetByIdWithoutRol(string id)
+        {
+            return await _accountServices.GetByIdWithoutRol(id);
+        }
 
         //metodo para confirmar email
         public async Task<string> confirmEmailAsync(string userId, string token)

@@ -1,40 +1,40 @@
-﻿@using RealStateAppProg3.Core.Application.ViewModels.TypeSale
-@model List<TypeSaleViewModel>
+﻿@using RealStateAppProg3.Core.Application.ViewModels.TypeProperty
+@model List<TypePropertyViewModel>
 
 <div class="container mt-5">
     <div class="row mb-3">
 
         <div class="col-3 offset-9">
-            <a asp-controller="TypeSale" asp-action="Save" class="btn btn-danger">Agregar tipo de venta</a>
+            <a asp-controller="Admin" asp-action="SaveTpro" class="btn btn-danger">Agregar un tipo de propiedad</a>
         </div>
 
         <div class="col-12">
-            <h2 class="text-center mb-4">Lista de mejoras</h2>
+            <h2 class="text-center mb-4">Tipos de propiedades</h2>
         </div>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col"></th>
+                    <th scope="col">Cantidad de propiedades asignadas</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 @if (@Model != null)
                 {
-                    @foreach (var beneficiary in @Model)
+                    @foreach (var type in @Model)
                     {
                         <tr>
-                            <td>@beneficiary.Name</td>
-                            <td>@beneficiary.Description</td>
+                            <td>@type.Name</td>
+                            <td>@type.Description</td>
                             <td>
-                                <a asp-controller="TypeSale" asp-action="Update" asp-route-Id="@beneficiary.Id">
+                                <a asp-controller="Admin" asp-action="UpdateTpro" asp-route-Id="@type.Id">
                                     Actualizar
                                 </a>
                             </td>
                             <td>
-                                <a asp-controller="TypeSale" asp-action="Remove" asp-route-Id="@beneficiary.Id">
+                                <a asp-controller="Admin" asp-action="RemoveTpro" asp-route-Id="@type.Id">
                                     Remover
                                 </a>
                             </td>

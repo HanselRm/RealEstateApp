@@ -78,7 +78,6 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore());
 
             CreateMap<Property, SavePropertyViewModel>()
-                .ForMember(x => x.Upgrades, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(x => x.Upgrades, opt => opt.Ignore())
                 .ForMember(x => x.TypeProperty, opt => opt.Ignore())

@@ -11,6 +11,8 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
         Task<string> ConfirmAccount(string userId, string token);
         Task<ForgotPassWordResponse> ForgotPasswordRequestAsync(ForgotPassowordRequest request, string origin);
         Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm, string origin);
+        Task<SaveUserViewModel> UpdateAsync(SaveUserViewModel vm);
+        Task<SaveUserViewModel> GetByIdWithoutRol(string id);
         Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request);
         Task SignOutAsync();
     }

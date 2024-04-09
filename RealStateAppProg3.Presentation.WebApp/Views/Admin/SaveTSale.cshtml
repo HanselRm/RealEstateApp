@@ -14,9 +14,9 @@
 
                         <div class="mb-md-5 mt-md-4 pb-5">
 
-                            <form method="post" asp-controller="TypeSale" asp-action="@(isEditing?"Update":"Save")">
+                            <form method="post" asp-controller="Admin" asp-action="@(isEditing?"UpdateTSale":"SaveTSale")">
 
-                                <h2 class="fw-bold mb-2 text-uppercase">Pago express</h2>
+                                <h2 class="fw-bold mb-2 text-uppercase">Agregar tipo de venta</h2>
 
                                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                                 @if(ViewBag.Error != null)
