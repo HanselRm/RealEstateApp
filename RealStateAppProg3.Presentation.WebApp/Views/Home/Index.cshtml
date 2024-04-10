@@ -1,4 +1,5 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+@using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
 @model List<PropertyViewModel>;
 
 @{
@@ -27,9 +28,11 @@
                     <div class="col-md-4">
                         <select class="form-select" aria-label="Tipo de propiedad">
                             <option selected>Tipo de propiedad</option>
-                            <option value="casa">Casa</option>
-                            <option value="apartamento">Apartamento</option>
-                            <!-- Agrega más opciones según tus tipos de propiedad -->
+                            @foreach(var TP in ViewBag.Tp)
+                            {
+                                <option value="TP.Id">@TP.Name</option>
+                            }
+                            
                         </select>
                     </div>
                     <div class="col-md-4">

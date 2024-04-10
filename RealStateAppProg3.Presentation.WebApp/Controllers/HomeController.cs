@@ -10,16 +10,26 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IPropertyService _propertyService;
+        private readonly IUpgradeService _upgradeService;
+        private readonly ITypeSaleService _typeSaleService;
+        private readonly ITypePropertyService _typePropertyService;
 
-        public HomeController(ILogger<HomeController> logger, IPropertyService propertyService)
+
+
+        public HomeController(ILogger<HomeController> logger, IPropertyService propertyService, IUpgradeService upgradeService, 
+                                ITypeSaleService typeSaleService, ITypePropertyService typePropertyServic)
         {
             _logger = logger;
             _propertyService = propertyService;
+            _upgradeService = upgradeService;
+            _typeSaleService = typeSaleService;
+            _typePropertyService = typePropertyServic;
         }
 
         public async Task<IActionResult> Index()
         {
             List<PropertyViewModel> list = await _propertyService.GetAllAsync();
+            ViewBag.Tp = await _typePropertyService.GetAllAsync();
             return View(list);
         }
         public async Task<IActionResult> FilterCode(string codigo)
