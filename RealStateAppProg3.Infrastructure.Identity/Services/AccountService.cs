@@ -219,7 +219,8 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             AppUser.PhoneNumber = vm.PhoneNumber;
             AppUser.PhoneNumberConfirmed = true;
             AppUser.ImgUser = vm.PhotoProfileUrl;
-            
+            //--- para que tenga posibilidad de crear el usuario activo 
+            AppUser.IsActive = vm.IsActive;
 
             var status = await _userManager.UpdateAsync(AppUser);
 
@@ -256,6 +257,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                 PhoneNumber = user.PhoneNumber,
                 PhotoProfileUrl = user.ImgUser,
                 Email = user.Email,
+                IsActive = user.IsActive,
                 Id = user.Id
             };
             return vm;
@@ -390,6 +392,45 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             verificationUrl = QueryHelpers.AddQueryString(verificationUrl, "token", code);
 
             return verificationUrl;
+        }
+        //obtener los usuarios con el rol administrador
+        public async Task<List<SaveUserViewModel>> GetUsersAdmin()
+        {
+           var users = await _userManager.GetUsersInRoleAsync(RoleENum.Admin.ToString());
+            //
+
+            return users.Select(user => new SaveUserViewModel
+            {
+                Name = user.Name,
+                Username = user.UserName,
+                Identification = user.Identification,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                PhotoProfileUrl = user.ImgUser,
+                IsActive = user.IsActive,
+                Email = user.Email,
+                Id = user.Id
+            }).ToList();
+        }
+
+        //obtener usuarios por rol
+        public async Task<List<SaveUserViewModel>> GetUsersByRole(string role)
+        {
+            var users = await _userManager.GetUsersInRoleAsync(role);
+            //
+
+            return users.Select(user => new SaveUserViewModel
+            {
+                Name = user.Name,
+                Username = user.UserName,
+                Identification = user.Identification,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                PhotoProfileUrl = user.ImgUser,
+                Email = user.Email,
+                IsActive = user.IsActive,
+                Id = user.Id
+            }).ToList();
         }
     }
 

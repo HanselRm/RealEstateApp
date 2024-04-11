@@ -1,0 +1,58 @@
+﻿@using RealStateAppProg3.Core.Application.ViewModels.Users
+@model List<SaveUserViewModel>;
+@{
+    bool isForAdmin = ViewBag.IsFor == "admin" ? true : false;
+}
+<div class="container mt-5">
+    <div class="row mb-3">
+
+        <div class="col-3 offset-9">
+            <a asp-controller="Admin" asp-action="@(isForAdmin?"SaveAdminUser":"SaveDevUser")" class="btn btn-danger">Agregar un @(isForAdmin ? "administrador" : "desarrollador0")</a>
+        </div>
+
+        <div class="col-12">
+            <h2 class="text-center mb-4">Usuarios @(ViewBag.IsFor == "admin"?"adiminstradores":"desarrolladores"):</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model != null)
+                {
+                    @foreach (var type in @Model)
+                    {
+                        <tr>
+                            <td>@type.Name</td>
+                            <td>@type.LastName</td>
+                            <td>@type.Identification</td>
+                            <td>@type.Email</td>
+                            <td>@type.Username</td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="@(isForAdmin?"UpdateAdminUser":"UpdateDevUser")" asp-route-Id="@type.Id">
+                                    Actualizar
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="UpdateStatusUser" asp-route-Id="@type.Id"
+                                   asp-route-Message="@(type.IsActive?"Desactivar":"Activar")">
+                                    @(type.IsActive?"Desactivar":"Activar")
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
