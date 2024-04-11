@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
 using System.Reflection;
@@ -11,6 +12,9 @@ namespace RealStateAppProg3.Core.Application
         {
             #region Mapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            #endregion
+            #region Mediator
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             #endregion
             #region Services
             services.AddTransient<IUpgradeService, UpgradeService>();
