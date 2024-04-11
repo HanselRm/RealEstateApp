@@ -71,10 +71,11 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View(property);
         }
 
-        public async Task<IActionResult> Agent()
+        public async Task<IActionResult> AgentList()
         {
-
-            return View();
+            var usersAgent = await _userService.GetUsersByRole("Agent");
+            usersAgent = usersAgent.FindAll(a => a.IsActive = true);
+            return View("AgentList", usersAgent);
         }
 
 
