@@ -23,40 +23,39 @@
             </form>
         </div>
         <div class="col-md-6">
-            <form>
+            <form action="@Url.Action("Filters", "Home")" method="get">
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <select class="form-select" aria-label="Tipo de propiedad">
-                            <option selected>Tipo de propiedad</option>
-                            @foreach(var TP in ViewBag.Tp)
+                        <select class="form-select" aria-label="Tipo de propiedad" name="typePropertyId">
+                            <option value="">Tipo de propiedad</option>
+                            @foreach (var TP in ViewBag.Tp)
                             {
-                                <option value="TP.Id">@TP.Name</option>
+                                <option value="@TP.Id">@TP.Name</option>
                             }
-                            
                         </select>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                            <input type="number" class="form-control" placeholder="Precio mínimo" aria-label="Precio mínimo">
+                            <input type="number" class="form-control" placeholder="Precio mínimo" aria-label="Precio mínimo" name="minPrice">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                            <input type="number" class="form-control" placeholder="Precio máximo" aria-label="Precio máximo">
+                            <input type="number" class="form-control" placeholder="Precio máximo" aria-label="Precio máximo" name="maxPrice">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-bed"></i></span>
-                            <input type="number" class="form-control" placeholder="Habitaciones" aria-label="Habitaciones">
+                            <input type="number" class="form-control" placeholder="Habitaciones" aria-label="Habitaciones" name="rooms">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-bath"></i></span>
-                            <input type="number" class="form-control" placeholder="Baños" aria-label="Baños">
+                            <input type="number" class="form-control" placeholder="Baños" aria-label="Baños" name="bathrooms">
                         </div>
                     </div>
                     <div class="col-md-4">

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+using RealStateAppProg3.Core.Domain.Entities;
 using RealStateAppProg3.Presentation.WebApp.Models;
 using System.Diagnostics;
 
@@ -35,9 +36,27 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> FilterCode(string codigo)
         {
             List<PropertyViewModel> list = await _propertyService.GetAllAsync();
+            ViewBag.Tp = await _typePropertyService.GetAllAsync();
             return View("Index",list.Where(p => p.Code == codigo).ToList());
         }
-        
+
+        public async Task<IActionResult> Filters(int? typePropertyId, decimal? minPrice, decimal? maxPrice, int? rooms, int? bathrooms)
+        {
+            List<PropertyViewModel> properties = await _propertyService.GetAllAsync();
+
+            // Aplicar filtros
+            properties = properties.Where(p =>
+            (!typePropertyId.HasValue || p.IdTypeProperty == typePropertyId.Value) &&
+                (!minPrice.HasValue || p.Value >= minPrice.Value) &&
+                (!maxPrice.HasValue || p.Value <= maxPrice.Value) &&
+                (!rooms.HasValue || p.NumberRooms == rooms.Value) &&
+                (!bathrooms.HasValue || p.Bathrooms == bathrooms.Value)
+            ).ToList();
+
+            ViewBag.Tp = await _typePropertyService.GetAllAsync();
+            return View("Index", properties);
+        }
+
 
         public IActionResult Privacy()
         {
