@@ -17,5 +17,6 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
         Task<List<SaveUserViewModel>> GetUsersAdmin();
         Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request);
         Task SignOutAsync();
+        Task<List<SaveUserViewModel>> GetAllAsync();
     }
 }

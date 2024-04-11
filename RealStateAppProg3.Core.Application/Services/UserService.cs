@@ -73,5 +73,10 @@ namespace RealStateAppProg3.Core.Application.Services
             var users = await _accountServices.GetUsersAdmin();
             return users;
         }
+
+        public async Task<List<SaveUserViewModel>> GetAllAsync()
+        {
+            return await _accountServices.GetAllAsync();
+        }
     }
 }
