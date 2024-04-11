@@ -1,5 +1,4 @@
-﻿using AspNetCore;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Asn1.Mozilla;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
@@ -31,20 +30,22 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _userService.GetUsersAdmin();
+            ViewBag.IsFor = "admin";
             return View("IndexAdmin",users);
         }
         //guardar administradores
         public IActionResult SaveAdminUser()
         {
             var userVm = new SaveUserViewModel{ IsActive = true };
-            return View("SaveAdminUser", userVm);
+            ViewBag.IsFor = "admin";
+            return View("RegisterAdmin", userVm);
         }
         [HttpPost]
         public async Task<IActionResult> SaveAdminUser(SaveUserViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View("SaveAdminUser", vm);
+                return View("RegisterAdmin", vm);
             }
             var origin = Request.Headers["origin"];
             var response = await _userService.RegisterAsync(vm, origin);
@@ -68,7 +69,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             var user = await _userService.GetByIdWithoutRol(Id); 
             if(user != null)
             {
-                return View("UpdateAdminUser", user);
+                return View("RegisterAdmin", user);
             }
             return RedirectToRoute(new { controller = "Admin", action = "Index" });
         }
@@ -100,6 +101,67 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             await _userService.UpdateAsync(user);
             return RedirectToRoute(new { controller = "Admin", action = "Index" });
         }
+        #endregion
+        #region Mant. de desarrolladores
+        //obtener todos los usuarios con nivel adminsitrador
+        public async Task<IActionResult> IndexDev()
+        {
+            var users = await _userService.GetUsersByRole("Developer");
+            ViewBag.IsFor = "dev";
+            return View("IndexAdmin", users);
+        }
+        //guardar administradores
+        public IActionResult SaveDevUser()
+        {
+            var userVm = new SaveUserViewModel { IsActive = true };
+            ViewBag.IsFor = "dev";
+            return View("RegistrAdmin", userVm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveDevUser(SaveUserViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("RegisterAdmin", vm);
+            }
+            var origin = Request.Headers["origin"];
+            var response = await _userService.RegisterAsync(vm, origin);
+            //-------------------------
+            if (response != null && response.HasError != true)
+            {
+                return RedirectToRoute(new { controller = "Admin", action = "Index" });
+            }
+            else
+            {
+                vm.HasError = response.HasError;
+                vm.Error = response.Error;
+                return View(vm);
+
+            }
+        }
+
+        //actualizar administradores
+        public async Task<IActionResult> UpdateDevUser(string Id)
+        {
+            var user = await _userService.GetByIdWithoutRol(Id);
+            if (user != null)
+            {
+                return View("UpdateAdminUser", user);
+            }
+            return RedirectToRoute(new { controller = "Admin", action = "IndexDev" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateDevUser(SaveUserViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("UpdateAdminUser", vm);
+            }
+
+            await _userService.UpdateAsync(vm);
+            return RedirectToRoute(new { controller = "Admin", action = "Index" });
+        }
+     
         #endregion
         #region Mant. de propiedades
         //Mantenimiento de propiedades
