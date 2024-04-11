@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
 using RealStateAppProg3.Core.Domain.Entities;
 using RealStateAppProg3.Presentation.WebApp.Models;
 using System.Diagnostics;
@@ -57,11 +58,19 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View("Index", properties);
         }
 
-
-        public IActionResult Privacy()
+        public async Task<IActionResult> PropertyDetails(string id)
         {
-            return View();
+            var properties = await _propertyService.GetallWithIncludeDetail();
+            var property = properties.FirstOrDefault(p => p.Code == id);
+            if (property == null)
+            {
+                return NotFound();
+            }
+
+            return View(property);
         }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -22,11 +22,11 @@ namespace RealStateAppProg3.Core.Application.ViewModels.Propertys
         public string? UrlImage4 { get; set; }
         //id usuario
         public string IdUser { get; set; }
-        public List<UpgradesProperty>? Upgrades { get; set; }
+        public List<string> Upgrades { get; set; }
+        public string NameAgent { get; set; }
         public string PhoneNumber { get; set; }
         public string fotoAgente { get; set; }
         public string EmailAgente { get; set; }
-        public List<PropertyFavViewModel>? propertyFavs { get; set; }
 
     }
 }

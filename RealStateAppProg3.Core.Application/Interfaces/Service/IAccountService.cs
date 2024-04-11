@@ -15,5 +15,6 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
         Task<SaveUserViewModel> GetByIdWithoutRol(string id);
         Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request);
         Task SignOutAsync();
+        Task<List<SaveUserViewModel>> GetAllAsync();
     }
 }
