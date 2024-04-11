@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Mozilla;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
 using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
 using RealStateAppProg3.Core.Application.ViewModels.TypeSale;
 using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
+using RealStateAppProg3.Core.Application.ViewModels.Users;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
@@ -12,14 +15,92 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         private readonly ITypePropertyService _typePropertyService;
         private readonly ITypeSaleService _typeSaleService;
         private readonly IUpgradeService _upgradeService;
+        //importacion del servicio de usuario
+        private readonly IUserService _userService;
 
-        public AdminController(ITypePropertyService typePropertyService, ITypeSaleService typeSaleService, IUpgradeService upgradeService)
+        public AdminController(ITypePropertyService typePropertyService,
+            ITypeSaleService typeSaleService, IUpgradeService upgradeService, IUserService userService)
         {
             _typeSaleService = typeSaleService;
             _typePropertyService = typePropertyService;
             _upgradeService = upgradeService;
+            _userService = userService;
+        }
+        #region Mant. Admin
+        //obtener todos los usuarios con nivel adminsitrador
+        public async Task<IActionResult> Index()
+        {
+            var users = await _userService.GetUsersAdmin();
+            return View("IndexAdmin",users);
+        }
+        //guardar administradores
+        public IActionResult SaveAdminUser()
+        {
+            var userVm = new SaveUserViewModel{ IsActive = true };
+            return View("SaveAdminUser", userVm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveAdminUser(SaveUserViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SaveAdminUser", vm);
+            }
+            var origin = Request.Headers["origin"];
+            var response = await _userService.RegisterAsync(vm, origin);
+            //-------------------------
+            if (response != null && response.HasError != true)
+            {
+                return RedirectToRoute(new { controller = "User", action = "Index" });
+            }
+            else
+            {
+                vm.HasError = response.HasError;
+                vm.Error = response.Error;
+                return View(vm);
+
+            }
         }
 
+        //actualizar administradores
+        public async Task<IActionResult> UpdateAdminUser(string Id)
+        {
+            var user = await _userService.GetByIdWithoutRol(Id); 
+            if(user != null)
+            {
+                return View("UpdateAdminUser", user);
+            }
+            return RedirectToRoute(new { controller = "Admin", action = "Index" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateAdminUser(SaveUserViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("UpdateAdminUser", vm);
+            }
+
+            await _userService.UpdateAsync(vm);
+            return RedirectToRoute(new { controller = "Admin", action = "Index" });
+        }
+        //actualizar el estado del usuario IsActive
+        public async Task<IActionResult> UpdateStatusUser(string Id, string Message)
+        {
+            ViewBag.Id = Id;
+            ViewBag.Message = Message;  
+            return View("ConfirmStatus");
+        }
+        //confirmando que desea cambiar el estado 
+        public async Task<IActionResult> ConfirmUpdateStatus(string Id)
+        {
+            var user = await _userService.GetByIdWithoutRol(Id);
+            //invertimos su valor, en caso de que este activo lo pondra falso y viceversa
+            user.IsActive = !user.IsActive;
+            //actualizamos
+            await _userService.UpdateAsync(user);
+            return RedirectToRoute(new { controller = "Admin", action = "Index" });
+        }
+        #endregion
         #region Mant. de propiedades
         //Mantenimiento de propiedades
         public async Task<IActionResult> MantTpro()

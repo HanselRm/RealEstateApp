@@ -2,8 +2,7 @@
 @using RealStateAppProg3.Core.Application.ViewModels.Users;
 @model SaveUserViewModel;
 @{
-
-
+    bool isEditing = (Model.Id != 0) ? true : false;
 }
 <head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -19,10 +18,10 @@
 
                             <div class="mb-md-5 mt-md-4 pb-5">
 
-                                <form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Register">
+                                <form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="@(isEditing?"UpdateAdminUser":"SaveAdminUser")">
 
-                                    <h2 class="fw-bold mb-2 text-uppercase">Registro</h2>
-                                    <p class="text-white-50 mb-5">Llena el siguiente registro!</p>
+                                    <h2 class="fw-bold mb-2 text-uppercase">Registro de usuarios admin</h2>
+                                    <p class="text-white-50 mb-5">Completa:</p>
 
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                                     @{
@@ -89,20 +88,10 @@
                                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                     </div>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <label asp-for="TypeUser" class="form-label">Tipo de usuario: </label>
-                                        <select asp-for="TypeUser" class="form-select" id="typeUser">
-                                            <option value=""> Seleccione una opcion</option>
-                                            <option value="Agent">Agente</option>
-                                            <option value="Client">Cliente</option>
-                                        </select>
-                                        <span asp-validation-for="TypeUser" class="text-danger"></span>
-                                    </div>
-
-                                    
+                                    <input type="hidden" asp-for="TypeUser" value="Admin"/>
                                     <input type="hidden" asp-for="Id" />
-
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Registro</button>
+                                    <input type="hidden" asp-asp-for="IsActive"/>
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrar</button>
                                 </form>
                             </div>
                         </div>
