@@ -14,17 +14,42 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         private readonly ITypePropertyService _typePropertyService;
         private readonly ITypeSaleService _typeSaleService;
         private readonly IUpgradeService _upgradeService;
+        private readonly IPropertyService _propertyService;
         //importacion del servicio de usuario
         private readonly IUserService _userService;
 
         public AdminController(ITypePropertyService typePropertyService,
-            ITypeSaleService typeSaleService, IUpgradeService upgradeService, IUserService userService)
+            ITypeSaleService typeSaleService, IUpgradeService upgradeService, IUserService userService, IPropertyService propertyService)
         {
             _typeSaleService = typeSaleService;
             _typePropertyService = typePropertyService;
             _upgradeService = upgradeService;
             _userService = userService;
+            _propertyService = propertyService;
         }
+        #region Home Admin
+        public async Task<IActionResult> Dashboard()
+        {
+            //tomando las propiedades
+            var properties = await _propertyService.GetAllAsync();
+            ViewBag.propertiesActive = properties.Count();
+            //agentes
+            var agents = await _userService.GetUsersByRole("Agent");
+            ViewBag.AgentsActive = agents.Where(d => d.IsActive).Count();
+            ViewBag.AgentsDisabled = agents.Where(d => !d.IsActive).Count();
+            //tomando los agentes
+            var devs = await _userService.GetUsersByRole("Developer");
+            ViewBag.devsActive = devs.Where(c => c.IsActive).Count();
+            ViewBag.devsDisabled = devs.Where(c => !c.IsActive).Count();
+            //tomando los clientes 
+            var clients= await _userService.GetUsersByRole("Client");
+            ViewBag.clientsActive = clients.Where(c => c.IsActive).Count();
+            ViewBag.clientsDisabled = clients.Where(c => !c.IsActive).Count();
+
+            //clients.Where(c => c.IsActive).Count();
+            return View("DashboardAdmin");
+        }
+        #endregion
         #region Mant. Admin
         //obtener todos los usuarios con nivel adminsitrador
         public async Task<IActionResult> Index()

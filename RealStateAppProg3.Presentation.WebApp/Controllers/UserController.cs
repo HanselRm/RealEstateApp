@@ -39,7 +39,12 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             AuthenticationResponse response = await _userService.LoginAsync(login);
             if (response != null && response.HasError != true)
             {
+
                 HttpContext.Session.Set<AuthenticationResponse>("user", response);
+                if (response.Roles.Contains("Admin")){
+                    return RedirectToRoute(new { controller = "Admin", action = "Dashboard" });
+
+                }
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             }
