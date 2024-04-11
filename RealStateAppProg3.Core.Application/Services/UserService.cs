@@ -3,7 +3,6 @@ using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.ViewModels.Users;
 
-
 namespace RealStateAppProg3.Core.Application.Services
 {
     public class UserService : IUserService
@@ -67,6 +66,12 @@ namespace RealStateAppProg3.Core.Application.Services
         {
             ResetPasswordRequest resetPass = _mapper.Map<ResetPasswordRequest>(vm);
             return await _accountServices.ResetPasswordAsync(resetPass);
+        }
+
+        public async Task<List<SaveUserViewModel>> GetUsersAdmin()
+        {
+            var users = await _accountServices.GetUsersAdmin();
+            return users;
         }
     }
 }

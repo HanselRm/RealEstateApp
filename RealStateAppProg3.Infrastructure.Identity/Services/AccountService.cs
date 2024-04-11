@@ -366,6 +366,24 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
 
             return verificationUrl;
         }
+        //obtener los usuarios con el rol administrador
+        public async Task<List<SaveUserViewModel>> GetUsersAdmin()
+        {
+           var users = await _userManager.GetUsersInRoleAsync(RoleENum.Admin.ToString());
+            //
+
+            return users.Select(user => new SaveUserViewModel
+            {
+                Name = user.Name,
+                Username = user.UserName,
+                Identification = user.Identification,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                PhotoProfileUrl = user.ImgUser,
+                Email = user.Email,
+                Id = user.Id
+            }).ToList();
+        }
     }
 
 }
