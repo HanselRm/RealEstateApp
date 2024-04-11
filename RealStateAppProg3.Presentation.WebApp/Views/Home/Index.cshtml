@@ -1,4 +1,5 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+@using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
 @model List<PropertyViewModel>;
 
 @{
@@ -9,6 +10,61 @@
     <h2 class="my-4 text-center text-primary">
         <i class="fas fa-home me-2"></i>Propiedades
     </h2>
+    @{
+        //Filtros
+    }
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form action="@Url.Action("FilterCode", "Home")" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="codigo" placeholder="Buscar por código" aria-label="Buscar por código" aria-describedby="search-code">
+                    <button class="btn btn-primary" type="submit" id="search-code"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form action="@Url.Action("Filters", "Home")" method="get">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <select class="form-select" aria-label="Tipo de propiedad" name="typePropertyId">
+                            <option value="">Tipo de propiedad</option>
+                            @foreach (var TP in ViewBag.Tp)
+                            {
+                                <option value="@TP.Id">@TP.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                            <input type="number" class="form-control" placeholder="Precio mínimo" aria-label="Precio mínimo" name="minPrice">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                            <input type="number" class="form-control" placeholder="Precio máximo" aria-label="Precio máximo" name="maxPrice">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-bed"></i></span>
+                            <input type="number" class="form-control" placeholder="Habitaciones" aria-label="Habitaciones" name="rooms">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-bath"></i></span>
+                            <input type="number" class="form-control" placeholder="Baños" aria-label="Baños" name="bathrooms">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-filter"></i> Filtrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var property in Model.OrderByDescending(p => p.Created))
@@ -40,6 +96,7 @@
                         <p class="card-text">
                             <i class="fas fa-ruler-combined me-2"></i><span class="fw-bold">Área:</span> @property.SizeInMeters m²
                         </p>
+                        <a asp-controller="Home" asp-action="PropertyDetails" asp-route-id="@property.Code" class="btn btn-primary">Ver Detalles</a>
                     </div>
                 </div>
             </div>

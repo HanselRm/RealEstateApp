@@ -68,5 +68,10 @@ namespace RealStateAppProg3.Core.Application.Services
             ResetPasswordRequest resetPass = _mapper.Map<ResetPasswordRequest>(vm);
             return await _accountServices.ResetPasswordAsync(resetPass);
         }
+
+        public async Task<List<SaveUserViewModel>> GetAllAsync()
+        {
+            return await _accountServices.GetAllAsync();
+        }
     }
 }

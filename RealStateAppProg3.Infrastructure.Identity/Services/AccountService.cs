@@ -261,6 +261,31 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             return vm;
         }
 
+        public async Task<List<SaveUserViewModel>> GetAllAsync()
+        {
+            var users = await _userManager.Users.ToListAsync();
+
+            List<SaveUserViewModel> list = new();
+
+            foreach (var user in users)
+            {
+                SaveUserViewModel vm = new SaveUserViewModel
+                {
+                    Name = user.Name,
+                    Username = user.UserName,
+                    Identification = user.Identification,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber,
+                    PhotoProfileUrl = user.ImgUser,
+                    Email = user.Email,
+                    Id = user.Id
+                };
+                list.Add(vm);
+            }
+
+            return list;
+
+        }
         //Olvidar contraseña
         public async Task<ForgotPassWordResponse> ForgotPasswordRequestAsync(ForgotPassowordRequest request, string origin)
         {

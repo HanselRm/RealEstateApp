@@ -29,7 +29,7 @@ namespace RealStateAppProg3.Infrastructure.Persistence.Repositories
             var query = _ctx.Set<T>().AsQueryable();
             foreach (string property in properties)
             {
-                query.Include(property);
+                query = query.Include(property);
             }
             return await query.ToListAsync();
         }
