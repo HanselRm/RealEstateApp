@@ -15,17 +15,18 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         private readonly IUpgradeService _upgradeService;
         private readonly ITypeSaleService _typeSaleService;
         private readonly ITypePropertyService _typePropertyService;
-
+        private readonly IUserService _userService;
 
 
         public HomeController(ILogger<HomeController> logger, IPropertyService propertyService, IUpgradeService upgradeService, 
-                                ITypeSaleService typeSaleService, ITypePropertyService typePropertyServic)
+                                ITypeSaleService typeSaleService, ITypePropertyService typePropertyServic, IUserService userService)
         {
             _logger = logger;
             _propertyService = propertyService;
             _upgradeService = upgradeService;
             _typeSaleService = typeSaleService;
             _typePropertyService = typePropertyServic;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
@@ -70,6 +71,11 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View(property);
         }
 
+        public async Task<IActionResult> Agent()
+        {
+
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
