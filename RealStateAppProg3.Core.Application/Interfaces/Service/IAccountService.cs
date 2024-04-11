@@ -15,6 +15,8 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
         Task<SaveUserViewModel> GetByIdWithoutRol(string id);
         //obtener los usuarios con el rol administrador
         Task<List<SaveUserViewModel>> GetUsersAdmin();
+        Task<List<SaveUserViewModel>> GetUsersByRole(string role);
+
         Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request);
         Task SignOutAsync();
         Task<List<SaveUserViewModel>> GetAllAsync();
