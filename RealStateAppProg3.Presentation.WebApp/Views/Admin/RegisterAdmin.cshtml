@@ -2,7 +2,8 @@
 @using RealStateAppProg3.Core.Application.ViewModels.Users;
 @model SaveUserViewModel;
 @{
-    bool isEditing = (Model.Id != 0) ? true : false;
+    bool isEditing = (Model.Id != null) ? true : false;
+    bool isForAdmin = ViewBag.IsFor == "admin" ? true : false;
 }
 <head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -20,7 +21,7 @@
 
                                 <form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="@(isEditing?"UpdateAdminUser":"SaveAdminUser")">
 
-                                    <h2 class="fw-bold mb-2 text-uppercase">Registro de usuarios admin</h2>
+                                    <h2 class="fw-bold mb-2 text-uppercase">Registro de usuario @(isForAdmin?"administrador":"desarrollador"):</h2>
                                     <p class="text-white-50 mb-5">Completa:</p>
 
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
@@ -88,10 +89,10 @@
                                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                     </div>
 
-                                    <input type="hidden" asp-for="TypeUser" value="Admin"/>
+                                    <input type="hidden" asp-for="TypeUser" value="@(isForAdmin?"Admin":"Developer")"/>
                                     <input type="hidden" asp-for="Id" />
                                     <input type="hidden" asp-asp-for="IsActive"/>
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrar</button>
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">@(isEditing?"Actualizar":"Registrar")</button>
                                 </form>
                             </div>
                         </div>

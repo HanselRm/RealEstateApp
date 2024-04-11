@@ -1,15 +1,17 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Users
 @model List<SaveUserViewModel>;
-
+@{
+    bool isForAdmin = ViewBag.IsFor == "admin" ? true : false;
+}
 <div class="container mt-5">
     <div class="row mb-3">
 
         <div class="col-3 offset-9">
-            <a asp-controller="Admin" asp-action="SaveAdminUser" class="btn btn-danger">Agregar un administrador</a>
+            <a asp-controller="Admin" asp-action="@(isForAdmin?"SaveAdminUser":"SaveDevUser")" class="btn btn-danger">Agregar un @(isForAdmin ? "administrador" : "desarrollador")</a>
         </div>
 
         <div class="col-12">
-            <h2 class="text-center mb-4">Usuarios administradores:</h2>
+            <h2 class="text-center mb-4">Usuarios @(ViewBag.IsFor == "admin"?"adiminstradores":"desarrolladores"):</h2>
         </div>
         <table class="table table-striped">
             <thead>
@@ -34,7 +36,7 @@
                             <td>@type.Email</td>
                             <td>@type.Username</td>
                             <td>
-                                <a asp-controller="Admin" asp-action="UpdateAdminUser" asp-route-Id="@type.Id">
+                                <a asp-controller="Admin" asp-action="@(isForAdmin?"UpdateAdminUser":"UpdateDevUser")" asp-route-Id="@type.Id">
                                     Actualizar
                                 </a>
                             </td>

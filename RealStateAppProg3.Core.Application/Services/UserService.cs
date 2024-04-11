@@ -78,5 +78,10 @@ namespace RealStateAppProg3.Core.Application.Services
         {
             return await _accountServices.GetAllAsync();
         }
+        //obtener usuarios por rol
+        public async Task<List<SaveUserViewModel>> GetUsersByRole(string role)
+        {
+            return await _accountServices.GetUsersByRole(role);
+        }
     }
 }
