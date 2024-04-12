@@ -9,6 +9,16 @@
     <h1 class="text-center mb-4">Nuestros Agentes Inmobiliarios</h1>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <form action="@Url.Action("FilterName", "Home")" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Name" placeholder="Buscar por Nombre" aria-label="Buscar por Nombre" aria-describedby="search-code">
+                        <button class="btn btn-primary" type="submit" id="search-name"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
         @foreach (var agent in Model.OrderByDescending(a => a.Name))
         {
             <div class="col">
