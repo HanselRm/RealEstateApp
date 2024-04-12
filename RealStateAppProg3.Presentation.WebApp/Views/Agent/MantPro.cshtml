@@ -11,7 +11,12 @@
         <i class="fas fa-home me-2"></i>Propiedades
     </h2>
 
-
+    <div class="col-3 offset-9">
+        <a asp-controller="Agent" asp-action="SaveProp" class="btn btn-danger">Agregar una propiedad</a>
+    </div>
+    <div class="col-12">
+        <h2 class="text-center mb-4">Propiedades</h2>
+    </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var property in Model.OrderByDescending(p => p.Created))
         {
