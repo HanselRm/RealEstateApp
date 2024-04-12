@@ -78,6 +78,13 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View("AgentList", usersAgent);
         }
 
+        public async Task<IActionResult> AgenteProperty(string id)
+        {
+            List<PropertyViewModel> list = await _propertyService.GetAllAsync();
+            list = list.Where(l => l.IdUser == id).ToList();
+            return View(list);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
