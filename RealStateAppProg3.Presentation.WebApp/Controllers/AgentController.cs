@@ -129,5 +129,20 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
             return RedirectToRoute(new { controller = "Agent", action = "MantPro" });
         }
+        public async Task<IActionResult> ConfirmDelete(string code)
+        {
+            SavePropertyViewModel vm = new SavePropertyViewModel();
+            vm.Code = code;
+            return View(vm);
+        }
+        public async Task<IActionResult> DeleteProperty(SavePropertyViewModel vm)
+        {
+            await _propertyService.RemoveAsync(vm.Code);
+
+            var user = HttpContext.Session.Get<AuthenticationResponse>("user");
+            var propiedades = await _propertyService.GetAllAsync();
+            return View("MantPro",propiedades.Where(a => a.IdUser == user.Id).ToList());
+        }
+
     }
 }

@@ -42,8 +42,8 @@
                         <p class="card-text">
                             <i class="fas fa-ruler-combined me-2"></i><span class="fw-bold">Área:</span> @property.SizeInMeters m²
                         </p>
-                        <a asp-controller="Agent" asp-action="EditProperty" asp-route-id="@property.Code" class="btn btn-primary">Editar</a>
-                        <a asp-controller="Agent" asp-action="DeleteProperty" asp-route-id="@property.Code" class="btn btn-primary">Eliminar</a>
+                        <a asp-controller="Agent" asp-action="EditProperty" asp-route-code="@property.Code" class="btn btn-primary">Editar</a>
+                        <a asp-controller="Agent" asp-action="ConfirmDelete" asp-route-code="@property.Code" class="btn btn-primary">Eliminar</a>
 
                     </div>
                 </div>
