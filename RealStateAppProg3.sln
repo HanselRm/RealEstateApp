@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealStateAppProg3.Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{14B8D6B1-09C3-4DAC-B458-A73E7F1A4756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStateAppProg3.Presentation.WebApp", "RealStateAppProg3.Presentation.WebApp\RealStateAppProg3.Presentation.WebApp.csproj", "{6B98AAE1-2260-4CC9-AF7A-4FBDF3602335}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealStateAppProg3.Presentation.WebApp", "RealStateAppProg3.Presentation.WebApp\RealStateAppProg3.Presentation.WebApp.csproj", "{6B98AAE1-2260-4CC9-AF7A-4FBDF3602335}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{1B0F26E6-9A05-4108-9FDF-FBA0582FA83C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStateAppProg3.Presentation.WebApi", "RealStateAppProg3.Presentation.WebApi\RealStateAppProg3.Presentation.WebApi.csproj", "{E28C6CBB-6E65-4456-867F-90A5DC28D90B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,10 @@ Global
 		{6B98AAE1-2260-4CC9-AF7A-4FBDF3602335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B98AAE1-2260-4CC9-AF7A-4FBDF3602335}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B98AAE1-2260-4CC9-AF7A-4FBDF3602335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28C6CBB-6E65-4456-867F-90A5DC28D90B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28C6CBB-6E65-4456-867F-90A5DC28D90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28C6CBB-6E65-4456-867F-90A5DC28D90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28C6CBB-6E65-4456-867F-90A5DC28D90B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +73,8 @@ Global
 		{A3064CE2-0464-4090-B200-9C06203DA32E} = {DD7046BA-26BA-46F4-B06F-3F6EB8C3B649}
 		{14B8D6B1-09C3-4DAC-B458-A73E7F1A4756} = {F50F87CE-CE73-4384-A495-D0BE76F5C6B1}
 		{6B98AAE1-2260-4CC9-AF7A-4FBDF3602335} = {14B8D6B1-09C3-4DAC-B458-A73E7F1A4756}
+		{1B0F26E6-9A05-4108-9FDF-FBA0582FA83C} = {F50F87CE-CE73-4384-A495-D0BE76F5C6B1}
+		{E28C6CBB-6E65-4456-867F-90A5DC28D90B} = {1B0F26E6-9A05-4108-9FDF-FBA0582FA83C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {049180B3-E204-4DCF-97CA-52B324B42714}
