@@ -7,18 +7,17 @@
 
 <div class="container my-5">
     <h1 class="text-center mb-4">Nuestros Agentes Inmobiliarios</h1>
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <form action="@Url.Action("FilterName", "Home")" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="Name" placeholder="Buscar por Nombre" aria-label="Buscar por Nombre" aria-describedby="search-code">
-                        <button class="btn btn-primary" type="submit" id="search-name"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
-            </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form action="@Url.Action("FilterName", "Home")" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="Name" placeholder="Buscar por Nombre" aria-label="Buscar por Nombre" aria-describedby="search-code">
+                    <button class="btn btn-primary" type="submit" id="search-name"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
         </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var agent in Model.OrderByDescending(a => a.Name))
         {
             <div class="col">
@@ -36,6 +35,7 @@
 
 @section Styles {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <style>
         .card-img-top {
             height: 200px;

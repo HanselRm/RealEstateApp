@@ -2,6 +2,7 @@
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
+using RealStateAppProg3.Core.Application.ViewModels.Users;
 using RealStateAppProg3.Core.Domain.Entities;
 using RealStateAppProg3.Presentation.WebApp.Models;
 using System.Diagnostics;
@@ -83,6 +84,12 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             List<PropertyViewModel> list = await _propertyService.GetAllAsync();
             list = list.Where(l => l.IdUser == id).ToList();
             return View(list);
+        }
+
+        public async Task<IActionResult> FilterName(string Name)
+        {
+            List<SaveUserViewModel> list = await _userService.GetAllAsync();
+            return View("AgentList", list.Where(p => p.Name == Name).ToList());
         }
 
 
