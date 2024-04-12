@@ -127,5 +127,11 @@ namespace RealStateAppProg3.Core.Application.Services
             }).ToList();
 
         }
+
+        public async Task RemoveAsync(string id)
+        {
+            var entity = await _propertyRepository.GetByIdAsync(id);
+            await _propertyRepository.RemoveAsync(entity);
+        }
     }
 }
