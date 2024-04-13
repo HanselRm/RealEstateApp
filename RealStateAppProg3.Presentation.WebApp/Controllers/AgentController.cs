@@ -150,6 +150,34 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
             return View(propierty);
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> EditProperty(SavePropertyViewModel vm)
+        {
+            if (ModelState["Description"].Errors.Any() || ModelState["Value"].Errors.Any()
+                || ModelState["NumberRooms"].Errors.Any() || ModelState["SizeInMeters"].Errors.Any()
+                || ModelState["Bathrooms"].Errors.Any() || ModelState["IdTypeProperty"].Errors.Any()
+                || ModelState["IdTypeSale"].Errors.Any() || ModelState["UpgradesId"].Errors.Any())
+            {
+                return View("SaveProp", vm);
+            }
+
+            //en caso de que hayan pasado mas de una imagen
+            if (vm.Img2 != null)
+            {
+                vm.UrlImage2 = UploadFiles.UploadFile(vm.Img2, "Property", vm.Code);
+            }
+            if (vm.Img3 != null)
+            {
+                vm.UrlImage3 = UploadFiles.UploadFile(vm.Img3, "Property", vm.Code);
+            }
+            if (vm.Img4 != null)
+            {
+                vm.UrlImage4 = UploadFiles.UploadFile(vm.Img4, "Property", vm.Code);
+
+            }
+            await _propertyService.UpdateAsync(vm, int.Parse(vm.Code));
+            return View("MantPro");
+        }
+
     }
 }
