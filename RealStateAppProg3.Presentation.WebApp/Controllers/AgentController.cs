@@ -144,5 +144,12 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View("MantPro",propiedades.Where(a => a.IdUser == user.Id).ToList());
         }
 
+        public async Task<IActionResult> EditProperty(string code)
+        {
+            var propierty = await _propertyService.GetByIdAsync(int.Parse(code));
+
+            return View(propierty);
+        }
+        
     }
 }
