@@ -146,17 +146,19 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
         public async Task<IActionResult> EditProperty(string code)
         {
-            int id = int.Parse(code);
-            var propierty = await _propertyService.GetByIdAsync(id);
-
+            //tipos de venta
             var typeSales = await _typeSaleService.GetAllAsync();
             ViewBag.TypeSales = typeSales;
+
             //tipo de propiedades
             var typeProperties = await _typePropertyService.GetAllAsync();
+            ViewBag.TypeProperties = typeProperties;
+
             //mejoras
             var upgrades = await _upgradeService.GetAllAsync();
             ViewBag.Upgrades = upgrades;
-            ViewBag.TypeProperties = typeProperties;
+
+            var propierty = await _propertyService.GetByIdAsync(code);
 
             return View(propierty);
         }

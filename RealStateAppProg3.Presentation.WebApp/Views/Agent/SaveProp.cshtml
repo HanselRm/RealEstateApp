@@ -35,9 +35,9 @@ else
                                         <span class="text-danger">@ViewBag.Error</span>
                                     }
 
-                                    <div class="form-outline form-white mb-4">
-                                        <label asp-for="IdTypeProperty" class="form-label">Tipo de propiedad:</label>
-                                        <select asp-for="IdTypeProperty">
+                                    <div class="form-outline form-white mb-5">
+                                        <label asp-for="IdTypeProperty" class="form-select mb-2">Tipo de propiedad:</label>
+                                        <select asp-for="IdTypeProperty" class="form-select">
                                             @foreach (var item in ViewBag.TypeProperties)
                                             {
                                                 <option value="@item.Id">@item.Name</option>
@@ -50,7 +50,7 @@ else
 
                                     <div class="form-outline form-white mb-4">
                                         <label asp-for="IdTypeSale" class="form-label">Tipo de venta:</label>
-                                        <select asp-for="IdTypeSale">
+                                        <select asp-for="IdTypeSale" class="form-select">
                                             @foreach (var item in ViewBag.TypeSales)
                                             {
                                                 <option value="@item.Id">@item.Name</option>
@@ -90,7 +90,7 @@ else
 
                                     <div class="form-outline form-white mb-4">
                                         <label asp-for="UpgradesId" class="form-label">Mejoras:</label>
-                                        <select asp-for="UpgradesId" multiple>
+                                        <select asp-for="UpgradesId" class="form-select" multiple>
                                             @foreach (var item in ViewBag.Upgrades)
                                             {
                                                 <option value="@item.Id">@item.Name</option>
