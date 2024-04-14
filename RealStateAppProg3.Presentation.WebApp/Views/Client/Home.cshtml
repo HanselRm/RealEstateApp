@@ -1,8 +1,14 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 @using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
+@using RealStateAppProg3.Core.Application.Helpers;
+﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+﻿@using RealStateAppProg3.Core.Application.Enums;
+@inject IHttpContextAccessor HttpContextAccessor
 @model List<PropertyViewModel>;
 
 @{
+    var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+
     ViewData["Title"] = "Home Page";
 }
 
@@ -16,6 +22,12 @@
         {
             <div class="col">
                 <div class="card h-100 shadow">
+                    <form asp-controller="Client" asp-action="addFVProperty" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-primary" value="@property.Code" name="code">
+                            <i class="fas fa-heart"></i> Me gusta
+                        </button>
+                    </form>
                     <div class="image-container">
                         <img class="card-img-top img-fluid" src="@property.UrlImage1" alt="@property.Code">
                     </div>
@@ -53,7 +65,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <style>
         .image-container {
-            height: 200px; 
+            height: 200px;
             overflow: hidden;
             display: flex;
             justify-content: center;

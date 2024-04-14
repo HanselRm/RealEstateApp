@@ -28,6 +28,8 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View(new LoginViewModel());
         }
 
+        
+
         //recibe el login
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel login)
