@@ -54,7 +54,17 @@ namespace RealStateAppProg3.Core.Application.Mappings
             #endregion
 
             #region Property
-            CreateMap<Property, PropertyViewModel>();
+            CreateMap<Property, PropertyViewModel>()
+                .ForMember(x => x.TypeProperty, opt => opt.Ignore())
+                .ForMember(x => x.TypeSale, opt => opt.Ignore())
+                .ForMember(x => x.Upgrades, opt => opt.Ignore())
+                .ForMember(x => x.propertyFavs, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(x => x.TypeProperty, opt => opt.Ignore())
+                .ForMember(x => x.TypeSale, opt => opt.Ignore())
+                .ForMember(x => x.Upgrades, opt => opt.Ignore())
+                .ForMember(x => x.propertyFavs, opt => opt.Ignore());
+
             CreateMap<Property, CreatePropertyCommand>()
                 .ForMember(x => x.Upgrades, opt => opt.Ignore())
                 .ReverseMap()

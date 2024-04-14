@@ -127,5 +127,24 @@ namespace RealStateAppProg3.Core.Application.Services
             }).ToList();
 
         }
+
+        public async Task RemoveAsync(string id)
+        {
+            var entity = await _propertyRepository.GetByIdAsync(id);
+            await _propertyRepository.RemoveAsync(entity);
+        }
+
+        public async Task<SavePropertyViewModel> GetByIdAsync(string id)
+        {
+            var entity = await _propertyRepository.GetByIdAsync(id);
+            return _mapper.Map<SavePropertyViewModel>(entity);
+        }
+
+        public virtual async Task<SavePropertyViewModel> UpdateAsync(SavePropertyViewModel vm, string id)
+        {
+            var entity = _mapper.Map<Property>(vm);
+            var t = await _propertyRepository.UpdateAsync(entity, id);
+            return _mapper.Map<SavePropertyViewModel>(t);
+        }
     }
 }

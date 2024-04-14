@@ -9,5 +9,8 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
     {
         Task<SavePropertyViewModel> SaveAsync(SavePropertyViewModel vm, string Id);
         Task<List<PropertyViewModelDetail>> GetallWithIncludeDetail();
+         Task RemoveAsync(string id);
+        Task<SavePropertyViewModel> GetByIdAsync(string id);
+        Task<SavePropertyViewModel> UpdateAsync(SavePropertyViewModel vm, string id);
     }
 }
