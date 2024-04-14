@@ -133,5 +133,11 @@ namespace RealStateAppProg3.Core.Application.Services
             var entity = await _propertyRepository.GetByIdAsync(id);
             await _propertyRepository.RemoveAsync(entity);
         }
+
+        public async Task<SavePropertyViewModel> GetByIdAsync(string id)
+        {
+            var entity = await _propertyRepository.GetByIdAsync(id);
+            return _mapper.Map<SavePropertyViewModel>(entity);
+        }
     }
 }
