@@ -30,9 +30,11 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             _propertyService = propertyService;
             _upgradeService = upgradeService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = HttpContext.Session.Get<AuthenticationResponse>("user");
+            var propiedades = await _propertyService.GetAllAsync();
+            return View(propiedades.Where(a => a.IdUser == user.Id).ToList());
         }
 
         public async Task<IActionResult> MantPro()
