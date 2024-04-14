@@ -43,7 +43,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 HttpContext.Session.Set<AuthenticationResponse>("user", response);
                 if (response.Roles.Contains("Admin")){
                     return RedirectToRoute(new { controller = "Admin", action = "Dashboard" });
-
+                }
+                else if (response.Roles.Contains("Agent"))
+                {
+                    return RedirectToRoute(new { controller = "Agent", action = "Index" });
                 }
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
