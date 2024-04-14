@@ -10,6 +10,7 @@ using RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty;
 using RealStateAppProg3.Core.Domain.Entities;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
+using RealStateAppProg3.Core.Application.ViewModels.PropertyFav;
 
 namespace RealStateAppProg3.Core.Application.Mappings
 {
@@ -94,7 +95,7 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.TypeSale, opt => opt.Ignore())
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore());
 
-            CreateMap<Property, SavePropertyViewModel>()
+            CreateMap<Property, SavePropertyFavViewModel>()
                 .ReverseMap()
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore());
 
