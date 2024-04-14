@@ -6,6 +6,7 @@ using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Application.ViewModels.Users;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
@@ -165,15 +166,40 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProperty(SavePropertyViewModel vm)
         {
+            //tipos de venta
+            var typeSales = await _typeSaleService.GetAllAsync();
+            ViewBag.TypeSales = typeSales;
+
+            //tipo de propiedades
+            var typeProperties = await _typePropertyService.GetAllAsync();
+            ViewBag.TypeProperties = typeProperties;
+
+            //mejoras
+            var upgrades = await _upgradeService.GetAllAsync();
+            ViewBag.Upgrades = upgrades;
+            var user = HttpContext.Session.Get<AuthenticationResponse>("user");
+            var propiedades = await _propertyService.GetAllAsync();
+
             if (ModelState["Description"].Errors.Any() || ModelState["Value"].Errors.Any()
                 || ModelState["NumberRooms"].Errors.Any() || ModelState["SizeInMeters"].Errors.Any()
                 || ModelState["Bathrooms"].Errors.Any() || ModelState["IdTypeProperty"].Errors.Any()
-                || ModelState["IdTypeSale"].Errors.Any() || ModelState["UpgradesId"].Errors.Any())
+                || ModelState["IdTypeSale"].Errors.Any())
             {
-                return View("SaveProp", vm);
+                ViewBag.TypeSales = typeSales;
+
+                //tipo de propiedades
+                ViewBag.TypeProperties = typeProperties;
+
+                //mejoras
+                ViewBag.Upgrades = upgrades;
+                return View("EditProperty", vm);
             }
 
             //en caso de que hayan pasado mas de una imagen
+            if (vm.Img1 != null)
+            {
+                vm.UrlImage1 = UploadFiles.UploadFile(vm.Img1, "Property", vm.Code);
+            }
             if (vm.Img2 != null)
             {
                 vm.UrlImage2 = UploadFiles.UploadFile(vm.Img2, "Property", vm.Code);
@@ -187,8 +213,18 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 vm.UrlImage4 = UploadFiles.UploadFile(vm.Img4, "Property", vm.Code);
 
             }
-            await _propertyService.UpdateAsync(vm, int.Parse(vm.Code));
-            return View("MantPro");
+            await _propertyService.UpdateAsync(vm, vm.Code);
+
+            ViewBag.TypeSales = typeSales;
+
+            //tipo de propiedades
+            ViewBag.TypeProperties = typeProperties;
+
+            //mejoras
+            ViewBag.Upgrades = upgrades;
+
+            
+            return View("MantPro",propiedades.Where(a => a.IdUser == user.Id).ToList());
         }
 
     }

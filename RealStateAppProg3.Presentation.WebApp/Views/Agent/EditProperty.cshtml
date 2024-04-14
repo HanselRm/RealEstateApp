@@ -98,7 +98,7 @@
                                     <div class="form-outline form-dark mb-4">
                                         <label asp-for="Img1" class="form-label">Imágenes</label>
                                         <div class="input-group">
-                                            <input asp-for="Img1" type="file" class="form-control form-control-lg" accept="image/*" required />
+                                            <input asp-for="Img1" type="file" class="form-control form-control-lg" accept="image/*" />
                                             <span class="input-group-text bg-primary text-white"><i class="bi bi-upload"></i></span>
                                         </div>
                                         <span asp-validation-for="Img1" class="text-danger"></span>
@@ -127,21 +127,29 @@
                                         {
                                             <p>Imagen Actual 1:</p>
                                             <img src="@Model.UrlImage1" class="img-fluid" alt="Imagen de la propiedad" />
+                                            <input type="hidden" asp-for="UrlImage1" value="@Model.UrlImage1" />
+
                                         }
                                         @if (!string.IsNullOrEmpty(Model.UrlImage2))
                                         {
                                             <p>Imagen Actual 2:</p>
                                             <img src="@Model.UrlImage2" class="img-fluid" alt="Imagen de la propiedad" />
+                                            <input type="hidden" asp-for="UrlImage2" value="@Model.UrlImage2" />
+
                                         }
                                         @if (!string.IsNullOrEmpty(Model.UrlImage3))
                                         {
                                             <p>Imagen Actual 3:</p>
                                             <img src="@Model.UrlImage3" class="img-fluid" alt="Imagen de la propiedad" />
+                                            <input type="hidden" asp-for="UrlImage3" value="@Model.UrlImage3" />
+
                                         }
                                         @if (!string.IsNullOrEmpty(Model.UrlImage4))
                                         {
                                             <p>Imagen Actual 4:</p>
                                             <img src="@Model.UrlImage4" class="img-fluid" alt="Imagen de la propiedad" />
+                                            <input type="hidden" asp-for="UrlImage4" value="@Model.UrlImage4" />
+
                                         }
                                     </div>
 
