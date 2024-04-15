@@ -99,6 +99,11 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ReverseMap()
                 .ForMember(x => x.Property, opt => opt.Ignore());
 
+            CreateMap<PropertyFav, PropertyFavViewModel>()
+                .ForMember(x => x.Property, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(x => x.Property, opt => opt.Ignore());
+
 
             CreateMap<GetAllPropertiesParameters, GetAllPropertiesQuery>();
             #endregion
