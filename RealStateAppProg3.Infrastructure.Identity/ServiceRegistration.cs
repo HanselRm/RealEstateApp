@@ -40,7 +40,7 @@ namespace RealStateAppProg3.Infrastructure.Identity
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Home";
-                options.AccessDeniedPath = "/User/AccessDenied";
+                options.AccessDeniedPath = "/User/AccesDenied";
             });
 
 
