@@ -15,7 +15,7 @@ namespace RealStateAppProg3.Presentation.WebApp.MiddledWares
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var user = _userSession.HasUser();
-            if (user == null)
+            if (user != null)
             {
                 var controller = (UserController)context.Controller;
                 if (user.Roles.Contains(RoleENum.Admin.ToString()))
