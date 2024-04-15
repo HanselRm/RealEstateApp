@@ -1,0 +1,62 @@
+﻿@using RealStateAppProg3.Core.Application.ViewModels.Users;
+@using RealStateAppProg3.Core.Application.Helpers;
+﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+﻿@using RealStateAppProg3.Core.Application.Enums;
+@inject IHttpContextAccessor HttpContextAccessor
+@model string;
+@{
+    ViewData["Title"] = "Acees denied";
+    var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+
+}
+
+<head>
+    <title>Mensaje Profesional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .message-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .message-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .message-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message-container">
+        <p>No tiene permiso para acceder a esta parte</p>
+        @if (user.Roles.Contains(RoleENum.Client.ToString()))
+        {
+        <p> <a asp-controller="Client" asp-action="Home"> Inicio </a></p>
+
+        }
+       else if (user.Roles.Contains(RoleENum.Agent.ToString()))
+        {
+            <p> <a asp-controller="Agent" asp-action="Index"> Inicio </a></p>
+
+        }
+        else if (user.Roles.Contains(RoleENum.Admin.ToString()))
+        {
+            <p> <a asp-controller="Admin" asp-action="Index"> Inicio </a></p>
+        }
+    </div>
+</body>
