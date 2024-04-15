@@ -23,23 +23,28 @@
         {
             <div class="col">
                 <div class="card h-100 shadow">
-                    <form asp-controller="Client" asp-action="addFVProperty" method="post">
-                        <input type="hidden" name="userId" value="@user.Id" />
-                        <button type="submit" class="btn btn-primary" value="@property.Code" name="code">
+                    
                             @{
                                 var isFavorite = listfav.Any(x => x.IdProperty == property.Code);
                             }
-                            @if (isFavorite)
-                            {
-                                <i class="fas fa-heart text-danger"></i> @:Quitar de favoritos
-                            }
-                            else
-                            {
-                                <i class="fas fa-heart"></i>
-                                @:Agregar a favoritos
-                            }
-                        </button>
-                    </form>
+                    @if (isFavorite)
+                    {
+                        <form asp-controller="Client" asp-action="RemoveFromFavorites" method="post">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-danger" value="@property.Code" name="code">
+                                <i class="fas fa-heart"></i> Quitar de favoritos
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Client" asp-action="addFVProperty" method="post">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-primary" value="@property.Code" name="code">
+                                <i class="fas fa-heart text-muted"></i> Agregar a favoritos
+                            </button>
+                        </form>
+                    }
                     <div class="image-container">
                         <img class="card-img-top img-fluid" src="@property.UrlImage1" alt="@property.Code">
                     </div>

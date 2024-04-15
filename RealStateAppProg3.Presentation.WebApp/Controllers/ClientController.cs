@@ -35,5 +35,16 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             ViewBag.PropertyFav = await _propertyFavService.GetAllAsync();
             return View("Home", await _propertyService.GetAllAsync());
         }
+
+        public async Task<IActionResult> RemoveFromFavorites(string code, string UserId)
+        {
+            var list = await _propertyFavService.GetAllAsync();
+            
+            PropertyFavViewModel vm = list.FirstOrDefault( x => x.IdUser == UserId && x.IdProperty == code);
+            await _propertyFavService.RemoveAsync(vm.Id);
+            ViewBag.PropertyFav = await _propertyFavService.GetAllAsync();
+            return View("Home", await _propertyService.GetAllAsync());
+        }
+        
     }
 }
