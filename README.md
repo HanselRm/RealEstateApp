@@ -21,7 +21,9 @@ una API RESTful para integración con otros sistemas.
 - Identity para la autenticación y autorización
 - JWT para la autenticación en la API
 - Patrones de diseño: Onion Architecture, CQRS, Mediator
+## Dependencias
 
+Este proyecto utiliza varios paquetes NuGet. Puedes ver la lista completa de dependencias en el archivo [RealEstateApp.csproj](./RealEstateApp/RealEstateApp.csproj).
 ## Requisitos
 
 - Visual Studio 2022 (o posterior)
