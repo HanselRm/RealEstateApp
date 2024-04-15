@@ -81,6 +81,7 @@ namespace RealStateAppProg3.Core.Application.Services
                 Bathrooms = p.Bathrooms,
                 SizeInMeters = p.SizeInMeters,
                 IdTypeProperty = p.IdTypeProperty,
+                typeProperty = p.TypeProperty.Name,
                 IdTypeSale = p.IdTypeSale,
                 UrlImage1 = p.UrlImage1,
                 UrlImage2 = p.UrlImage2,
