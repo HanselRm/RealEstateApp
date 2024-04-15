@@ -53,7 +53,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AgentList">Agentes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="#">Mis propiedades</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="MyPropertys">Mis propiedades</a>
                             </li>
                         }
                         @if(user != null && user.Roles.Contains(RoleENum.Agent.ToString()))
