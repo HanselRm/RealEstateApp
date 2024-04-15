@@ -20,6 +20,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         }
         public async Task<IActionResult> Home()
         {
+            ViewBag.PropertyFav = await _propertyFavService.GetAllAsync();
             return View(await _propertyService.GetAllAsync());
         }
 
@@ -31,7 +32,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 IdUser = UserId
             };
             await _propertyFavService.SaveAsync(vm);
-
+            ViewBag.PropertyFav = await _propertyFavService.GetAllAsync();
             return View("Home", await _propertyService.GetAllAsync());
         }
     }

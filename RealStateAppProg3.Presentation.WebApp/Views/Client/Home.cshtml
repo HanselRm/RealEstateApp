@@ -1,5 +1,6 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 @using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
+@using RealStateAppProg3.Core.Application.ViewModels.PropertyFav;
 @using RealStateAppProg3.Core.Application.Helpers;
 ﻿@using RealStateAppProg3.Core.Application.Dtos.Account
 ﻿@using RealStateAppProg3.Core.Application.Enums;
@@ -8,7 +9,7 @@
 
 @{
     var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
-
+    List<PropertyFavViewModel> listfav = ViewBag.PropertyFav;
     ViewData["Title"] = "Home Page";
 }
 
@@ -25,7 +26,18 @@
                     <form asp-controller="Client" asp-action="addFVProperty" method="post">
                         <input type="hidden" name="userId" value="@user.Id" />
                         <button type="submit" class="btn btn-primary" value="@property.Code" name="code">
-                            <i class="fas fa-heart"></i> Me gusta
+                            @{
+                                var isFavorite = listfav.Any(x => x.IdProperty == property.Code);
+                            }
+                            @if (isFavorite)
+                            {
+                                <i class="fas fa-heart text-danger"></i> @:Quitar de favoritos
+                                    }
+                            else
+                            {
+                                <i class="fas fa-heart"></i>
+                                @:Agregar a favoritos
+                            }
                         </button>
                     </form>
                     <div class="image-container">
