@@ -50,6 +50,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 {
                     return RedirectToRoute(new { controller = "Agent", action = "Index" });
                 }
+                else if (response.Roles.Contains("Client"))
+                {
+                    return RedirectToRoute(new { controller = "Client", action = "Home" });
+                }
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             }
