@@ -1,8 +1,6 @@
 # RealEstateApp
 
-RealEstateApp es una aplicación web completa para el manejo de propiedades inmobiliarias, desarrollada utilizando ASP.NET Core MVC 
-y Entity Framework Core. La aplicación cuenta con funcionalidades para clientes, agentes inmobiliarios y administradores, así como 
-una API RESTful para integración con otros sistemas.
+RealEstateApp es una aplicación web completa para el manejo de propiedades inmobiliarias, desarrollada utilizando ASP.NET Core MVC y Entity Framework Core. La aplicación cuenta con funcionalidades para clientes, agentes inmobiliarios y administradores, así como una API RESTful para integración con otros sistemas.
 
 ## Características principales
 
@@ -21,9 +19,94 @@ una API RESTful para integración con otros sistemas.
 - Identity para la autenticación y autorización
 - JWT para la autenticación en la API
 - Patrones de diseño: Onion Architecture, CQRS, Mediator
-## Dependencias
 
-Este proyecto utiliza varios paquetes NuGet. Puedes ver la lista completa de dependencias en el archivo [RealEstateApp.csproj](./RealEstateApp/RealEstateApp.csproj).
+## Estructura del proyecto
+
+Este proyecto sigue la arquitectura Onion Architecture y está organizado en múltiples proyectos y capas. A continuación, se detallan los principales proyectos y sus dependencias:
+
+### RealEstateApp.Core.Application
+
+Este proyecto contiene las interfaces, servicios, viewmodels, maps, dtos, helpers, enums y lógica de negocio principal de la aplicación.
+
+Dependencias:
+- RealEstateApp.Core.Domain
+- Microsoft.EntityFrameworkCore
+- AutoMapper
+- MediatR
+- Microsoft.AspNetCore.Http
+- Microsoft.AspNetCore.Http.Abstractions
+- Microsoft.AspNetCore.Http.Extensions
+- Microsoft.Extensions.Options.ConfigurationExtensions
+- Newtonsoft.Json
+- System.Text.Encodings.Web
+
+### RealEstateApp.Core.Domain
+Este proyecto contiene las entidades y settins de la app.
+
+Dependencias:
+
+### RealEstateApp.Infrastructure.Idenity
+
+Este proyecto contiene el manejador de usuario
+
+Dependencias:
+- RealEstateApp.Core.Application
+- RealEstateApp.Infrastructure.Shared
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore
+- Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.InMemory
+- Microsoft.EntityFrameworkCore.SqlServer
+- Microsoft.EntityFrameworkCore.Tools
+- Microsoft.Extensions.DependencyInjection
+- Microsoft.Extensions.Options.ConfigurationExtensions
+
+### RealEstateApp.Infrastructure.Persistence
+
+Este proyecto contiene la configuracion del contexto de la base de datos y migrations y repositorios
+
+- RealEstateApp.Core.Application
+- RealEstateApp.Core.Domain
+- Microsoft.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.Design
+- Microsoft.EntityFrameworkCore.SqlServer
+- Microsoft.EntityFrameworkCore.Tools
+- Microsoft.Extensions.DependencyInjection.Abstractions
+- Microsoft.Extensions.Options.ConfigurationExtensions
+
+### RealEstateApp.Infrastructure.Shared
+
+Este proyecto contiene el manejo de mails
+
+- RealEstateApp.Core.Application
+- RealEstateApp.Core.Domain
+- MailKit
+- MimeKit
+- Microsoft.Extensions.Options.ConfigurationExtensions
+
+### RealEstateApp.Presentation.WebApp
+
+Este proyecto contiene la aplicación web ASP.NET Core MVC.
+
+Dependencias:
+- RealEstateApp.Core.Application
+- RealEstateApp.Core.Domain
+- RealEstateApp.Infrastructure.Idenity
+- RealEstateApp.Infrastructure.Persistence
+- RealEstateApp.Infrastructure.Shared
+- Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+- Microsoft.EntityFrameworkCore.Tools
+- Microsoft.VisualStudio.Web.CodeGeneration.Design
+
+### RealEstateApp.Presentation.WebApi
+
+Este proyecto contiene la API RESTful de la aplicación.
+
+Dependencias:
+- RealEstateApp.Core
+- RealEstateApp.Infrastructure
+- Microsoft.AspNetCore.Authentication.JwtBearer
+- Swashbuckle.AspNetCore
+
 ## Requisitos
 
 - Visual Studio 2022 (o posterior)
@@ -35,8 +118,9 @@ Este proyecto utiliza varios paquetes NuGet. Puedes ver la lista completa de dep
 1. Clona este repositorio en tu máquina local.
 2. Abre la solución en Visual Studio.
 3. Configura la cadena de conexión a la base de datos en el archivo `appsettings.json`.
-4. Ejecuta las migraciones de Entity Framework Core para crear la base de datos: `Update-Database` (desde la Consola del Administrador de Paquetes de NuGet).
-5. Ejecuta la aplicación.
+4. Configura el webApp como proyecto por default
+5. Ejecuta las migraciones de Entity Framework Core para crear la base de datos: `Update-Database` (desde la Consola del Administrador de Paquetes de NuGet).
+6. Ejecuta la aplicación.
 
 ## Contribución
 
