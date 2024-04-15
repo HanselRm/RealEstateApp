@@ -15,7 +15,8 @@ namespace RealStateAppProg3.Core.Application.ViewModels.Propertys
         public int SizeInMeters { get; set; }
         public int Bathrooms { get; set; }
         public int IdTypeProperty { get; set; }
-        public string typeProperty{ get; set; }
+        public string NametypeProperty{ get; set; }
+        public string NameSale { get; set; }
         public int IdTypeSale { get; set; }
         public string UrlImage1 { get; set; }
         public string? UrlImage2 { get; set; }

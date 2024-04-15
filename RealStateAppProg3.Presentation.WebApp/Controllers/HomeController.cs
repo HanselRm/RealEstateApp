@@ -32,7 +32,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<PropertyViewModel> list = await _propertyService.GetAllAsync();
+            List<PropertyViewModel> list = await _propertyService.GetallWithInclude();
             ViewBag.Tp = await _typePropertyService.GetAllAsync();
             return View(list);
         }
