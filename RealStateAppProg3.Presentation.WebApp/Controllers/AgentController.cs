@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Helpers;
@@ -10,6 +11,7 @@ using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
+    [Authorize(Roles = "Agent")]
     public class AgentController : Controller
     {
         private readonly IUserService _userService;

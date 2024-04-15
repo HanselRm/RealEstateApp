@@ -5,9 +5,11 @@ using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.ViewModels.PropertyFav;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
+    [Authorize(Roles = "Client")]
     public class ClientController : Controller
     {
         private readonly IPropertyService _propertyService;

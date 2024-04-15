@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Asn1.Mozilla;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
@@ -9,6 +10,7 @@ using RealStateAppProg3.Core.Application.ViewModels.Users;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ITypePropertyService _typePropertyService;
