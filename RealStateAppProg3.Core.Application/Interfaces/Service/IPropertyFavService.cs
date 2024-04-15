@@ -7,5 +7,6 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
 {
     public interface IPropertyFavService : IBaseService<PropertyFavViewModel,SavePropertyFavViewModel,PropertyFav>
     {
+        Task<List<PropertyFavViewModel>> GetAllByUserAsync(string user);
     }
 }

@@ -27,5 +27,12 @@ namespace RealStateAppProg3.Core.Application.Services
             //vm.IdUser = _httpContextAccessor.HttpContext.Session.Get("User");
             return base.SaveAsync(vm);
         }
+
+        public async Task<List<PropertyFavViewModel>> GetAllByUserAsync(string user)
+        {
+            var entities = await _propertyFavRepository.GetAllAsync();
+            var list = entities.Where(x => x.IdUser == user).ToList();
+            return _mapper.Map<List<PropertyFavViewModel>>(list);
+        }
     }
 }

@@ -5,6 +5,7 @@ using RealStateAppProg3.Infrastructure.Identity.Models;
 using RealStateAppProg3.Infrastructure.Identity.Seeds;
 using RealStateAppProg3.Core.Application;
 using RealStateAppProg3.Infrastructure.Persistence;
+using RealStateAppProg3.Presentation.WebApp.MiddledWares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSession();
@@ -25,6 +26,10 @@ builder.Services.AddControllersWithViews();
 
 //Añadir sesiones
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+//MiddledWares
+builder.Services.AddTransient<ValidateUser, ValidateUser>();
+builder.Services.AddScoped<LoginAuthorize>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Helpers;
@@ -10,6 +11,7 @@ using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
+    [Authorize(Roles = "Agent")]
     public class AgentController : Controller
     {
         private readonly IUserService _userService;
@@ -30,9 +32,11 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             _propertyService = propertyService;
             _upgradeService = upgradeService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = HttpContext.Session.Get<AuthenticationResponse>("user");
+            var propiedades = await _propertyService.GetAllAsync();
+            return View(propiedades.Where(a => a.IdUser == user.Id).ToList());
         }
 
         public async Task<IActionResult> MantPro()
