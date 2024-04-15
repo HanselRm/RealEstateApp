@@ -95,9 +95,9 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.TypeSale, opt => opt.Ignore())
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore());
 
-            CreateMap<Property, SavePropertyFavViewModel>()
+            CreateMap<PropertyFav, SavePropertyFavViewModel>()
                 .ReverseMap()
-                .ForMember(x => x.propertyFavs, opt => opt.Ignore());
+                .ForMember(x => x.Property, opt => opt.Ignore());
 
 
             CreateMap<GetAllPropertiesParameters, GetAllPropertiesQuery>();

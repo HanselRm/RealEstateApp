@@ -23,7 +23,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View(await _propertyService.GetAllAsync());
         }
 
-        public async Task<IActionResult> addFVProperty(int code, string UserId)
+        public async Task<IActionResult> addFVProperty(string code, string UserId)
         {
             SavePropertyFavViewModel vm = new SavePropertyFavViewModel
             {
@@ -32,7 +32,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             };
             await _propertyFavService.SaveAsync(vm);
 
-            return View();
+            return View("Home", await _propertyService.GetAllAsync());
         }
     }
 }
