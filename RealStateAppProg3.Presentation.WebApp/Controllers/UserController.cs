@@ -172,5 +172,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 return View(vm);
             }
         }
+
+        public async Task<IActionResult> AccesDenied()
+        {
+            return View();
+        }
     }
 }

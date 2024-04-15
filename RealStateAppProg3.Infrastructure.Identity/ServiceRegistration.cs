@@ -37,11 +37,11 @@ namespace RealStateAppProg3.Infrastructure.Identity
                 .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
 
             //rutas
-            /*services.ConfigureApplicationCookie(options =>
+            services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/User";
+                options.LoginPath = "/Home";
                 options.AccessDeniedPath = "/User/AccessDenied";
-            });*/
+            });
 
 
             //Agrege el manejo de autentication
