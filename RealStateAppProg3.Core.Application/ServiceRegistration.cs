@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using InternetBanking.Core.Application.Interfaces.Service;
+using InternetBanking.Core.Application.Services;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
 using System.Reflection;
@@ -12,7 +15,12 @@ namespace RealStateAppProg3.Core.Application
             #region Mapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             #endregion
+            #region Mediator
+            services.AddMediatR(typeof(Assembly));
+            #endregion
             #region Services
+
+            services.AddTransient(typeof(IBaseService<,,>), typeof(BaseService<,,>));
             services.AddTransient<IUpgradeService, UpgradeService>();
             services.AddTransient<ITypePropertyService, TypePropertyService>();
             services.AddTransient<ITypeSaleService, TypeSaleService>();
