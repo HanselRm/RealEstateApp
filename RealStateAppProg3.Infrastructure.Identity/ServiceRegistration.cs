@@ -22,6 +22,7 @@ namespace RealStateAppProg3.Infrastructure.Identity
         {
 
             #region Contexts
+            services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
             ContextConfiguration(configuration, services);
             #endregion
 

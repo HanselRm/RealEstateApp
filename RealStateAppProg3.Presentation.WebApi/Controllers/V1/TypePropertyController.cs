@@ -9,6 +9,7 @@ using System.Net.Mime;
 namespace RealStateAppProg3.Presentation.WebApi.Controllers.V1
 {
     [ApiVersion("1.0")]
+    [SwaggerTag("Tipo de propiedades")]
     public class TypePropertyController : BaseApiController
     {
         private readonly ITypePropertyService _typePropertyService;

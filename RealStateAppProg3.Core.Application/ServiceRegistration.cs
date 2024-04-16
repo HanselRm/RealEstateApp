@@ -16,7 +16,7 @@ namespace RealStateAppProg3.Core.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             #endregion
             #region Mediator
-            services.AddMediatR(typeof(Assembly));
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             #endregion
             #region Services
 
@@ -27,6 +27,7 @@ namespace RealStateAppProg3.Core.Application
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IPropertyFavService,PropertyFavService>();
             services.AddTransient<IPropertyService, PropertyService>();
+            services.AddTransient<IUpgradePropertyService, UpgradePropertyService>();
             #endregion
         }
     }

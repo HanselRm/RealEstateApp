@@ -1,7 +1,11 @@
-﻿@using RealStateAppProg3.Core.Application.ViewModels.Users
+﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+@using RealStateAppProg3.Core.Application.Helpers;
+@using RealStateAppProg3.Core.Application.ViewModels.Users
 @model List<SaveUserViewModel>;
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     bool isForAdmin = ViewBag.IsFor == "admin" ? true : false;
+    var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
 }
 <div class="container mt-5">
     <div class="row mb-3">
@@ -29,24 +33,28 @@
                 {
                     @foreach (var type in @Model)
                     {
-                        <tr>
-                            <td>@type.Name</td>
-                            <td>@type.LastName</td>
-                            <td>@type.Identification</td>
-                            <td>@type.Email</td>
-                            <td>@type.Username</td>
-                            <td>
-                                <a asp-controller="Admin" asp-action="@(isForAdmin?"UpdateAdminUser":"UpdateDevUser")" asp-route-Id="@type.Id">
-                                    Actualizar
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="Admin" asp-action="UpdateStatusUser" asp-route-Id="@type.Id"
-                                   asp-route-Message="@(type.IsActive?"Desactivar":"Activar")">
-                                    @(type.IsActive?"Desactivar":"Activar")
-                                </a>
-                            </td>
-                        </tr>
+                        if(user.Id != type.Id)
+                        {
+                            <tr>
+                                <td>@type.Name</td>
+                                <td>@type.LastName</td>
+                                <td>@type.Identification</td>
+                                <td>@type.Email</td>
+                                <td>@type.Username</td>
+                                <td>
+                                    <a asp-controller="Admin" asp-action="@(isForAdmin?"UpdateAdminUser":"UpdateDevUser")" asp-route-Id="@type.Id">
+                                        Actualizar
+                                    </a>
+                                </td>
+                                <td>
+                                    <a asp-controller="Admin" asp-action="UpdateStatusUser" asp-route-Id="@type.Id"
+                                       asp-route-Message="@(type.IsActive?"Desactivar":"Activar")">
+                                        @(type.IsActive ? "Desactivar" : "Activar")
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                     
 
                     }
                 }

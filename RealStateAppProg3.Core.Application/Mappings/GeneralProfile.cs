@@ -84,6 +84,8 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.TypeSale, opt => opt.Ignore())
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore());
 
+            CreateMap<GetAllPropertiesQuery, GetAllPropertiesParameters>();
+
             CreateMap<GetAllPropertiesParameters, GetAllPropertiesQuery>();
             #endregion
             #region UpgradeProperty

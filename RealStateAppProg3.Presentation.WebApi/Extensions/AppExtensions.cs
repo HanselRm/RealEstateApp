@@ -10,7 +10,7 @@ namespace RealStateAppProg3.Presentation.WebApi.Extensions
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "StockApp API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "RealState API");
                 options.DefaultModelRendering(ModelRendering.Model);
             });
         }
