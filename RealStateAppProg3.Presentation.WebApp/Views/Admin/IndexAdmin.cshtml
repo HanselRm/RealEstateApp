@@ -1,7 +1,11 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Users
+﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+@using RealStateAppProg3.Core.Application.Helpers;
 @model List<SaveUserViewModel>;
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     bool isForAdmin = ViewBag.IsFor == "admin" ? true : false;
+    var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
 }
 <div class="container mt-5">
     <div class="row mb-3">
@@ -40,12 +44,15 @@
                                     Actualizar
                                 </a>
                             </td>
-                            <td>
-                                <a asp-controller="Admin" asp-action="UpdateStatusUser" asp-route-Id="@type.Id"
-                                   asp-route-Message="@(type.IsActive?"Desactivar":"Activar")">
-                                    @(type.IsActive?"Desactivar":"Activar")
-                                </a>
-                            </td>
+                            @if(user.Id != type.Id)
+                            {
+                                <td>
+                                    <a asp-controller="Admin" asp-action="UpdateStatusUser" asp-route-Id="@type.Id"
+                                       asp-route-Message="@(type.IsActive?"Desactivar":"Activar")">
+                                        @(type.IsActive ? "Desactivar" : "Activar")
+                                    </a>
+                                </td>
+                            }
                         </tr>
 
                     }
