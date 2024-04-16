@@ -201,6 +201,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> MantTpro()
         {
             var vm = await _typePropertyService.GetAllAsync();
+            ViewBag.Cantidad = await _propertyService.GetallWithInclude();
             return View(vm);
         }
         //guarda tipo de propiedad
@@ -256,6 +257,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> MantTSale()
         {
             var vm = await _typeSaleService.GetAllAsync();
+            ViewBag.Cantidad = await _propertyService.GetallWithInclude();
             return View(vm);
         }
 

@@ -1,4 +1,5 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.TypeProperty
+@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 @model List<TypePropertyViewModel>
 
 <div class="container mt-5">
@@ -28,6 +29,15 @@
                         <tr>
                             <td>@type.Name</td>
                             <td>@type.Description</td>
+                            <td>@if (ViewBag.Cantidad != null)
+                                {
+                                    List<PropertyViewModel> list = ViewBag.Cantidad;
+                                    var count = list.Count(x => x.NametypeProperty == type.Name);
+                                    @: @count
+
+                                }
+                            </td>
+
                             <td>
                                 <a asp-controller="Admin" asp-action="UpdateTpro" asp-route-Id="@type.Id">
                                     Actualizar
