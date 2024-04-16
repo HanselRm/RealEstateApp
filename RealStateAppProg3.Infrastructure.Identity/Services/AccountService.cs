@@ -432,6 +432,18 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
                 Id = user.Id
             }).ToList();
         }
+
+        public async Task<List<string>> GetRolesByUsername(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if(user == null)
+            {
+               //en caso de que no haya retornara una matriz vacia
+                return null;
+            }
+            var rolesUser = await _userManager.GetRolesAsync(user);
+            return (List<string>)rolesUser;
+        }
     }
 
 }
