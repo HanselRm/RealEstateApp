@@ -76,6 +76,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             //Valida si el user esta activo
             if (!user.IsActive)
             {
+
                 response.HasError = true;
                 response.Error = $"Comuniquese con su administrador para acceder a los permisos de agente.";
                 return response;
@@ -509,6 +510,15 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             rngCryptoServiceProvider.GetBytes(ramdomBytes);
 
             return BitConverter.ToString(ramdomBytes).Replace("-", "");
+        }
+
+        public async Task DeleteUserByIdAsync(string code)
+        {
+            var user = await _userManager.FindByIdAsync(code);
+            if(user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
         }
     }
 

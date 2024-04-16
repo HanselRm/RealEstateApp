@@ -83,5 +83,10 @@ namespace RealStateAppProg3.Core.Application.Services
         {
             return await _accountServices.GetUsersByRole(role);
         }
+
+        public async Task DeleteByIdAsync(string Code)
+        {
+            await _accountServices.DeleteUserByIdAsync(Code);
+        }
     }
 }
