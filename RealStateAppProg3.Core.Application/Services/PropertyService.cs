@@ -127,5 +127,11 @@ namespace RealStateAppProg3.Core.Application.Services
             }).ToList();
 
         }
+
+        public async Task<List<PropertyViewModel>> GetAllPropertiesByAgentId(string code)
+        {
+            var properties = await _propertyRepository.GetPropertiesByIdAgentAsync(code);
+            return _mapper.Map<List<PropertyViewModel>>(properties);
+        }
     }
 }
