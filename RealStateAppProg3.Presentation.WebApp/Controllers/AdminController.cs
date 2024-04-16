@@ -165,14 +165,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             ViewBag.IsFor = "dev";
             return View("RegistrAdmin", userVm);
         }
-        [HttpPost]
-       public IActionResult SaveDevUser()
-        {
-            var userVm = new SaveUserViewModel { IsActive = true };
-            ViewBag.IsFor = "dev";
-            return View("RegistrAdmin", userVm);
-        }
-        
+
         [HttpPost]
         public async Task<IActionResult> SaveDevUser(SaveUserViewModel vm)
         {
