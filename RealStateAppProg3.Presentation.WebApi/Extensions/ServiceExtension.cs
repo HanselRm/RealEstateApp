@@ -29,7 +29,9 @@ namespace RealStateAppProg3.WebApi.Extensions
                         //Url = new Uri("")
                     }
                 });
-                //options.EnableAnnotations();
+                //activando los annotations para la documentacion de swagger
+                options.EnableAnnotations();
+
                 options.DescribeAllParametersInCamelCase();
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

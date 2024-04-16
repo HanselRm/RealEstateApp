@@ -6,7 +6,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ApiEstadisticas.WebApi.Middlewares
+namespace RealStateAppProg3.WebApi.Middlewares
 {
     public class ErrorHandlerMiddleware
     {

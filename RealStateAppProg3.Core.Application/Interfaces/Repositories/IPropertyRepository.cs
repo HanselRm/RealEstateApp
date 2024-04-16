@@ -7,6 +7,10 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Repositories
     public interface IPropertyRepository : IBaseRepository<Property>
     {
         Task<Property> GetByIdAsync(string id);
+
+        Task<List<Property>> GetPropertiesByIdAgentAsync(string agentId);
+
         Task<Property> UpdateAsync(Property vm, string id);
+
     }
 }
