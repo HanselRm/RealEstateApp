@@ -9,6 +9,7 @@ using System.Net.Mime;
 namespace RealStateAppProg3.Presentation.WebApi.Controllers.V1
 {
     [ApiVersion("1.0")]
+    [SwaggerTag("Tipo de venta")]
     public class TypeSaleController : BaseApiController
     {
         private readonly ITypeSaleService _typeSaleService;

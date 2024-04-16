@@ -11,6 +11,7 @@ namespace RealStateAppProg3.Presentation.WebApi.Controllers.V1
 {
     [ApiVersion("1.0")]
     [Authorize(Roles = "Admin,Developer")]
+    [SwaggerTag("Propiedad de controladores")]
     public class PropertyController : BaseApiController
     {
         
@@ -22,6 +23,7 @@ namespace RealStateAppProg3.Presentation.WebApi.Controllers.V1
             ]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PropertyViewModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> List()
         {

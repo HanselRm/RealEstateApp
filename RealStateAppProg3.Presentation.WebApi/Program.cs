@@ -30,7 +30,6 @@ builder.Services.AddSwaggerExtension();
 builder.Services.AddApiVersioningExtension();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
-
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
@@ -48,11 +47,13 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 app.UseSwaggerExtension();
 app.UseErrorHandlingMiddleware();
 app.UseHealthChecks("/health");
 app.UseSession();
+
 
 app.UseEndpoints(endpoints =>
 {

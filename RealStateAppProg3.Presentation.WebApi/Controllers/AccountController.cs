@@ -36,11 +36,12 @@ namespace RealStateAppProg3.Presentation.WebApi.Controllers
             {
                 return BadRequest(new ApiException("No existe dicho nombre de usuario"));
             }
-            if (response.Contains("Client"))
+            if (response.Contains("Admin") || response.Contains("Developer"))
             {
-                return BadRequest(new ApiException("No tienes acceso a esta funcionalidad"));
+                return Ok(await _userService.AuthenticateAsync(request));
             }
-            return Ok(await _userService.AuthenticateAsync(request));
+            return BadRequest(new ApiException("No tienes acceso a esta funcionalidad"));
+
         }
 
 
@@ -52,7 +53,7 @@ namespace RealStateAppProg3.Presentation.WebApi.Controllers
                 Description = "Registro de usuarios con rol desarrollador."
             )]
         [Consumes(MediaTypeNames.Application.Json)]
-        public async Task<IActionResult> RegisterDev(SaveUserViewModel userVm)
+        public async Task<IActionResult> RegisterDev([FromBody]SaveUserViewModel userVm)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +76,7 @@ namespace RealStateAppProg3.Presentation.WebApi.Controllers
            Description = "Registro de usuarios con rol desarrollador."
        )]
         [Consumes(MediaTypeNames.Application.Json)]
-        public async Task<IActionResult> RegisterAdmin(SaveUserViewModel userVm)
+        public async Task<IActionResult> RegisterAdmin([FromBody]SaveUserViewModel userVm)
         {
             if (!ModelState.IsValid)
             {

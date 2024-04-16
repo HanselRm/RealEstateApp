@@ -20,13 +20,12 @@ namespace RealStateAppProg3.WebApi.Extensions
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "StockApp API",
+                    Title = "RealState API",
                     Description = "This Api will be responsible for overall data distribution",
                     Contact = new OpenApiContact
                     {
                         Name = "Grupo Richard | Hansel prog3",
                         Email = "20221915@itla.edu.do",
-                        //Url = new Uri("")
                     }
                 });
                 //activando los annotations para la documentacion de swagger

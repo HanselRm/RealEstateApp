@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RealStateAppProg3.Core.Application.ViewModels.Users;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -15,6 +16,7 @@ namespace RealStateAppProg3.Presentation.WebApi.Controllers.V1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<SaveUserViewModel>))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return NoContent();

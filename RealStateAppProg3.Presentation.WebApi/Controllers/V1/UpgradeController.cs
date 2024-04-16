@@ -11,6 +11,7 @@ using System.Net.Mime;
 namespace RealStateAppProg3.Presentation.WebApi.Controllers.V1
 {
     [ApiVersion("1.0")]
+    [SwaggerTag("Controlador de mejoras")]
     public class UpgradeController : Controller
     {
         private readonly IUpgradeService _upgradeService;

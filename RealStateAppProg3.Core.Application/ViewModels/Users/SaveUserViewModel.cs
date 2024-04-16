@@ -36,6 +36,7 @@ namespace RealStateAppProg3.Core.Application.ViewModels.Users
 
 
         [Required(ErrorMessage = "Debes Ingresar la foto del user")]
+        [JsonIgnore]
         [SwaggerParameter("Foto de perfil")]
         public IFormFile file { get; set; }
 

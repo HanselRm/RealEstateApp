@@ -96,7 +96,8 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         //actualizar administradores
         public async Task<IActionResult> UpdateAdminUser(string Id)
         {
-            var user = await _userService.GetByIdWithoutRol(Id); 
+            var user = await _userService.GetByIdWithoutRol(Id);
+            ViewBag.IsFor = "admin";
             if(user != null)
             {
                 return View("RegisterAdmin", user);
@@ -106,9 +107,26 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAdminUser(SaveUserViewModel vm)
         {
-            if (!ModelState.IsValid)
+            var usr = await _userService.GetByIdWithoutRol(vm.Id);
+            if (vm.Password == null)
             {
-                return View("UpdateAdminUser", vm);
+                vm.Password = usr.Password;
+                vm.ConfirmPassword = usr.Password;
+            }
+            if (usr.PhotoProfileUrl == null)
+            {
+                vm.PhotoProfileUrl = "url";
+            }
+            else
+            {
+                vm.PhotoProfileUrl = usr.PhotoProfileUrl;
+            }
+
+            if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
+                || ModelState["PhoneNumber"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
+                || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any()|| ModelState["TypeUser"].Errors.Any())
+            {
+                return View("RegisterAdmin", vm);
             }
 
             await _userService.UpdateAsync(vm);
@@ -148,12 +166,27 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View("RegistrAdmin", userVm);
         }
         [HttpPost]
+       public IActionResult SaveDevUser()
+        {
+            var userVm = new SaveUserViewModel { IsActive = true };
+            ViewBag.IsFor = "dev";
+            return View("RegistrAdmin", userVm);
+        }
+        
+        [HttpPost]
         public async Task<IActionResult> SaveDevUser(SaveUserViewModel vm)
         {
+            var usr = await _userService.GetByIdWithoutRol(vm.Id);
+            if (vm.Password == "")
+            {
+                vm.Password = usr.Password;
+                vm.ConfirmPassword = usr.Password;
+            }
+            vm.PhotoProfileUrl = usr.PhotoProfileUrl;
             if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
-                || ModelState["PhoneNumber"].Errors.Any() || ModelState["file"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
-                || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
-                || ModelState["ConfirmPassword"].Errors.Any())
+                  || ModelState["PhoneNumber"].Errors.Any() || ModelState["file"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
+                  || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
+                  || ModelState["ConfirmPassword"].Errors.Any())
             {
                 return View("RegisterAdmin", vm);
             }
@@ -179,20 +212,37 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             var user = await _userService.GetByIdWithoutRol(Id);
             if (user != null)
             {
-                return View("UpdateAdminUser", user);
+                return View("RegisterAdmin", user);
             }
             return RedirectToRoute(new { controller = "Admin", action = "IndexDev" });
         }
         [HttpPost]
         public async Task<IActionResult> UpdateDevUser(SaveUserViewModel vm)
         {
-            if (!ModelState.IsValid)
+            var usr = await _userService.GetByIdWithoutRol(vm.Id);
+            if (vm.Password == null)
+            {
+                vm.Password = usr.Password;
+                vm.ConfirmPassword = usr.Password;
+            }
+            if (usr.PhotoProfileUrl == null)
+            {
+                vm.PhotoProfileUrl = "url";
+            }
+            else
+            {
+                vm.PhotoProfileUrl = usr.PhotoProfileUrl;
+            }
+
+            if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
+                || ModelState["PhoneNumber"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
+                || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["TypeUser"].Errors.Any())
             {
                 return View("UpdateAdminUser", vm);
             }
 
             await _userService.UpdateAsync(vm);
-            return RedirectToRoute(new { controller = "Admin", action = "Index" });
+            return RedirectToRoute(new { controller = "Admin", action = "IndexDev" });
         }
      
         #endregion

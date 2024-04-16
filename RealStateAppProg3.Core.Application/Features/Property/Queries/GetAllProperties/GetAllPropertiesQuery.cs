@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using MediatR;
+using RealStateAppProg3.Core.Application.Exceptions;
 using RealStateAppProg3.Core.Application.Interfaces.Repositories;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Domain.Entities;
@@ -30,7 +31,7 @@ namespace RealStateAppProg3.Core.Application.Features.Property.Queries.GetAllPro
         {
             var parameters = _mapper.Map<GetAllPropertiesParameters>(request);
             var properties = await GetAllPropertiesWithFilterAsync(parameters);
-            if (properties == null || properties.Count == 0) throw new Exception("No existen propiedades");
+            if (properties == null || properties.Count == 0) throw new ApiException("No existen propiedades",204);
             return properties;
         }
 
