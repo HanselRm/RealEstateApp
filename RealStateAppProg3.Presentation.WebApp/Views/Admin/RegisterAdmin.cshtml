@@ -93,6 +93,7 @@
                                     <input type="hidden" asp-for="Id" />
                                     <input type="hidden" asp-asp-for="IsActive"/>
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">@(isEditing?"Actualizar":"Registrar")</button>
+                                    <a asp-controller="Admin" asp-action="@(isForAdmin?"Index":"IndexDev")" class="btn btn-primary btn-lg px-5 mt-2">Cancelar</a>
                                 </form>
                             </div>
                         </div>

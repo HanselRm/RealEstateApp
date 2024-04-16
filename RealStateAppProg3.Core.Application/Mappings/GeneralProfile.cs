@@ -60,6 +60,7 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.TypeSale, opt => opt.Ignore())
                 .ForMember(x => x.Upgrades, opt => opt.Ignore())
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore())
+                .ForMember(x => x.NametypeProperty, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(x => x.TypeProperty, opt => opt.Ignore())
                 .ForMember(x => x.TypeSale, opt => opt.Ignore())

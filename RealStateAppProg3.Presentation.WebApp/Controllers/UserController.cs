@@ -72,7 +72,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         {
             await _userService.SignOutAsync();
             HttpContext.Session.Remove("user");
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
         }
 
         //crear usuario
