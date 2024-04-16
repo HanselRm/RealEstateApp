@@ -62,7 +62,7 @@ namespace RealStateAppProg3.Infrastructure.Identity.Services
             if (!user.EmailConfirmed)
             {
                 response.HasError = true;
-                response.Error = $"Su cuenta no está activa, comuniquese con el Admin";
+                response.Error = $"Su cuenta no está activa";
                 return response;
             }
             //Valida si el user esta activo
