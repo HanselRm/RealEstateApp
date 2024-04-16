@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealStateAppProg3.Core.Application.Dtos.Account;
 using RealStateAppProg3.Core.Application.Helpers;
@@ -6,9 +7,11 @@ using RealStateAppProg3.Core.Application.Interfaces.Service;
 using RealStateAppProg3.Core.Application.Services;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Application.ViewModels.Users;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
+    [Authorize(Roles = "Agent")]
     public class AgentController : Controller
     {
         private readonly IUserService _userService;
@@ -29,9 +32,11 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             _propertyService = propertyService;
             _upgradeService = upgradeService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = HttpContext.Session.Get<AuthenticationResponse>("user");
+            var propiedades = await _propertyService.GetAllAsync();
+            return View(propiedades.Where(a => a.IdUser == user.Id).ToList());
         }
 
         public async Task<IActionResult> MantPro()
@@ -129,5 +134,102 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
             return RedirectToRoute(new { controller = "Agent", action = "MantPro" });
         }
+        public async Task<IActionResult> ConfirmDelete(string code)
+        {
+            SavePropertyViewModel vm = new SavePropertyViewModel();
+            vm.Code = code;
+            return View(vm);
+        }
+        public async Task<IActionResult> DeleteProperty(SavePropertyViewModel vm)
+        {
+            await _propertyService.RemoveAsync(vm.Code);
+
+            var user = HttpContext.Session.Get<AuthenticationResponse>("user");
+            var propiedades = await _propertyService.GetAllAsync();
+            return View("MantPro",propiedades.Where(a => a.IdUser == user.Id).ToList());
+        }
+
+        public async Task<IActionResult> EditProperty(string code)
+        {
+            //tipos de venta
+            var typeSales = await _typeSaleService.GetAllAsync();
+            ViewBag.TypeSales = typeSales;
+
+            //tipo de propiedades
+            var typeProperties = await _typePropertyService.GetAllAsync();
+            ViewBag.TypeProperties = typeProperties;
+
+            //mejoras
+            var upgrades = await _upgradeService.GetAllAsync();
+            ViewBag.Upgrades = upgrades;
+
+            var propierty = await _propertyService.GetByIdAsync(code);
+
+            return View(propierty);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProperty(SavePropertyViewModel vm)
+        {
+            //tipos de venta
+            var typeSales = await _typeSaleService.GetAllAsync();
+            ViewBag.TypeSales = typeSales;
+
+            //tipo de propiedades
+            var typeProperties = await _typePropertyService.GetAllAsync();
+            ViewBag.TypeProperties = typeProperties;
+
+            //mejoras
+            var upgrades = await _upgradeService.GetAllAsync();
+            ViewBag.Upgrades = upgrades;
+            var user = HttpContext.Session.Get<AuthenticationResponse>("user");
+            var propiedades = await _propertyService.GetAllAsync();
+
+            if (ModelState["Description"].Errors.Any() || ModelState["Value"].Errors.Any()
+                || ModelState["NumberRooms"].Errors.Any() || ModelState["SizeInMeters"].Errors.Any()
+                || ModelState["Bathrooms"].Errors.Any() || ModelState["IdTypeProperty"].Errors.Any()
+                || ModelState["IdTypeSale"].Errors.Any())
+            {
+                ViewBag.TypeSales = typeSales;
+
+                //tipo de propiedades
+                ViewBag.TypeProperties = typeProperties;
+
+                //mejoras
+                ViewBag.Upgrades = upgrades;
+                return View("EditProperty", vm);
+            }
+
+            //en caso de que hayan pasado mas de una imagen
+            if (vm.Img1 != null)
+            {
+                vm.UrlImage1 = UploadFiles.UploadFile(vm.Img1, "Property", vm.Code);
+            }
+            if (vm.Img2 != null)
+            {
+                vm.UrlImage2 = UploadFiles.UploadFile(vm.Img2, "Property", vm.Code);
+            }
+            if (vm.Img3 != null)
+            {
+                vm.UrlImage3 = UploadFiles.UploadFile(vm.Img3, "Property", vm.Code);
+            }
+            if (vm.Img4 != null)
+            {
+                vm.UrlImage4 = UploadFiles.UploadFile(vm.Img4, "Property", vm.Code);
+
+            }
+            await _propertyService.UpdateAsync(vm, vm.Code);
+
+            ViewBag.TypeSales = typeSales;
+
+            //tipo de propiedades
+            ViewBag.TypeProperties = typeProperties;
+
+            //mejoras
+            ViewBag.Upgrades = upgrades;
+
+            
+            return View("MantPro",propiedades.Where(a => a.IdUser == user.Id).ToList());
+        }
+
     }
 }

@@ -1,9 +1,16 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 @using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
+@using RealStateAppProg3.Core.Application.ViewModels.PropertyFav;
+@using RealStateAppProg3.Core.Application.Helpers;
+﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+﻿@using RealStateAppProg3.Core.Application.Enums;
+@inject IHttpContextAccessor HttpContextAccessor
 @model List<PropertyViewModel>;
 
 @{
-    ViewData["Title"] = "Mant. property";
+    var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+    List<PropertyFavViewModel> listfav = ViewBag.PropertyFav;
+    ViewData["Title"] = "Home Page";
 }
 
 <div class="container">
@@ -11,17 +18,33 @@
         <i class="fas fa-home me-2"></i>Propiedades
     </h2>
 
-    <div class="col-3 offset-9">
-        <a asp-controller="Agent" asp-action="SaveProp" class="btn btn-danger">Agregar una propiedad</a>
-    </div>
-    <div class="col-12">
-        <h2 class="text-center mb-4">Propiedades</h2>
-    </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var property in Model.OrderByDescending(p => p.Created))
         {
             <div class="col">
                 <div class="card h-100 shadow">
+                    
+                            @{
+                                var isFavorite = listfav.Any(x => x.IdProperty == property.Code);
+                            }
+                    @if (isFavorite)
+                    {
+                        <form asp-controller="Client" asp-action="RemoveFromFavorites" method="post">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-danger" value="@property.Code" name="code">
+                                <i class="fas fa-heart"></i> Quitar de favoritos
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Client" asp-action="addFVProperty" method="post">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-primary" value="@property.Code" name="code">
+                                <i class="fas fa-heart text-muted"></i> Agregar a favoritos
+                            </button>
+                        </form>
+                    }
                     <div class="image-container">
                         <img class="card-img-top img-fluid" src="@property.UrlImage1" alt="@property.Code">
                     </div>
@@ -47,9 +70,7 @@
                         <p class="card-text">
                             <i class="fas fa-ruler-combined me-2"></i><span class="fw-bold">Área:</span> @property.SizeInMeters m²
                         </p>
-                        <a asp-controller="Agent" asp-action="EditProperty" asp-route-code="@property.Code" class="btn btn-primary">Editar</a>
-                        <a asp-controller="Agent" asp-action="ConfirmDelete" asp-route-code="@property.Code" class="btn btn-primary">Eliminar</a>
-
+                        <a asp-controller="Home" asp-action="PropertyDetails" asp-route-id="@property.Code" class="btn btn-primary">Ver Detalles</a>
                     </div>
                 </div>
             </div>
@@ -61,7 +82,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <style>
         .image-container {
-            height: 200px; /* Ajusta la altura según tus necesidades */
+            height: 200px;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -75,4 +96,3 @@
             }
     </style>
 }
-

@@ -8,6 +8,7 @@ using RealStateAppProg3.Core.Application.ViewModels.Users;
 using System.Data;
 using NuGet.Protocol.Plugins;
 using NuGet.Common;
+using RealStateAppProg3.Presentation.WebApp.MiddledWares;
 
 namespace RealStateAppProg3.Presentation.WebApp.Controllers
 {
@@ -23,6 +24,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         }
 
         //pagina de login
+        [ServiceFilter(typeof(LoginAuthorize))]
         public IActionResult Index()
         {
             return View(new LoginViewModel());
@@ -30,6 +32,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
         //recibe el login
         [HttpPost]
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> Index(LoginViewModel login)
         {
             if (!ModelState.IsValid)
@@ -41,9 +44,17 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             {
 
                 HttpContext.Session.Set<AuthenticationResponse>("user", response);
-                if (response.Roles.Contains("Admin")){
+                if (response.Roles.Contains("Admin"))
+                {
                     return RedirectToRoute(new { controller = "Admin", action = "Dashboard" });
-
+                }
+                else if (response.Roles.Contains("Agent"))
+                {
+                    return RedirectToRoute(new { controller = "Agent", action = "Index" });
+                }
+                else if (response.Roles.Contains("Client"))
+                {
+                    return RedirectToRoute(new { controller = "Client", action = "Home" });
                 }
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
 
@@ -65,12 +76,14 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         }
 
         //crear usuario
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> Register() 
         {
             return View(new SaveUserViewModel());
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> Register(SaveUserViewModel vm)
         {
             if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any() 
@@ -100,12 +113,14 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         }
 
         //ConfirmEmail method
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             string response = await _userService.confirmEmailAsync(userId, token);
             return View("ConfirmEmail", response);
         }
         //Recuperar contraseña
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> PasswordRecover()
         {
             return View(new ForgotPasswordViewModel());
@@ -113,6 +128,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> PasswordRecover(ForgotPasswordViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -136,12 +152,14 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             }
         }
         //resetear contraseña
+        [ServiceFilter(typeof(LoginAuthorize))]
         public IActionResult ResetPassword(ResetPasswordViewModel vm)
         {
 
             return View(vm);
         }
         [HttpPost]
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> ResetPasswordd(ResetPasswordViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -162,6 +180,11 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 vm.Error = response.Error;
                 return View(vm);
             }
+        }
+
+        public async Task<IActionResult> AccesDenied()
+        {
+            return View();
         }
     }
 }

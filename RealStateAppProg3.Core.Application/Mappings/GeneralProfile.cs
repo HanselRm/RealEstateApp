@@ -10,6 +10,7 @@ using RealStateAppProg3.Core.Application.ViewModels.UpgradeProperty;
 using RealStateAppProg3.Core.Domain.Entities;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Application.ViewModels.Upgrades;
+using RealStateAppProg3.Core.Application.ViewModels.PropertyFav;
 
 namespace RealStateAppProg3.Core.Application.Mappings
 {
@@ -54,7 +55,17 @@ namespace RealStateAppProg3.Core.Application.Mappings
             #endregion
 
             #region Property
-            CreateMap<Property, PropertyViewModel>();
+            CreateMap<Property, PropertyViewModel>()
+                .ForMember(x => x.TypeProperty, opt => opt.Ignore())
+                .ForMember(x => x.TypeSale, opt => opt.Ignore())
+                .ForMember(x => x.Upgrades, opt => opt.Ignore())
+                .ForMember(x => x.propertyFavs, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(x => x.TypeProperty, opt => opt.Ignore())
+                .ForMember(x => x.TypeSale, opt => opt.Ignore())
+                .ForMember(x => x.Upgrades, opt => opt.Ignore())
+                .ForMember(x => x.propertyFavs, opt => opt.Ignore());
+
             CreateMap<Property, CreatePropertyCommand>()
                 .ForMember(x => x.Upgrades, opt => opt.Ignore())
                 .ReverseMap()
@@ -83,6 +94,16 @@ namespace RealStateAppProg3.Core.Application.Mappings
                 .ForMember(x => x.TypeProperty, opt => opt.Ignore())
                 .ForMember(x => x.TypeSale, opt => opt.Ignore())
                 .ForMember(x => x.propertyFavs, opt => opt.Ignore());
+
+            CreateMap<PropertyFav, SavePropertyFavViewModel>()
+                .ReverseMap()
+                .ForMember(x => x.Property, opt => opt.Ignore());
+
+            CreateMap<PropertyFav, PropertyFavViewModel>()
+                .ForMember(x => x.Property, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(x => x.Property, opt => opt.Ignore());
+
 
             CreateMap<GetAllPropertiesQuery, GetAllPropertiesParameters>();
 

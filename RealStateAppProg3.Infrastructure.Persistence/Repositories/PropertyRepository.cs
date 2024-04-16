@@ -25,5 +25,13 @@ namespace RealStateAppProg3.Infrastructure.Persistence.Repositories
         {
             return await _ctx.Set<Property>().Where(p => p.IdUser == agentId).ToListAsync();
         }
+        
+        public async Task<Property> UpdateAsync(Property vm, string id)
+        {
+            Property entry = await _ctx.Set<Property>().FindAsync(id);
+            _ctx.Entry(entry).CurrentValues.SetValues(vm);
+            await _ctx.SaveChangesAsync();
+            return entry;
+        }
     }
 }

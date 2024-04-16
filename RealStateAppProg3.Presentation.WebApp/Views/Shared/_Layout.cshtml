@@ -35,7 +35,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Agentes</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AgentList">Agentes</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Únete a la app</a>
@@ -47,13 +47,13 @@
                         @if (user != null && user.Roles.Contains(RoleENum.Client.ToString()))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Home">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Agentes</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AgentList">Agentes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Mis propiedades</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="MyPropertys">Mis propiedades</a>
                             </li>
                         }
                         @if(user != null && user.Roles.Contains(RoleENum.Agent.ToString()))
@@ -89,7 +89,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="MantTSale">Mant. de tipo ventas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="SaveUpgrade">Mant. de mejoras</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="MantUpgrade">Mant. de mejoras</a>
                             </li>
                         }
                     </ul>
