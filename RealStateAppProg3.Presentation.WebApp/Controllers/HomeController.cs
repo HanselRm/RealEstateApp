@@ -81,7 +81,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
 
         public async Task<IActionResult> AgenteProperty(string id)
         {
-            List<PropertyViewModel> list = await _propertyService.GetAllAsync();
+            List<PropertyViewModel> list = await _propertyService.GetallWithInclude();
             list = list.Where(l => l.IdUser == id).ToList();
             return View(list);
         }
