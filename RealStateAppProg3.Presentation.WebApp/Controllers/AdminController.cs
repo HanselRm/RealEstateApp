@@ -399,6 +399,15 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             await _upgradeService.RemoveAsync(id);
             return RedirectToRoute(new { controller = "Admin", action = "MantUpgrade" });
         }
+
         #endregion
+
+        public async Task<IActionResult> AgentList()
+        {
+            var usersAgent = await _userService.GetUsersByRole("Agent");
+            usersAgent = usersAgent.FindAll(a => a.IsActive = true);
+            ViewBag.Cantidad = await _propertyService.GetallWithInclude();
+            return View("AgentList", usersAgent);
+        }
     }
 }
