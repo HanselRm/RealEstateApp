@@ -1,4 +1,4 @@
-﻿using ApiEstadisticas.WebApi.Middlewares;
+﻿using RealStateAppProg3.WebApi.Middlewares;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace RealStateAppProg3.Presentation.WebApi.Extensions

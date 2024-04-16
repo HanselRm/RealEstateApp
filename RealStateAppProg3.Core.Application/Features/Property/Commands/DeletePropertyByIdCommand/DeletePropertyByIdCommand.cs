@@ -2,11 +2,13 @@
 using AutoMapper;
 using MediatR;
 using RealStateAppProg3.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace RealStateAppProg3.Core.Application.Features.Property.Commands.DeletePropertyByIdCommand
 {
     public class DeletePropertyByIdCommand : IRequest<string>
     {
+        [SwaggerParameter(Description = "Codigo de la imagen")]
         public string Code { get; set; }
     }
 
