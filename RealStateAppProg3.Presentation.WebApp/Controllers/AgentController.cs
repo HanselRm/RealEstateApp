@@ -42,7 +42,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> MantPro()
         {
             var user = HttpContext.Session.Get<AuthenticationResponse>("user");
-            var propiedades = await _propertyService.GetAllAsync();
+            var propiedades = await _propertyService.GetallWithInclude();
             return View(propiedades.Where(a => a.IdUser == user.Id).ToList());
         }
         //mi perfil

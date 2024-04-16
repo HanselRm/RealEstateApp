@@ -1,4 +1,5 @@
 ﻿@using RealStateAppProg3.Core.Application.ViewModels.TypeSale
+@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 @model List<TypeSaleViewModel>
 
 <div class="container mt-5">
@@ -9,7 +10,7 @@
         </div>
 
         <div class="col-12">
-            <h2 class="text-center mb-4">Lista de mejoras</h2>
+            <h2 class="text-center mb-4">Lista de tipo de venta</h2>
         </div>
         <table class="table table-striped">
             <thead>
@@ -28,6 +29,15 @@
                         <tr>
                             <td>@beneficiary.Name</td>
                             <td>@beneficiary.Description</td>
+                            <td>
+                                @if (ViewBag.Cantidad != null)
+                                {
+                                    List<PropertyViewModel> list = ViewBag.Cantidad;
+                                    var count = list.Count(x => x.NameSale == beneficiary.Name);
+                                    @: @count
+
+                                }
+                            </td>
                             <td>
                                 <a asp-controller="Admin" asp-action="UpdateTSale" asp-route-Id="@beneficiary.Id">
                                     Actualizar

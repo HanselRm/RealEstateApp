@@ -70,7 +70,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveAdminUser(SaveUserViewModel vm)
         {
-            if (!ModelState.IsValid)
+            if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
+                || ModelState["PhoneNumber"].Errors.Any() || ModelState["file"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
+                || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
+                || ModelState["ConfirmPassword"].Errors.Any())
             {
                 return View("RegisterAdmin", vm);
             }
@@ -79,7 +82,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             //-------------------------
             if (response != null && response.HasError != true)
             {
-                return RedirectToRoute(new { controller = "User", action = "Index" });
+                return RedirectToRoute(new { controller = "Admin", action = "Index" });
             }
             else
             {
@@ -163,6 +166,14 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             return View("RegistrAdmin", userVm);
         }
         [HttpPost]
+       public IActionResult SaveDevUser()
+        {
+            var userVm = new SaveUserViewModel { IsActive = true };
+            ViewBag.IsFor = "dev";
+            return View("RegistrAdmin", userVm);
+        }
+        
+        [HttpPost]
         public async Task<IActionResult> SaveDevUser(SaveUserViewModel vm)
         {
             var usr = await _userService.GetByIdWithoutRol(vm.Id);
@@ -172,7 +183,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
                 vm.ConfirmPassword = usr.Password;
             }
             vm.PhotoProfileUrl = usr.PhotoProfileUrl;
-            if (!ModelState.IsValid)
+            if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
+                  || ModelState["PhoneNumber"].Errors.Any() || ModelState["file"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
+                  || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
+                  || ModelState["ConfirmPassword"].Errors.Any())
             {
                 return View("RegisterAdmin", vm);
             }
@@ -237,6 +251,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> MantTpro()
         {
             var vm = await _typePropertyService.GetAllAsync();
+            ViewBag.Cantidad = await _propertyService.GetallWithInclude();
             return View(vm);
         }
         //guarda tipo de propiedad
@@ -292,6 +307,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> MantTSale()
         {
             var vm = await _typeSaleService.GetAllAsync();
+            ViewBag.Cantidad = await _propertyService.GetallWithInclude();
             return View(vm);
         }
 

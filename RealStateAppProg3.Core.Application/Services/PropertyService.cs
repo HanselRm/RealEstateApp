@@ -81,16 +81,14 @@ namespace RealStateAppProg3.Core.Application.Services
                 Bathrooms = p.Bathrooms,
                 SizeInMeters = p.SizeInMeters,
                 IdTypeProperty = p.IdTypeProperty,
+                NametypeProperty = p.TypeProperty.Name,
+                NameSale = p.TypeSale.Name,
                 IdTypeSale = p.IdTypeSale,
                 UrlImage1 = p.UrlImage1,
                 UrlImage2 = p.UrlImage2,
                 UrlImage3 = p.UrlImage3,
                 UrlImage4 = p.UrlImage4,
-                IdUser = p.IdUser,
-                TypeProperty = _mapper.Map<TypePropertyViewModel>(p.TypeProperty),
-                TypeSale = _mapper.Map<TypeSaleViewModel>(p.TypeSale),
-                Upgrades = _mapper.Map<List<UpgradesProperty>>(p.Upgrades)
-
+                IdUser = p.IdUser
             }).ToList();
             
         }
