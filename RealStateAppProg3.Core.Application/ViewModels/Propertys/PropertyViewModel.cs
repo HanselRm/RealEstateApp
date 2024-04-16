@@ -3,6 +3,7 @@ using RealStateAppProg3.Core.Application.ViewModels.PropertyFav;
 using RealStateAppProg3.Core.Application.ViewModels.TypeProperty;
 using RealStateAppProg3.Core.Application.ViewModels.TypeSale;
 using RealStateAppProg3.Core.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace RealStateAppProg3.Core.Application.ViewModels.Propertys
 {

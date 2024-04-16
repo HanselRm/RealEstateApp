@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
 using RealStateAppProg3.Core.Application.Interfaces.Repositories;
 using RealStateAppProg3.Core.Application.ViewModels.Propertys;
 using RealStateAppProg3.Core.Domain.Entities;
@@ -20,6 +21,11 @@ namespace RealStateAppProg3.Infrastructure.Persistence.Repositories
             return await _ctx.Set<Property>().FindAsync(id);
         }
 
+        public async Task<List<Property>> GetPropertiesByIdAgentAsync(string agentId)
+        {
+            return await _ctx.Set<Property>().Where(p => p.IdUser == agentId).ToListAsync();
+        }
+        
         public async Task<Property> UpdateAsync(Property vm, string id)
         {
             Property entry = await _ctx.Set<Property>().FindAsync(id);
