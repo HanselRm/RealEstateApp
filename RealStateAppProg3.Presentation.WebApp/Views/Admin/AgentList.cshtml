@@ -1,0 +1,60 @@
+﻿@using RealStateAppProg3.Core.Application.ViewModels.Users;
+@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+@model List<SaveUserViewModel>
+
+@{
+    ViewData["Title"] = "Agentes Inmobiliarios";
+}
+
+<div class="container mt-5">
+    <div class="row mb-3">
+
+
+        <div class="col-12">
+            <h2 class="text-center mb-4">Lista de tipo agente</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">cantidad de propiedades</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model != null)
+                {
+                    @foreach (var beneficiary in @Model)
+                    {
+                        <tr>
+                            <td>@beneficiary.Name</td>
+                            <td>@beneficiary.LastName</td>
+                            <td>
+                                @if (ViewBag.Cantidad != null)
+                                {
+                                    List<PropertyViewModel> list = ViewBag.Cantidad;
+                                    var count = list.Count(x => x.NameSale == beneficiary.Name);
+                                    @: @count
+
+                                }
+                            </td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="UpdateTSale" asp-route-Id="@beneficiary.Id">
+                                    Actualizar
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="RemoveTSale" asp-route-Id="@beneficiary.Id">
+                                    Remover
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
