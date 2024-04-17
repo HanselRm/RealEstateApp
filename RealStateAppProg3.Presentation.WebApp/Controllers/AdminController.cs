@@ -405,9 +405,34 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> AgentList()
         {
             var usersAgent = await _userService.GetUsersByRole("Agent");
-            usersAgent = usersAgent.FindAll(a => a.IsActive = true);
             ViewBag.Cantidad = await _propertyService.GetallWithInclude();
             return View("AgentList", usersAgent);
+        }
+        public async Task<IActionResult> UpdateStatusUserAgent(string Id, string Message)
+        {
+            ViewBag.Id = Id;
+            ViewBag.Message = Message;
+            return View("ConfirmStatusAgent");
+        }
+        //confirmando que desea cambiar el estado 
+        public async Task<IActionResult> ConfirmUpdateStatusAgent(string Id)
+        {
+            var user = await _userService.GetByIdWithoutRol(Id);
+            //invertimos su valor, en caso de que este activo lo pondra falso y viceversa
+            user.IsActive = !user.IsActive;
+            //actualizamos
+            await _userService.UpdateAsync(user);
+            return RedirectToRoute(new { controller = "Admin", action = "AgentList" });
+        }
+        public IActionResult RemoveAgent(string Id)
+        {
+            ViewBag.Id = Id;
+            return View("RemoveAgent");
+        }
+        public async Task<IActionResult> ConfirmRemoveAgent(string Id)
+        {
+            await _userService.DeleteByIdAsync(Id.ToString());
+            return RedirectToRoute(new { controller = "Admin", action = "AgentList" });
         }
     }
 }

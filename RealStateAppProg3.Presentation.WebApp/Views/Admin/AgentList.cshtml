@@ -40,12 +40,13 @@
                                 }
                             </td>
                             <td>
-                                <a asp-controller="Admin" asp-action="UpdateTSale" asp-route-Id="@beneficiary.Id">
-                                    Actualizar
+                                <a asp-controller="Admin" asp-action="UpdateStatusUserAgent" asp-route-Id="@beneficiary.Id"
+                                   asp-route-Message="@(beneficiary.IsActive?"Desactivar":"Activar")">
+                                    @(beneficiary.IsActive ? "Desactivar" : "Activar")
                                 </a>
                             </td>
                             <td>
-                                <a asp-controller="Admin" asp-action="RemoveTSale" asp-route-Id="@beneficiary.Id">
+                                <a asp-controller="Admin" asp-action="RemoveAgent" asp-route-Id="@beneficiary.Id">
                                     Remover
                                 </a>
                             </td>

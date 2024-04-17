@@ -10,6 +10,7 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
         Task<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request);
         //Obtiene roles del usuairo mediante un username
         Task<List<string>> GetRolesByUsername(string username);
+        Task DeleteUserByIdAsync(string code);
         Task<string> ConfirmAccount(string userId, string token);
         Task<ForgotPassWordResponse> ForgotPasswordRequestAsync(ForgotPassowordRequest request, string origin);
         Task<SaveUserViewModel> RegisterAsync(SaveUserViewModel vm, string origin);

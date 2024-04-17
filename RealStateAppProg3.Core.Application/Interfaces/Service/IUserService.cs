@@ -5,6 +5,7 @@ namespace RealStateAppProg3.Core.Application.Interfaces.Service
 {
     public interface IUserService
     {
+        Task DeleteByIdAsync(string Code);
         Task<string> confirmEmailAsync(string userId, string token);
         Task<ForgotPassWordResponse> ForgotPassWordAsync(ForgotPasswordViewModel vm, string origin);
         Task<AuthenticationResponse> LoginAsync(LoginViewModel vm);
