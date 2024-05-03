@@ -71,7 +71,7 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
         public async Task<IActionResult> SaveAdminUser(SaveUserViewModel vm)
         {
             if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
-                || ModelState["PhoneNumber"].Errors.Any() || ModelState["file"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
+                || ModelState["PhoneNumber"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
                 || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
                 || ModelState["ConfirmPassword"].Errors.Any())
             {
@@ -177,9 +177,9 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             }
             vm.PhotoProfileUrl = usr.PhotoProfileUrl;
             if (ModelState["Name"].Errors.Any() || ModelState["LastName"].Errors.Any() || ModelState["Identification"].Errors.Any()
-                  || ModelState["PhoneNumber"].Errors.Any() || ModelState["file"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
-                  || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
-                  || ModelState["ConfirmPassword"].Errors.Any())
+                || ModelState["PhoneNumber"].Errors.Any() || ModelState["PhoneNumber"].Errors.Any()
+                || ModelState["Username"].Errors.Any() || ModelState["Email"].Errors.Any() || ModelState["Password"].Errors.Any()
+                || ModelState["ConfirmPassword"].Errors.Any())
             {
                 return View("RegisterAdmin", vm);
             }
