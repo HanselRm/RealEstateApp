@@ -60,7 +60,10 @@ namespace RealStateAppProg3.Presentation.WebApp.Controllers
             {
                 return View(vm);
             }
-            /*vm.PhotoProfileUrl = UploadFiles.UploadFile(vm.file, "User", vm.Id);*/
+            if(vm.file != null)
+            {
+                vm.PhotoProfileUrl = UploadFiles.UploadFile(vm.file, "User", vm.Id);
+            }
 
             SaveUserViewModel response = await _userService.UpdateAsync(vm);
 
