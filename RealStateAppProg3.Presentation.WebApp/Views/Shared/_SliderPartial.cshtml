@@ -1,0 +1,33 @@
+﻿@model RealStateAppProg3.Core.Application.ViewModels.Propertys.PropertyViewModelDetail
+
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<div id="propertySlider" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="@Model.UrlImage1" class="d-block w-100" alt="Imagen 1">
+        </div>
+        @if (!string.IsNullOrEmpty(Model.UrlImage2))
+        {
+            <div class="carousel-item">
+                <img src="@Model.UrlImage2" class="d-block w-100" alt="Imagen 2">
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.UrlImage3))
+        {
+            <div class="carousel-item">
+                <img src="@Model.UrlImage3" class="d-block w-100" alt="Imagen 3">
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#propertySlider" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#propertySlider" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+</div>

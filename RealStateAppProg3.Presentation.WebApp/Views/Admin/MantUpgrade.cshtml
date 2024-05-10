@@ -1,0 +1,56 @@
+﻿@using RealStateAppProg3.Core.Application.ViewModels.Upgrades
+@using RealStateAppProg3.Core.Application.ViewModels.Propertys;
+@model List<UpgradeViewModel>
+
+<div class="container mt-5">
+    <div class="row mb-3">
+
+        <div class="col-3 offset-9">
+            <a asp-controller="Admin" asp-action="SaveUpgrade" class="btn btn-danger">Agregar una mejora</a>
+        </div>
+
+        <div class="col-12">
+            <h2 class="text-center mb-4">Lista de mejoras</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model != null)
+                {
+                    @foreach (var beneficiary in @Model)
+                    {
+                        <tr>
+                            <td>@beneficiary.Name</td>
+                            <td>@beneficiary.Description</td>
+                            <td>
+                                @if (ViewBag.Cantidad != null)
+                                {
+
+                                }
+                            </td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="UpdateUpgrade" asp-route-Id="@beneficiary.Id">
+                                    Actualizar
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="RemoveUpgrade" asp-route-Id="@beneficiary.Id">
+                                    Remover
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-users"></i> Clientes</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="card-text"><i class="fas fa-user-check"></i> Activos: @ViewBag.clientsActive</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="card-text"><i class="fas fa-user-times"></i> Inactivos: @ViewBag.clientsDisabled</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-user-tie"></i> Agentes</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="card-text"><i class="fas fa-user-check"></i> Activos: @ViewBag.AgentsActive</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="card-text"><i class="fas fa-user-times"></i> Inactivos: @ViewBag.AgentsDisabled</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-hard-hat"></i> Desarrolladores</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="card-text"><i class="fas fa-user-check"></i> Activos: @ViewBag.devsActive</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="card-text"><i class="fas fa-user-times"></i> Inactivos: @ViewBag.devsDisabled</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-info text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-home"></i> Propiedades</h5>
+                    <p class="card-text"><i class="fas fa-check-circle"></i> Registradas: @ViewBag.propertiesActive</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+}

@@ -17,11 +17,12 @@ namespace RealStateAppProg3.Core.Domain.Entities
         public string? UrlImage2 {  get; set; }
         public string? UrlImage3 {  get; set; }
         public string? UrlImage4 {  get; set; }
+        public DateTime? Created { get; set; }
         //id usuario
         public string IdUser { get; set; }
-        public TypeProperty? TypeProperty { get; set; }
-        public TypeSale? TypeSale { get; set; }
-        public List<UpgradesProperty>? Upgrades { get; set; }
-        public List<PropertyFav>? propertyFavs { get; set; }
+        public TypeProperty TypeProperty { get; set; }
+        public TypeSale TypeSale { get; set; }
+        public List<UpgradesProperty> Upgrades { get; set; }
+        public List<PropertyFav> propertyFavs { get; set; }
     }
 }

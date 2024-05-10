@@ -1,0 +1,155 @@
+﻿@using RealStateAppProg3.Core.Application.ViewModels.Propertys
+﻿@using RealStateAppProg3.Core.Application.Dtos.Account
+@using RealStateAppProg3.Core.Application.Helpers;
+@model SavePropertyViewModel;
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Guardar propiedad";
+    var user = HttpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+    bool isEditing = Model.Code == null ? false : true;
+}
+
+@if (ViewBag.TypeSales.Count == 0 || ViewBag.Count == 0 || ViewBag.Upgrades.Count == 0)
+{
+    <h2>No hay tipos de propiedad, mejoras o ventas agregadas.</h2>
+}
+else
+{
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/1600x900/?real-estate');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-light text-dark" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <div class="mb-md-5 mt-md-4 pb-5">
+                                <form method="post" enctype="multipart/form-data" asp-controller="Agent" asp-action="SaveProp" )">
+                                    <h2 class="fw-bold mb-2 text-uppercase">Agregar Propiedad</h2>
+
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <label asp-for="IdTypeProperty" class="form-label">Tipo de propiedad:</label>
+                                        <select asp-for="IdTypeProperty" class="form-select">
+                                            @foreach (var item in ViewBag.TypeProperties)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                            <span asp-validation-for="IdTypeProperty" class="text-danger"></span>
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <label asp-for="IdTypeSale" class="form-label">Tipo de venta:</label>
+                                        <select asp-for="IdTypeSale" class="form-select">
+                                            @foreach (var item in ViewBag.TypeSales)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                            <span asp-validation-for="IdTypeSale" class="text-danger"></span>
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <input asp-for="Value" type="number" class="form-control form-control-lg" placeholder="Precio en RD$" />
+                                        <label asp-for="Value" class="form-label">Precio</label>
+                                        <span asp-validation-for="Value" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <textarea asp-for="Description" class="form-control form-control-lg" rows="3" placeholder="Descripción de la propiedad"></textarea>
+                                        <label asp-for="Description" class="form-label">Descripción</label>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <input asp-for="SizeInMeters" type="number" class="form-control form-control-lg" placeholder="Tamaño en m²" />
+                                        <label asp-for="SizeInMeters" class="form-label">Tamaño</label>
+                                        <span asp-validation-for="SizeInMeters" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <input asp-for="NumberRooms" type="number" class="form-control form-control-lg" placeholder="Cantidad de habitaciones" />
+                                        <label asp-for="NumberRooms" class="form-label">Habitaciones</label>
+                                        <span asp-validation-for="NumberRooms" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <input asp-for="Bathrooms" type="number" class="form-control form-control-lg" placeholder="Cantidad de baños" />
+                                        <label asp-for="Bathrooms" class="form-label">Baños</label>
+                                        <span asp-validation-for="Bathrooms" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <label asp-for="UpgradesId" class="form-label">Mejoras:</label>
+                                        <select asp-for="UpgradesId" class="form-select" multiple>
+                                            @foreach (var item in ViewBag.Upgrades)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <label asp-for="Img1" class="form-label">Imágenes</label>
+                                        <div class="input-group">
+                                            <input asp-for="Img1" type="file" class="form-control form-control-lg" accept="image/*" required />
+                                            <span class="input-group-text bg-primary text-white"><i class="bi bi-upload"></i></span>
+                                        </div>
+                                        <span asp-validation-for="Img1" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <input asp-for="Img2" type="file" class="form-control form-control-lg" accept="image/*" />
+                                        <label asp-for="Img2" class="form-label">Imagen Adicional 2</label>
+                                        <span asp-validation-for="Img2" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <input asp-for="Img3" type="file" class="form-control form-control-lg" accept="image/*" />
+                                        <label asp-for="Img3" class="form-label">Imagen Adicional 3</label>
+                                        <span asp-validation-for="Img3" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline form-dark mb-4">
+                                        <input asp-for="Img4" type="file" class="form-control form-control-lg" accept="image/*" />
+                                        <label asp-for="Img4" class="form-label">Imagen Adicional 4</label>
+                                        <span asp-validation-for="Img4" class="text-danger"></span>
+                                    </div>
+
+                                    <input type="hidden" asp-for="Code" />
+                                        <input type="hidden" asp-for="IdUser" value="@user.Id" />
+
+
+                                    <button class="btn btn-primary btn-lg px-5" type="submit">Guardar Cambios</button>
+                                        <a asp-controller="Agent" asp-action="MantPro" class="btn btn-primary btn-lg px-5 mt-2">Cancelar</a>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+}
