@@ -111,11 +111,49 @@
         </main>
     </div>
 
-   @*  <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - RealStateAppProg3.Presentation.WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    @if (!ViewContext.RouteData.Values["controller"].ToString().Equals("User") || !ViewContext.RouteData.Values["action"].ToString().Equals("Index") &&
+    !ViewContext.RouteData.Values["controller"].ToString().Equals("User") || !ViewContext.RouteData.Values["action"].ToString().Equals("Register"))
+    {
+        <div class="container my-5">
+
+            <footer class="text-center text-white" style="background-color: #f1f1f1;">
+                <!-- Grid container -->
+                <div class="container pt-4">
+                    <!-- Section: Social media -->
+                    <section class="mb-4">
+                        
+
+                        <!-- Instagram -->
+                        <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                           href="https://www.instagram.com/hansel.zip/"
+                           role="button"
+                           data-mdb-ripple-color="dark">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <!-- Linkedin -->
+                        <a class="btn btn-link btn-floating btn-lg text-dark m-1"
+                           href="https://www.linkedin.com/in/hansel-rodriguez-mej%C3%ADa-3a9bb7222/"
+                           role="button"
+                           data-mdb-ripple-color="dark">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                       
+                    </section>
+                </div>
+                <!-- Grid container -->
+                <!-- Copyright -->
+                <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2020 Copyright:
+                    <a href="mailto:hanselrodriguezm02@hotmail.com?subject=Asunto">¡Da clic aquí para enviarnos un correo!</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+
         </div>
-    </footer> *@
+        <!-- End of .container -->
+
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
