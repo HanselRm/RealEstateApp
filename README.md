@@ -1,24 +1,45 @@
-# RealEstateApp
+# RealEstateApp: Plataforma de Gestión Inmobiliaria
 
-RealEstateApp es una aplicación web completa para el manejo de propiedades inmobiliarias, desarrollada utilizando ASP.NET Core MVC y Entity Framework Core. La aplicación cuenta con funcionalidades para clientes, agentes inmobiliarios y administradores, así como una API RESTful para integración con otros sistemas.
+[![Licencia MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
+[![Tecnología Principal](https://img.shields.io/badge/Tech-ASP.NET%20Core%20MVC-purple.svg)](https://dotnet.microsoft.com/apps/aspnet/mvc)
+[![Arquitectura](https://img.shields.io/badge/Architecture-Onion%20CQRS-orange.svg)](https://en.wikipedia.org/wiki/Onion_architecture)
 
-## Características principales
+## 🏠 Descripción del Proyecto
 
-- **Clientes:** Los clientes pueden buscar y ver detalles de propiedades, marcar propiedades como favoritas y acceder a su lista de favoritos.
-- **Agentes inmobiliarios:** Los agentes pueden gestionar sus propiedades (crear, editar y eliminar), actualizar su perfil y ver un listado de sus propiedades.
-- **Administradores:** Los administradores pueden gestionar agentes, desarrolladores, tipos de propiedades, tipos de ventas y mejoras. También pueden ver estadísticas del sistema.
-- **API RESTful:** La aplicación incluye una API RESTful segura con JWT para el manejo de propiedades, agentes, tipos de propiedades, tipos de ventas y mejoras.
+**RealEstateApp** es una aplicación web robusta y completa diseñada para la gestión integral de propiedades inmobiliarias. Desarrollada con **ASP.NET Core MVC** y **Entity Framework Core**, la plataforma ofrece funcionalidades diferenciadas para clientes, agentes inmobiliarios y administradores, además de exponer una **API RESTful** segura para la integración con sistemas externos.
 
-## Tecnologías utilizadas
+El proyecto sigue rigurosamente los principios de **Arquitectura Limpia (Onion Architecture)**, complementada con los patrones **CQRS (Command Query Responsibility Segregation)** y **Mediator**, lo que garantiza una alta mantenibilidad, escalabilidad y separación de preocupaciones.
 
-- ASP.NET Core MVC
-- Entity Framework Core
-- SQL Server (o cualquier otra base de datos compatible con EF Core)
-- Bootstrap
-- AutoMapper
-- Identity para la autenticación y autorización
-- JWT para la autenticación en la API
-- Patrones de diseño: Onion Architecture, CQRS, Mediator
+## ✨ Características Principales
+
+La aplicación está segmentada para atender las necesidades de diferentes perfiles de usuario:
+
+| Perfil de Usuario | Funcionalidades Clave |
+| :--- | :--- |
+| **Clientes** | Búsqueda y visualización de propiedades, gestión de lista de favoritos. |
+| **Agentes Inmobiliarios** | Gestión completa de su cartera de propiedades (creación, edición, eliminación), actualización de perfil y listado de propiedades asignadas. |
+| **Administradores** | Gestión de usuarios (agentes, desarrolladores), administración de catálogos (tipos de propiedades, tipos de ventas, mejoras) y acceso a estadísticas del sistema. |
+| **API RESTful** | Interfaz de programación de aplicaciones segura (mediante **JWT**) para la manipulación de propiedades y catálogos, facilitando la integración con otras plataformas. |
+
+## 🛠️ Tecnologías y Arquitectura
+
+Este proyecto se basa en un conjunto de tecnologías modernas y patrones de diseño avanzados:
+
+### Stack Tecnológico
+
+*   **Backend:** ASP.NET Core MVC (versión 6.0 o superior)
+*   **ORM:** Entity Framework Core
+*   **Base de Datos:** SQL Server (compatible con cualquier otra base de datos soportada por EF Core)
+*   **Autenticación/Autorización:** ASP.NET Core Identity y JWT (para la API)
+*   **Mapeo de Objetos:** AutoMapper
+*   **UI/Estilos:** Bootstrap
+
+### Patrones de Diseño
+
+El proyecto implementa una **Arquitectura Limpia (Onion Architecture)** para desacoplar la lógica de negocio de la infraestructura y la interfaz de usuario. Además, utiliza:
+
+*   **CQRS (Command Query Responsibility Segregation):** Separación de las operaciones de lectura (Queries) y escritura (Commands) para optimizar el rendimiento y la escalabilidad.
+*   **Mediator:** Implementado a través de la librería MediatR para gestionar la comunicación entre las capas de la aplicación de forma desacoplada.
 
 ## Estructura del proyecto
 
